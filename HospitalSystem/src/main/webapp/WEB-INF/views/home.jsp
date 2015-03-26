@@ -6,10 +6,11 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Hello Guys!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
 <P> ${welcomeMessage}</P>
+<P><a href="<c:url value="/signup" />"> Signup</a><P>
 </body>
 </html>
