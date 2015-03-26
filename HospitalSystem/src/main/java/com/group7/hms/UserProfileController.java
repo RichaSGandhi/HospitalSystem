@@ -19,6 +19,7 @@ import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
 import com.group7.hms.Users.Providers;
 import com.group7.hms.Users.User;
+import com.group7.hms.service.SendEmail;
 
 
 /**
@@ -52,6 +53,7 @@ public class UserProfileController {
 		logger.info("Attempting to create new user.");
 
 		User user = null;
+		
 		if(role.equalsIgnoreCase("Doctor")||role.equalsIgnoreCase("Nurse")){
 			user = new Providers(email,password);
 
@@ -62,14 +64,17 @@ public class UserProfileController {
 			user = new Administrator(email,password);
 
 		}
-		
-
+		logger.info("Here Printing " + role + " " + email + " " + password);
+		logger.info("new user object created." + role + " " + email + " " + password);
 		model.addAttribute("user", user);
 
 		model.addAttribute("email", email);
+		
 
 		//model.addAttribute("viewName", "signupEmailConfirmation");
-
+		SendEmail send = new SendEmail(email,"Please Activate your account","Hi There your account is created use this link to activate");
+		logger.info("Mail Object Created");
+		send.sendMail();
 		return "signupEmailConfirmation";
 	}
 

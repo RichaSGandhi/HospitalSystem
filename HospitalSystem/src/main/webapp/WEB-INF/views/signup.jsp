@@ -87,24 +87,10 @@
 							<fieldset>
 		<legend>Sign Up</legend>
 		<div class="table">
-			<div class="row">
-				<span class="labelCell"> <label for="emailAddress">Email
-						Address:</label>
-				</span> <span class="fieldCell"> <input path="email"
-						id="emailAddress" placeholder="Email Address" />
-				</span>
-			</div>
-			<div class="row">
-				<span class="labelCell"> <label for="password">Password:</label>
-				</span> <span class="fieldCell"> <input type="password"
-						path="password" id="password" placeholder="Password" />
-				</span>
-			</div>
-			<div class="row">
-				<span class="labelCell"> <label for="role">Role:</label>
-				</span> <span class="fieldCell"> <input 
-						path="role" id="role" placeholder="Role" />
-				</span>
+			<tr><td>E-mail: </td><td><input type="email" id="email" name="email" required></td></tr>
+
+			<tr><td>Password: </td><td><input  type="password" id="password" name="password" required></td></tr>
+			<tr><td>Role: </td><td><input type="String" id="role" name="role" required></td></tr>
 			</div>
 			<div class="row">
 				<span class="fieldCell"><input class="PrimaryButton" type="submit" id="submitButton" value="Submit" /></span> <span
