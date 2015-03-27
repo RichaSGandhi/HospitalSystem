@@ -66,15 +66,17 @@ public class UserProfileController {
 		}
 		logger.info("Here Printing " + role + " " + email + " " + password);
 		logger.info("new user object created." + role + " " + email + " " + password);
-		model.addAttribute("user", user);
+		//model.addAttribute("user", user);
 
-		model.addAttribute("email", email);
+		//model.addAttribute("email", email);
 		
 
 		//model.addAttribute("viewName", "signupEmailConfirmation");
-		SendEmail send = new SendEmail(email,"Please Activate your account","Hi There your account is created use this link to activate");
-		logger.info("Mail Object Created");
+		SendEmail send = new SendEmail(email,"THIS IS SUBJECT LINE", "ACTIVATE YOUR ACCOUNT");
 		send.sendMail();
+		logger.info("Mail Object Created");
+		//boolean answer = SendEmail.generateAndSendEmail();
+		//logger.info("" +answer);
 		return "signupEmailConfirmation";
 	}
 
