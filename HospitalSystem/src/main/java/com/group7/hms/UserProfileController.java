@@ -19,6 +19,7 @@ import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
 import com.group7.hms.Users.Providers;
 import com.group7.hms.Users.User;
+import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.SendEmail;
 
 
@@ -36,14 +37,41 @@ public class UserProfileController {
 	public String newUser(Locale locale, Model model) {
 		logger.info("Accessing the new User Signup page.");
 
-		model.addAttribute("viewName", "newUser");
+		model.addAttribute("viewName", "signup");
 
-		return "signup";
+		return "masterpage";
+	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String Login(Locale locale, Model model) {
+		logger.info("Accessing the new User Login page.");
+
+		model.addAttribute("viewName", "login");
+
+		return "masterpage";
+	}
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String LoginSubmit(Locale locale, Model model,
+			@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "password", defaultValue = "") String password) {
+		logger.info("Logging in");
+		UserDAOImpl dao = new UserDAOImpl();
+		String name = dao.getUserName(email);
+		if (name==null){
+			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
+			model.addAttribute("viewName", "signup");
+			return "masterpage";
+		}
+		else{
+		model.addAttribute("name", name);
+		model.addAttribute("viewName", "Profile");
+		return "masterpage";
+		}
 	}
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String createUser(
 			Locale locale,
 			Model model,
+			@RequestParam(value = "name", defaultValue = "") String name,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password,
 			@RequestParam(value = "role", defaultValue = "") String role
@@ -51,9 +79,7 @@ public class UserProfileController {
 	) {
 
 		logger.info("Attempting to create new user.");
-
-		User user = null;
-		
+		User user = null;		
 		if(role.equalsIgnoreCase("Doctor")||role.equalsIgnoreCase("Nurse")){
 			user = new Providers(email,password);
 
@@ -63,21 +89,21 @@ public class UserProfileController {
 		}if(role.equalsIgnoreCase("Admin")){
 			user = new Administrator(email,password);
 
+		}else{
+			model.addAttribute("ErrorMsg", "Role does not exist");
+			model.addAttribute("viewName", "signup");
+			return "masterpage";
 		}
-		logger.info("Here Printing " + role + " " + email + " " + password);
+		logger.info("Here Printing " + role + " " + email + " " + password +" "+name);
 		logger.info("new user object created." + role + " " + email + " " + password);
 		//model.addAttribute("user", user);
-
-		//model.addAttribute("email", email);
-		
-
-		//model.addAttribute("viewName", "signupEmailConfirmation");
-		SendEmail send = new SendEmail(email,"THIS IS SUBJECT LINE", "ACTIVATE YOUR ACCOUNT");
-		send.sendMail();
+		//model.addAttribute("email", email);;
 		logger.info("Mail Object Created");
-		//boolean answer = SendEmail.generateAndSendEmail();
-		//logger.info("" +answer);
-		return "signupEmailConfirmation";
+		boolean answer = SendEmail.generateAndSendEmail(email,name);
+		logger.info("" +answer);
+		model.addAttribute("name", name);
+		model.addAttribute("viewName", "signupEmailConfirmation");
+		return "masterpage";
 	}
 
 	

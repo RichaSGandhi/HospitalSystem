@@ -7,7 +7,7 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>${title}</title>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/style.css" />">
+	href="<c:url value="css/style.css" />">
 
 </head>
 
@@ -21,12 +21,12 @@
 				<c:if test="${user==null}">
 					<a style="color: white" href="<c:url value="/signup" />">Create
 						Profile</a> |
-					<a style="color: white" href="<c:url value="/user/login" />">Login</a>
+					<a style="color: white" href="<c:url value="/login" />">Login</a>
 				</c:if>
 				<c:if test="${user!=null}">
-					<a style="color: white" href="<c:url value="/user/update" />">${user.getfName()}
+					<a style="color: white" href="<c:url value="/update" />">${user.getfName()}
 						${user.getlName()}</a> |
-					<a style="color: white" href="<c:url value="/user/logout" />">Logout</a>
+					<a style="color: white" href="<c:url value="/logout" />">Logout</a>
 				</c:if>
 			</div>
 		</div>
@@ -38,10 +38,13 @@
 				<jsp:include page="${viewName}.jsp" />
 			</div>
 		</div>
-		<div id="footer">&copy; 2015 - All Rights Reserved</div>
+		
+		<div id="footer">&copy; 2015 - All Rights Reserved
 		<div style="float: right; margin: 20px;">
 			<a href="<c:url value="/" />">Home</a>
 		</div>
+		</div>
+		
 			
 	</div>
 </body>

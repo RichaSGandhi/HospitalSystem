@@ -5,12 +5,13 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello Guys!  
-</h1>
+<h2>
+	<P>Hello Folks.. Our Hospital management System helps you create an account and keep track of your 
+	appointments! So, get started and make "Hospitaling" easy. </P>
+</h2>
 
-<P>  The time on the server is ${serverTime}. </P>
-<P> ${welcomeMessage}</P>
-<P><a href="<c:url value="/signup" />"> Signup</a><P>
+
+<h3><P> ${welcomeMessage}</P></h3>
+
 </body>
 </html>

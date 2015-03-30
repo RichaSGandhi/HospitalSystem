@@ -30,11 +30,13 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
+		model.addAttribute("viewName", "home");
+
 		
-		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("welcomeMessage", "welcome to Hospital Management system Group 7 : Richa");
+		//model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("welcomeMessage", "Welcome to Hospital Management System By Group 7 : Richa");
 		
-		return "home";
+		return "masterpage";
 	}
 	
 }

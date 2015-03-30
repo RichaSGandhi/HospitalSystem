@@ -1,0 +1,361 @@
+/***  MAINS  ***/
+#wrapper {
+	max-width: 994px;
+	margin: 0px auto;
+	width: 994px;
+	padding: 0px;
+}
+
+body {
+	font-family: Calibri, Verdana, san-serif;
+	color: #333333;
+	font-size: 14px;
+	line-height: 20px;
+	background-color: #efefef;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*** HEADERS and TEXT ***/
+h1 {
+	font-size: 30px;
+	color: #367C2B;
+	font-weight: bold;
+	line-height: 30px;
+	padding: 10px;
+}
+
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+h4 {
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 16px;
+}
+
+.error {
+	font-family: Calibri, Verdana, san-serif;
+	color: #cd6600;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	margin-top: 0px;
+}
+
+.message {
+	font-family: Calibri, Verdana, san-serif;
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	margin-top: 0px;
+}
+
+root {
+	display: block;
+}
+
+
+/***  LINKS  ***/
+a:link {
+	font-size: 14px;
+	color: #367C2B;
+}
+
+a:visited {
+	font-size: 14px;
+	color: #367C2B;
+	text-decoration: none;
+}
+
+a:hover {
+	font-size: 14px;
+	color: #367C2B;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #367C2B;
+}
+
+/*** inline links ***/
+a:link,inline {
+	font-size: 14px;
+	color: #367C2B;
+	text-decoration: underline;;
+}
+
+a:visited,inline {
+	font-size: 14px;
+	color: #367C2B;
+	text-decoration: none;
+}
+
+a:hover,inline {
+	font-size: 14px;
+	color: #669966;
+	text-decoration: underline;
+}
+
+a:active,inline {
+	color: #367C2B;
+}
+
+
+
+/*** BUTTONS ***/
+.PrimaryButton {
+	background: #FFDE00;
+	padding-left: 18px;
+	padding-right: 18px;
+	height: 28px;
+	line-height: 14px;
+	color: #595959;
+	font-size: 14px;
+	font-family: Calibri;
+	font-weight: bold;
+	vertical-align: middle;
+	border-color: #FFDE00;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.PrimaryButton:hover {
+	color: #000000;
+}
+
+.PrimaryButton:active {
+	
+}
+
+.SecondaryButton {
+	background: #FFDE00;
+	padding-left: 18px;
+	padding-right: 18px;
+	height: 21px;
+	line-height: 10px;
+	color: #595959;
+	font-size: 12px;
+	font-family: Calibri;
+	font-weight: bold;
+	vertical-align: middle;
+	border-color: #FFDE00;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.SecondaryButton:hover {
+	color: #000000;
+}
+
+.SecondaryButton:active {
+	
+}
+
+.TertiaryButton {
+	background: #E5E6E6;
+	padding-left: 18px;
+	padding-right: 18px;
+	height: 21px;
+	color: 595959;
+	font-size: 12px;
+	font-family: Calibri;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.TertiaryButton:hover {
+	border-top-color: #28597a;
+	background: #E5E6E6;
+}
+
+.TertiaryButton:active {
+	
+}
+
+.AttachmentButton {
+	padding-left: 18px;
+	padding-right: 18px;
+	height: 21px;
+	color: 595959;
+	font-size: 12px;
+	font-family: Calibri;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.AttachmentButton:hover {
+	border-top-color: #28597a;
+	background: #E5E6E6;
+	color: #ccc;
+}
+
+.AttachmentButton:active {
+	
+}
+
+.closeButton {
+	background: #FFDE00;
+	padding-left: 18px;
+	padding-right: 18px;
+	height: 21px;
+	color: 595959;
+	font-size: 12px;
+	font-family: Calibri;
+	font-weight: bold;
+	horizontal-align: middle;
+}
+
+/***   CONTENT AREA   ***/
+.left {
+	display: inline;
+	align: left;
+	margin-right: 15px;
+}
+
+.field_name {
+	font-weight: bold;
+}
+
+.error {
+	font-size: 13px;
+	color: #CC6600;
+	line-height: 14px;
+	text-align: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: text-top;
+}
+
+.content { /* Overall area for contents section */
+	padding: 0 2px 0 2px;
+	border-bottom: 1px solid #ccc;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.content-area { /* Contents section with text and fields */
+	margin: 0px 24px 15px 24px;
+	overflow: hidden;
+}
+
+.summary {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	width: 500px;
+	border: 2px solid;
+	padding: 10px;
+}
+
+/***   TABLE AREAS   ***/
+table {
+	font-family: Calibri, Verdana, san-serif;
+	color: #333333;
+	font-size: 14px;
+	line-height: 20px;
+	background-color: #efefef;
+	margin-top: 0px;
+}
+
+td {
+	text-align: right;
+}
+
+
+
+td.input {
+	text-align: left;
+}
+
+/***   FOOTER AREA   ***/
+.copy {
+	margin-left: 24px;
+	font-family: 'Calibri Bold', sans-serif;
+	font-weight: bold;
+	margin-top: 0px;
+	font-size: 11px;
+}
+
+/**centeralign**/
+table#centeralign td
+{
+width : 300px
+text-align: center;
+
+}
+
+/*** SPACING ***/
+.clear {
+	clear: both;
+}
+
+.spacer {
+	height: 10px;
+}
+
+.submitSpacer {
+	height: 15px;
+}
+
+/*** Testing Values ***/
+.TestLabels {
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 13px;
+	color: red;
+	padding: 10px;
+	align: right;
+}
+
+.table {
+	display: table;
+}
+
+.row {
+	display: table-row;
+}
+
+.labelCell {
+	display: table-cell;
+	padding: .5em;
+}
+
+.fieldCell {
+	display: table-cell;
+	padding: .5em;
+}
+
+#header {
+	background-color: #367C2B;
+	white-space: nowrap;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	border-bottom: 2px solid #111;
+	color: White;
+}
+
+#header>div {
+	display: inline-block;
+}
+
+#header h1 {
+	color: white;
+	padding: 0px 10px;
+}
+
+.tableMax{
+	width: 100%;
+}
