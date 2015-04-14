@@ -271,7 +271,7 @@ table {
 }
 
 td {
-	text-align: right;
+	text-align: left;
 }
 
 
@@ -279,6 +279,7 @@ td {
 td.input {
 	text-align: left;
 }
+
 
 /***   FOOTER AREA   ***/
 .copy {

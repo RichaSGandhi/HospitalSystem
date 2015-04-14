@@ -1,6 +1,8 @@
 package com.group7.hms;
 
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
 import com.group7.hms.Users.Providers;
 import com.group7.hms.Users.User;
+import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.SendEmail;
 
@@ -55,17 +58,32 @@ public class UserProfileController {
 			@RequestParam(value = "password", defaultValue = "") String password) {
 		logger.info("Logging in");
 		UserDAOImpl dao = new UserDAOImpl();
-		String name = dao.getUserName(email);
-		if (name==null){
+		String[] info = dao.getUserName(email);
+		if (info[0]==null){
 			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
 			model.addAttribute("viewName", "signup");
 			return "masterpage";
 		}
-		else{
-		model.addAttribute("name", name);
-		model.addAttribute("viewName", "Profile");
+		else if(info[2].equalsIgnoreCase("inactive")){
+		model.addAttribute("name", info[0]);
+		model.addAttribute("role",info[1]);
+		model.addAttribute("viewName", "updateProfile");
 		return "masterpage";
 		}
+		else{
+			model.addAttribute("name", info[0]);
+			model.addAttribute("role",info[1]);
+			model.addAttribute("viewName", "Profile");
+			return "masterpage";
+		}
+	}
+	@RequestMapping(value = "/makeAppointment", method = RequestMethod.GET)
+	public String makeAppointment(Locale locale, Model model,
+			@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "password", defaultValue = "") String password) {
+		model.addAttribute("viewName", "makeAppointment");
+		return "masterpage";
+		
 	}
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String createUser(
@@ -77,23 +95,25 @@ public class UserProfileController {
 			@RequestParam(value = "role", defaultValue = "") String role
 
 	) {
-
+		UserDAO dataLayerObj = new UserDAOImpl();
 		logger.info("Attempting to create new user.");
 		User user = null;		
 		if(role.equalsIgnoreCase("Doctor")||role.equalsIgnoreCase("Nurse")){
-			user = new Providers(email,password);
+			user = new Providers(email,password,role,name);
 
 		}else if(role.equalsIgnoreCase("Patient")){
-			user = new Patient(email,password);
+			user = new Patient(email,password,role,name);
 
 		}if(role.equalsIgnoreCase("Admin")){
-			user = new Administrator(email,password);
+			user = new Administrator(email,password,role,name);
 
 		}else{
 			model.addAttribute("ErrorMsg", "Role does not exist");
 			model.addAttribute("viewName", "signup");
 			return "masterpage";
 		}
+		try{
+		dataLayerObj.setUser(user);
 		logger.info("Here Printing " + role + " " + email + " " + password +" "+name);
 		logger.info("new user object created." + role + " " + email + " " + password);
 		//model.addAttribute("user", user);
@@ -103,6 +123,11 @@ public class UserProfileController {
 		logger.info("" +answer);
 		model.addAttribute("name", name);
 		model.addAttribute("viewName", "signupEmailConfirmation");
+		
+		}catch(SQLException e){
+			model.addAttribute("ErrorMsg", "Account already exists for this email id, Please Login");
+			model.addAttribute("viewName", "signup");
+		}
 		return "masterpage";
 	}
 

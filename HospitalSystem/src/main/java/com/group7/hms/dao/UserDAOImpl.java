@@ -1,6 +1,7 @@
 package com.group7.hms.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 //import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +23,14 @@ import com.group7.hms.Users.*;
 @Service
 public class UserDAOImpl implements UserDAO {
 
-	private DataSource dataSource;
-	//private NamedParameterJdbcTemplate jdbcTemplate;
+	private DataSource dataSource;	
+	private JdbcTemplate jdbcTemplateObject;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
+		System.out.println("Datasource set");
 		this.dataSource = dataSource;
-		//this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 @Override
@@ -61,34 +64,28 @@ public class UserDAOImpl implements UserDAO {
 
 	//new user
 	@Override
-	public void setUser(String email, String password, String fName,
-			String lName, String phoneNumber, String street, String state,
-			String zip, String answer1, String answer2, String answer3) {
+	public void setUser(User user) throws SQLException {
 
-		String sql = "INSERT INTO USERS "
-				+ "(email, password, fName, lName, phoneNumber, street, state, zip, answer1, answer2, answer3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO hospitalmanagement.Users "
+				+ "(username, emailid, password, role,name,status) VALUES (?, ?, ?, ?,?,?)";
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
+			//conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, email);
-			ps.setString(2, password);
-			ps.setString(3, fName);
-			ps.setString(4, lName);
-			ps.setString(5, phoneNumber);
-			ps.setString(6, street);
-			ps.setString(7, state);
-			ps.setString(8, zip);
-			ps.setString(9, answer1);
-			ps.setString(10, answer2);
-			ps.setString(11, answer3);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPrimaryEmail());
+			ps.setString(3, user.getPassword());
+			ps.setString(4, user.getJobTitle());
+			ps.setString(5, user.getName());
+			ps.setString(6, "InActive");
 
 			ps.executeUpdate();
 			ps.close();
 
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw e;
 
 		} finally {
 			if (conn != null) {
@@ -102,29 +99,38 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String getUserName(String email) {
+	public String[] getUserName(String email) {
 
-		String sql = "SELECT * FROM hospitalmanagement.login WHERE email = ?";
+		String sql = "SELECT * FROM hospitalmanagement.Users WHERE emailId = ?";
 
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
+			System.out.println("trying to get connection");
+			 //User user = jdbcTemplateObject.queryForObject(sql, 
+                  //   email, new StudentMapper());
+			//conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
+			String[] sendInfo = new String[3];
 			User user = null;
 			ResultSet rs = ps.executeQuery();
 			String name= null;
+			String role = null;
+			String status = null;
 			if (rs.next()) {
-				name = rs.getString("fName");
-				//user = new User();
-				//user.setEmail(email);
-				//user.setfName(rs.getString("fName"));
+				name = rs.getString("Name");
+				role = rs.getString("Role");
+				status = rs.getString("Status");
 			}
 			rs.close();
 			ps.close();
-			return name;
-
+			sendInfo[0]=name;
+			sendInfo[1]=role;
+			sendInfo[2]=status;
+			return sendInfo;
+			 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

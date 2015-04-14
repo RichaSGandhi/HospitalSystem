@@ -17,19 +17,19 @@
 <div id="wrapper">
 
 	<div class="header" style="display:''">
-	<h1>User's Account</h1>
+	
 	</div>
 
 	<div class="content">
 <h2><c:out value="Welcome: ${name}" /></h2>
+<h3><c:out value="Role: ${role}" /></h3>
 <table>				
 <tr><td><a href="<c:url value="/" />">Home</a> </td></tr>
 <tr><td><a href="<c:url value="/user/edit" />">Update My Profile</a> </td></tr>
+<tr><td><a href="<c:url value="/makeAppointment"/>"> Make an Appointment</a></td></tr>
 </table>
      <P>Hi!! This is your home page</P>    
-    <div class="content-area">
-		<p><c:out value="${name}"/> </p>
-	</div>
+ 
 	
 </div>
 

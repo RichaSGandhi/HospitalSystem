@@ -7,10 +7,8 @@ package com.group7.hms.Users;
  */
 public class Providers extends User {
 
-	/**
-	 * private field jobTitle - stores the job title of the Provider
-	 */
-	private String jobTitle;
+
+	
 
 	/**
 	 * private field degree - stores the degree of the Provider
@@ -53,8 +51,8 @@ public class Providers extends User {
 	 * @param applicantPassword
 	 *            - the projected email address of the provider
 	 */
-	public Providers(String applicantEmail, String applicantPassword) {
-		super(applicantEmail, applicantPassword);
+	public Providers(String applicantEmail, String applicantPassword, String role, String name) {	
+		super(applicantEmail, applicantPassword,role,name);
 
 	}
 
@@ -78,10 +76,10 @@ public class Providers extends User {
 	 * @param affiliation
 	 *            - the affiliation of the provider
 	 */
-	public Providers(String applicantEmail, String applicantPassword,
+	/*public Providers(String applicantEmail, String applicantPassword,
 			String jobTitle, String degree, String specailization,
 			String certificaion, String department, String affiliation) {
-		super(applicantEmail, applicantPassword);
+		//super(applicantEmail, applicantPassword,jobTitle,);
 		setJobTitle(jobTitle);
 		setDegree(degree);
 		setSpecalization(specailization);
@@ -89,26 +87,9 @@ public class Providers extends User {
 		setDepartment(department);
 		setAffiliation(affiliation);
 
-	}
+	}*/
 
-	/**
-	 * public method getJobTitle - will return the job title of the provider
-	 * 
-	 * @return the jobTitle
-	 */
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
-	/**
-	 * public method setJobTitle - sets the job title of the provider
-	 * 
-	 * @param jobTitle
-	 *            the jobTitle to set
-	 */
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
+	
 
 	/**
 	 * public method setDegree - will return the degree of the provider

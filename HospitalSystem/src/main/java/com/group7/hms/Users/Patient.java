@@ -25,8 +25,8 @@ public class Patient extends User {
 	 * @param applicantPassword
 	 *            - the projected patient password.
 	 */
-	public Patient(String applicantEmail, String applicantPassword) {
-		super(applicantEmail, applicantPassword);
+	public Patient(String applicantEmail, String applicantPassword, String role, String name) {
+		super(applicantEmail, applicantPassword, role,name);
 		patientInsurance = new Insurance();
 	}
 
@@ -46,14 +46,14 @@ public class Patient extends User {
 	 * @param insuranceID
 	 *            - the insurance policy ID
 	 */
-	public Patient(String applicantEmail, String applicantPassword,
+	/*public Patient(String applicantEmail, String applicantPassword,
 			String provider, Date startDate, Date endDate,
-			String insuranceID) {
-		super(applicantEmail, applicantPassword);
+			String insuranceID, String role) {
+		super(applicantEmail, applicantPassword,role);
 		patientInsurance = new Insurance(provider, startDate, endDate,
 				insuranceID);
 	}
-
+*/
 	/**
 	 * public method getInsuranceProvider - will return the patients insurance
 	 * provider

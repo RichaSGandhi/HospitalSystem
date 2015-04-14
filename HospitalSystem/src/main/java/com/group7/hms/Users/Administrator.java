@@ -41,8 +41,8 @@ public class Administrator extends User {
 	 * @param applicantPassword
 	 *            - applicants proposed email address
 	 */
-	public Administrator(String applicantEmail, String applicantPassword) {
-		super(applicantEmail, applicantPassword);
+	public Administrator(String applicantEmail, String applicantPassword,String role,String name) {
+		super(applicantEmail, applicantPassword,role,name);
 
 	}
 
@@ -64,16 +64,16 @@ public class Administrator extends User {
 	 * @param department
 	 *            - the department of the administrator.
 	 */
-	public Administrator(String applicantEmail, String applicantPassword,
+	/*public Administrator(String applicantEmail, String applicantPassword,
 			String jobTitle, String degree, String certifications,
 			String specailizations, String department) {
-		super(applicantEmail, applicantPassword);
-		setJobTitle(jobTitle);
+		super(applicantEmail, applicantPassword,jobTitle);
+		//setJobTitle(jobTitle);
 		setDegree(degree);
 		setCertifications(certifications);
 		setSpecailizations(specailizations);
 		setDepartment(department);
-	}
+	}*/
 
 	/**
 	 * public method getJobTitle - will return the job title of the

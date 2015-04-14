@@ -25,7 +25,7 @@ public abstract class User {
 	/**
 	 * private field firstname - The first name of the user
 	 */
-	private String firstName;
+	private String Name;
 	/**
 	 * private field middleName - The middle name of the user
 	 */
@@ -84,12 +84,15 @@ public abstract class User {
 	 * contact.
 	 */
 	private String ecEmailAddress;
-
+	/**
+	 * private field jobTitle - stores the job title of the Provider
+	 */
+	private String jobTitle;
 	/**
 	 * public constructor - will create a new instance of the class User and
 	 * store the username, primary email and the password.
 	 */
-	public User(String applicantEmail, String applicantPassword) {
+	public User(String applicantEmail, String applicantPassword,String role,String name) {
 		// set the username. This should be the only time that the username is
 		// ever set.
 		setUsername(applicantEmail);
@@ -97,6 +100,8 @@ public abstract class User {
 		setPrimaryEmail(applicantEmail);
 		// Set the password for the user
 		setPassword(applicantPassword);
+		setName(name);
+		setJobTitle(role);
 	}
 
 	/**
@@ -147,19 +152,19 @@ public abstract class User {
 	 * 
 	 * @return the firstName of the user
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return Name;
 	}
 
 	/**
 	 * public method setFirstName - sets the first name of the user. Will be
 	 * used when the user enters their personal information and demographics
 	 * 
-	 * @param firstName
+	 * @param Name
 	 *            the firstName to set
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String Name) {
+		this.Name = Name;
 	}
 
 	/**
@@ -606,5 +611,24 @@ public abstract class User {
 		public void setZipCode(int zipCode) {
 			this.zipCode = zipCode;
 		}
+		
+	}
+	/**
+	 * public method getJobTitle - will return the job title of the provider
+	 * 
+	 * @return the jobTitle
+	 */
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	/**
+	 * public method setJobTitle - sets the job title of the provider
+	 * 
+	 * @param jobTitle
+	 *            the jobTitle to set
+	 */
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 }

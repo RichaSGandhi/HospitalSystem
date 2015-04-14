@@ -53,7 +53,7 @@ public class SendEmail {
 		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		//generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("richa-gandhi@uiowa.edu"));
 		generateMailMessage.setSubject("Please activate your account");
-		String emailBody = "Hi, " +name+ "! Please follow this link activate your account and login<br><br> Regards, <br>Richa Gandhi<br>Group 7<br> Hospital Management System";
+		String emailBody = "Hi, " +name+ "! Please follow this link activate your account and login http://localhost:8080/hms/login<br><br> Regards, <br>Richa Gandhi<br>Group 7<br> Hospital Management System";
 		generateMailMessage.setContent(emailBody, "text/html");
 		System.out.println("Mail Session has been created successfully..");
  

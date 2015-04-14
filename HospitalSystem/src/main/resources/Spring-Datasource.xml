@@ -10,6 +10,9 @@
       <property name="username" value="root"/>
       <property name="password" value="sept"/>
    </bean>
-   
+  
+     <bean id="UserDAO" class="com.group7.hms.dao.UserDAOImpl">
+   <property name="dataSource" ref="dataSource"/>
+   </bean>
 
 </beans>
