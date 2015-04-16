@@ -30,7 +30,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Jacob/Documents/Fund Software Engineering/JAR/javax.mail-api-1.5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jacob/Documents/Fund Software Engineering/JAR/mail-1.4.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jacob/Documents/GitHub/RichaSGandhi/HospitalSystem/HospitalSystem/src/lib/mail-1.4.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jacob/Documents/GitHub/RichaSGandhi/HospitalSystem/HospitalSystem/src/lib/javax.mail-api-1.5.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
