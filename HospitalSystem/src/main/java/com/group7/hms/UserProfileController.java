@@ -4,6 +4,7 @@ package com.group7.hms;
 
 
 
+import java.lang.ProcessBuilder.Redirect;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.group7.hms.Users.Administrator;
@@ -134,24 +136,43 @@ public class UserProfileController {
 	@RequestMapping(value = "/makeAppointment", method = RequestMethod.GET)
 	public String makeAppointment(Locale locale, Model model,
 			@RequestParam(value = "department", defaultValue = "General") String department){
+		System.out.println("Im here 1");
 		List<Providers> docList = daoObject.getDoctorInfo(department);
+		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
 		return "masterpage";
 	}
+	/*@RequestMapping(value = "/makeAppointmentAjax", method = RequestMethod.POST)
+	public @ResponseBody Providers makeAppointmentAjax(Locale locale, Model model,
+			@RequestParam(value = "department", defaultValue = "General") String department){
+		List<Providers> docList = daoObject.getDoctorInfo(department);
+		System.out.println("Im here n ajax");
+		//model.addAttribute("viewName", "makeAppointment");
+		//model.addAttribute("doctorList", docList);
+		//return "masterpage";
+		Providers x=null;
+		for(Providers a : docList){
+			x = a;
+		}
+		return x;
+	}*/
 
-	@RequestMapping(value = "/submit", method = RequestMethod.POST, params = "search")
+	@RequestMapping(value = "/makeAppointment", method = RequestMethod.POST, params = "search")
 	public String searchDocs(Locale locale, Model model,
 			@RequestParam(value = "department", defaultValue = "") String department){
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
+		//return "redirect:/makeAppointment";
 		return "masterpage";
 	}
-	@RequestMapping(value = "/makeAppointment/getDoctorsDetails", method = RequestMethod.GET)
-	public void getDoctorsDetails(String email){
-		System.out.println("GEtting in doctor deayils");
-	}
+	
+	/*@RequestMapping(value = "/makeAppointment", method = RequestMethod.POST, params = "selectedUser")
+	public void getDoctorsDetails(Locale locale, Model model,
+			@RequestParam(value = "selectedUser", defaultValue = "") Providers doctor){
+		System.out.println(doctor.getName());
+	}*/
 	
 	
 
