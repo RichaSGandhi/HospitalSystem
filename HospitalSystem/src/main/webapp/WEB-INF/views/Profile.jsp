@@ -25,7 +25,7 @@
 <h3><c:out value="Role: ${role}" /></h3>
 <table>				
 <tr><td><a href="<c:url value="/" />">Home</a> </td></tr>
-<tr><td><a href="<c:url value="/user/edit" />">Update My Profile</a> </td></tr>
+<tr><td><a href="<c:url value="/updateProfile" />">Update My Profile</a> </td></tr>
 <tr><td><a href="<c:url value="/makeAppointment"/>"> Make an Appointment</a></td></tr>
 </table>
      <P>Hi!! This is your home page</P>    

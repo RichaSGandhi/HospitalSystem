@@ -92,6 +92,9 @@ public abstract class User {
 	 * public constructor - will create a new instance of the class User and
 	 * store the username, primary email and the password.
 	 */
+	public User(){
+		
+	}
 	public User(String applicantEmail, String applicantPassword,String role,String name) {
 		// set the username. This should be the only time that the username is
 		// ever set.

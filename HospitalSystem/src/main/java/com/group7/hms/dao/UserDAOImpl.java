@@ -114,7 +114,7 @@ public class UserDAOImpl implements UserDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			String[] sendInfo = new String[3];
-			User user = null;
+			//User user = null;
 			ResultSet rs = ps.executeQuery();
 			String name= null;
 			String role = null;
@@ -143,6 +143,43 @@ public class UserDAOImpl implements UserDAO {
 		}
 
 		// return "Test Name";
+	}
+	
+	@Override
+	public List<Providers> getDoctorInfo(String dept) {
+
+		String sql = "SELECT * FROM hospitalmanagement.Users WHERE department = ?";
+		List<Providers> docList = new ArrayList<Providers>();
+		Connection conn = null;
+
+		try {
+			System.out.println("trying to get connection");
+			 //User user = jdbcTemplateObject.queryForObject(sql, 
+                  //   email, new StudentMapper());
+			//conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, dept);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Providers doc = new Providers();
+				doc.setName(rs.getString("name"));
+				doc.setAffiliation(rs.getString("affiliation"));
+				doc.setDegree(rs.getString("degree"));
+				doc.setSpecialization(rs.getString("specialization"));
+				//doc.setExperience(rs.getString("experience"));
+				doc.setAvailableDays(rs.getString("availableDays"));
+				docList.add(doc);
+				
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		for(Providers a:docList){
+			System.out.println(a);
+		}
+		return docList;
 	}
 	@Override
 	public void resetPassword(String emailAddress, String password) {

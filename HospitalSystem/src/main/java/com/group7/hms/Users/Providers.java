@@ -18,7 +18,7 @@ public class Providers extends User {
 	/**
 	 * private field specialization - stores the specialization of the Provider
 	 */
-	private String specalization;
+	private String specialization;
 
 	/**
 	 * private field certification - stores the certification of the provider
@@ -40,9 +40,13 @@ public class Providers extends User {
 	 * private field affiliation - stores the affiliation of the provider.
 	 */
 	private String affiliation;
+	
 
 	// TODO implement the Shift/Availability and Holidays
-
+	private String availableDays;
+	public String getAvailableDays() {
+		return availableDays;
+	}
 	/**
 	 * public constructor - minimal constructor
 	 * 
@@ -51,6 +55,9 @@ public class Providers extends User {
 	 * @param applicantPassword
 	 *            - the projected email address of the provider
 	 */
+	public Providers(){
+		super();
+	}
 	public Providers(String applicantEmail, String applicantPassword, String role, String name) {	
 		super(applicantEmail, applicantPassword,role,name);
 
@@ -114,10 +121,10 @@ public class Providers extends User {
 	 * public method getSpecailization - will return the specialization of the
 	 * provider
 	 * 
-	 * @return the specalization
+	 * @return the specialization
 	 */
-	public String getSpecalization() {
-		return specalization;
+	public String getSpecialization() {
+		return specialization;
 	}
 
 	/**
@@ -127,8 +134,8 @@ public class Providers extends User {
 	 * @param specalization
 	 *            the specialization to set
 	 */
-	public void setSpecalization(String specalization) {
-		this.specalization = specalization;
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
 	/**
@@ -208,6 +215,11 @@ public class Providers extends User {
 	 */
 	public void setAffiliation(String affiliation) {
 		this.affiliation = affiliation;
+	}
+	public void setAvailableDays(String days) {
+		// TODO Auto-generated method stub
+		this.availableDays =days;
+		
 	}
 
 }

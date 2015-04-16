@@ -27,15 +27,15 @@
 			<div>	
 			<table>
 		<tr>			
-			<th> Departments :</th> <th><select id="Department" Department="role" placeholder = "Department" required style="width:146px">
-									 <option value="physician">General Physician</option>
+			<th> Departments :</th> <th><select id="Department" placeholder = "Department" name = "department" required style="width:146px">
+									 <option value="general">General Physician</option>
  									 <option value="cardiology">Cardiologist</option>
 								     <option value="neurology">Neurology</option>
  									 <option value="pediatrics">Pediatrics</option>
  									 <option value="gynaecology">Gynaecology</option>
   									 </select></th>
   									 <th></th>
-			<th> <input class="PrimaryButton" type="submit" id="submitButton" value="Search" /> </th>	
+			<th> <input class="PrimaryButton" type="submit" id="submitButton" value="Search" name="search"/> </th>	
 		</tr>	
 			</table>	
 				</div>
@@ -57,16 +57,15 @@
       							</c:when>
 
 							    <c:otherwise>
-									<c:forEach items="${doctorList}" var="car" >
+									<c:forEach items="${doctorList}" var="user" >
 				   						
 				   						<tr>				   					
 				   							<td><button id="${user.getPrimaryEmail()}" name="select" onclick="getDoctorsDetails(this)">Select</button></td>				   							
 				   							<td style="text-align: center;"><c:out value="${user.getName()}"/></td>
 				   							<td style="text-align: center;"><c:out value="${user.getAffiliation()}"/></td>				   							
-				   							<td style="text-align: center;"><c:out value="${user.getDegree()}"/></td>
-				   							<td style="text-align: center;"><c:out value="${user.getExperience()}"/></td>
-				   							<td style="text-align: center;"><c:out value="${user.getSpecalization()}"/></td>
-				   							<td style="text-align: center;"><c:out value="${user.getAvailableDay()}"/></td>
+				   							<td style="text-align: center;"><c:out value="${user.getDegree()}"/></td>	
+				   							<td style="text-align: center;"><c:out value="${user.getSpecialization()}"/></td>
+				   							<td style="text-align: center;"><c:out value="${user.getAvailableDays()}"/></td>
 				   						</tr>
 									</c:forEach>										    
 							    </c:otherwise>

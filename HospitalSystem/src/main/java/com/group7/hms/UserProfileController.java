@@ -1,4 +1,8 @@
+
 package com.group7.hms;
+
+
+
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -35,6 +39,7 @@ import com.group7.hms.service.SendEmail;
 
 public class UserProfileController {
 	private static final Logger logger = LoggerFactory.getLogger(UserProfileController.class);
+	UserDAO daoObject = new UserDAOImpl();
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String newUser(Locale locale, Model model) {
@@ -62,29 +67,29 @@ public class UserProfileController {
 		if (info[0]==null){
 			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
 			model.addAttribute("viewName", "signup");
-			return "masterpage";
+			
 		}
-		else if(info[2].equalsIgnoreCase("inactive")){
-		model.addAttribute("name", info[0]);
-		model.addAttribute("role",info[1]);
-		model.addAttribute("viewName", "updateProfile");
-		return "masterpage";
+		else if (info[2].equalsIgnoreCase("active")) {
+			model.addAttribute("name", info[0]);
+			model.addAttribute("role", info[1]);
+			model.addAttribute("viewName", "Profile");
 		}
 		else{
 			model.addAttribute("name", info[0]);
-			model.addAttribute("role",info[1]);
-			model.addAttribute("viewName", "Profile");
-			return "masterpage";
+			model.addAttribute("viewName", "updateProfile");
+			
 		}
-	}
-	@RequestMapping(value = "/makeAppointment", method = RequestMethod.GET)
-	public String makeAppointment(Locale locale, Model model,
-			@RequestParam(value = "email", defaultValue = "") String email,
-			@RequestParam(value = "password", defaultValue = "") String password) {
-		model.addAttribute("viewName", "makeAppointment");
 		return "masterpage";
 		
 	}
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.GET)
+	public String updateProfile(Locale locale, Model model,
+			@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "password", defaultValue = "") String password) {
+		model.addAttribute("viewName", "updateProfile");
+		return "masterpage";
+	}
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String createUser(
 			Locale locale,
@@ -95,25 +100,22 @@ public class UserProfileController {
 			@RequestParam(value = "role", defaultValue = "") String role
 
 	) {
-		UserDAO dataLayerObj = new UserDAOImpl();
+
 		logger.info("Attempting to create new user.");
 		User user = null;		
 		if(role.equalsIgnoreCase("Doctor")||role.equalsIgnoreCase("Nurse")){
-			user = new Providers(email,password,role,name);
+			user = new Providers(email,password, role, name);
 
 		}else if(role.equalsIgnoreCase("Patient")){
-			user = new Patient(email,password,role,name);
+			user = new Patient(email,password, role, name);
 
-		}if(role.equalsIgnoreCase("Admin")){
-			user = new Administrator(email,password,role,name);
+		}else if(role.equalsIgnoreCase("Admin")){
+			user = new Administrator(email,password, role, name);
 
-		}else{
-			model.addAttribute("ErrorMsg", "Role does not exist");
-			model.addAttribute("viewName", "signup");
-			return "masterpage";
 		}
 		try{
-		dataLayerObj.setUser(user);
+		daoObject.setUser(user);
+		
 		logger.info("Here Printing " + role + " " + email + " " + password +" "+name);
 		logger.info("new user object created." + role + " " + email + " " + password);
 		//model.addAttribute("user", user);
@@ -123,17 +125,36 @@ public class UserProfileController {
 		logger.info("" +answer);
 		model.addAttribute("name", name);
 		model.addAttribute("viewName", "signupEmailConfirmation");
-		
 		}catch(SQLException e){
-			model.addAttribute("ErrorMsg", "Account already exists for this email id, Please Login");
+			model.addAttribute("ErrorMsg", "Account already Exists, Please Login");
 			model.addAttribute("viewName", "signup");
 		}
 		return "masterpage";
 	}
+	@RequestMapping(value = "/makeAppointment", method = RequestMethod.GET)
+	public String makeAppointment(Locale locale, Model model,
+			@RequestParam(value = "department", defaultValue = "General") String department){
+		List<Providers> docList = daoObject.getDoctorInfo(department);
+		model.addAttribute("viewName", "makeAppointment");
+		model.addAttribute("doctorList", docList);
+		return "masterpage";
+	}
 
-	
+	@RequestMapping(value = "/submit", method = RequestMethod.POST, params = "search")
+	public String searchDocs(Locale locale, Model model,
+			@RequestParam(value = "department", defaultValue = "") String department){
+		List<Providers> docList = daoObject.getDoctorInfo(department);
+		model.addAttribute("viewName", "makeAppointment");
+		model.addAttribute("doctorList", docList);
+		return "masterpage";
+	}
+	@RequestMapping(value = "/makeAppointment/getDoctorsDetails", method = RequestMethod.GET)
+	public void getDoctorsDetails(String email){
+		System.out.println("GEtting in doctor deayils");
+	}
 	
 	
 
 
 }
+
