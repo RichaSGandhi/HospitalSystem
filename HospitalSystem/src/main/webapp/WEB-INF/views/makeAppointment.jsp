@@ -10,6 +10,11 @@
 		<title>Make Appointment</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/demo_table.css" />">
+	<script>function getDoctorsDetails(){
+		var doctor = document.getElementById('selectedUser').value;
+		alert("Warning: Are you sure you want to make appointment with "+doctor+"?");
+	}
+		</script>
 	</head>
 	
 	<body>
@@ -23,11 +28,11 @@
 				<h2>Please Search for Appointments here based on Departments</h2>
 				
 				
-				<form:form id ="doctorsSearch" name="doctorsSearch"  action="submit">
+				<form:form id ="makeAppointment" method="GET">
 			<div>	
 			<table>
 		<tr>			
-			<th> Departments :</th> <th><select id="Department" placeholder = "Department" name = "department" required style="width:146px">
+			<th> Departments :</th> <th><select id="Department" name = "department" required style="width:146px">
 									 <option value="general">General Physician</option>
  									 <option value="cardiology">Cardiologist</option>
 								     <option value="neurology">Neurology</option>
@@ -41,7 +46,8 @@
 				</div>
 		
 			</form:form>					
-				<h2>Available Doctors</h2>				
+				<h2>Available Doctors</h2>
+								
 				<table class="tableMax">
 									<tr>
 										<th></th>
@@ -60,8 +66,8 @@
 									<c:forEach items="${doctorList}" var="user" >
 				   						
 				   						<tr>				   					
-				   							<td><button id="${user.getPrimaryEmail()}" name="select" onclick="getDoctorsDetails(this)">Select</button></td>				   							
-				   							<td style="text-align: center;"><c:out value="${user.getName()}"/></td>
+				   							<td><button id="selectedUser" type = "submit" name="selectDoc" value = "${user}">Select</button></td>				   							
+				   							<td id= "docName" style="text-align: center;"><c:out value="${user.getName()}"/></td>
 				   							<td style="text-align: center;"><c:out value="${user.getAffiliation()}"/></td>				   							
 				   							<td style="text-align: center;"><c:out value="${user.getDegree()}"/></td>	
 				   							<td style="text-align: center;"><c:out value="${user.getSpecialization()}"/></td>
@@ -72,6 +78,7 @@
 							</c:choose>
 						
 					</table>
+					
 					<br>
 					<br>
 		
