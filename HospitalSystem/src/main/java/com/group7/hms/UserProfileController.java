@@ -5,6 +5,7 @@ package com.group7.hms;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -153,6 +154,21 @@ public class UserProfileController {
 		System.out.println("GEtting in doctor deayils");
 	}
 	
+	@RequestMapping(value ="/scheduleAppointment", method =RequestMethod.GET )
+	public String schedlueAppointment(Model model, Locale locale){
+		
+		
+		List<String> appointments = new ArrayList<String>();
+		for(int i = 9; i < 17; i++ ){
+			String aMpM = (i<12)? "AM":"PM";
+			appointments.add(Integer.toString((i%12))+":00-"+Integer.toString((i%12))+":59 " + aMpM);
+		}
+		model.addAttribute("appointments",appointments);
+		model.addAttribute("viewname", "scheduleAppointment");
+		
+		return null;
+		
+	}
 	
 
 
