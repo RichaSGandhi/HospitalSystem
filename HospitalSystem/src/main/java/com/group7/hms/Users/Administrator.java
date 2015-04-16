@@ -21,16 +21,16 @@ public class Administrator extends User {
 	 * private field certifications - The certifications that the Administrator
 	 * holds
 	 */
-	public String certifications;
+	private String certifications;
 	/**
 	 * private field specializations - The specializations that the
 	 * Administrator holds.
 	 */
-	public String specializations;
+	private String specializations;
 	/**
 	 * private field department - The department the Administrator belongs to.
 	 */
-	public String department;
+	private String department;
 
 	// TODO Implement shift/Availability and Holidays
 	/**
