@@ -17,6 +17,10 @@ public class Patient extends User {
 	 */
 	private Insurance patientInsurance;
 
+	public Patient(){
+		super();
+		patientInsurance = new Insurance();
+	}
 	/**
 	 * public constructor - the minimal constructor
 	 * 
@@ -145,10 +149,10 @@ public class Patient extends User {
 	 */
 	private class Insurance {
 
-		private String provider;
-		private Date startDate;
-		private Date endDate;
-		private String insuranceID;
+		private String provider="";
+		private Date startDate = new Date();
+		private Date endDate = new Date();
+		private String insuranceID="";
 
 		/**
 		 * public constructor - minimal constructor

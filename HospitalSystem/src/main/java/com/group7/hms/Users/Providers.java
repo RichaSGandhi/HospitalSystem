@@ -13,37 +13,46 @@ public class Providers extends User {
 	/**
 	 * private field degree - stores the degree of the Provider
 	 */
-	private String degree;
+	private String degree="";
 
 	/**
 	 * private field specialization - stores the specialization of the Provider
 	 */
-	private String specialization;
+	private String specialization="";
 
 	/**
 	 * private field certification - stores the certification of the provider
 	 */
-	private String certification;
+	private String certification="";
 
 	/**
 	 * private field experience - stores the experience level of the provider
 	 */
-	private String experience;
+	private String experience="";
 
 	/**
 	 * private field department - stores the department information of the
 	 * provider
 	 */
-	private String department;
+	private String department="";
 
 	/**
 	 * private field affiliation - stores the affiliation of the provider.
 	 */
-	private String affiliation;
+	private String affiliation="";
 	
 
 	// TODO implement the Shift/Availability and Holidays
-	private String availableDays;
+	private String availableDays="";
+
+	public String getAvailableHours() {
+		return availableHours;
+	}
+	
+	public void setAvailableHours(String availableHours) {
+		this.availableHours = availableHours;
+	}
+	private String availableHours="";
 	public String getAvailableDays() {
 		return availableDays;
 	}

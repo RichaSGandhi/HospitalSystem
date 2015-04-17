@@ -16,36 +16,36 @@ public abstract class User {
 	 * private field username - The username will also be the email that the
 	 * user will recieve email notifications
 	 */
-	private String username;
+	private String username="";
 	/**
 	 * private field password - The password for the user
 	 */
 	// TODO The password need to be hashed.
-	private String password;
+	private String password="";
 	/**
 	 * private field firstname - The first name of the user
 	 */
-	private String Name;
+	private String Name="";
 	/**
 	 * private field middleName - The middle name of the user
 	 */
-	private String middleName;
+	private String middleName="";
 	/**
 	 * private field lastName - The last name of the user
 	 */
-	private String lastName;
+	private String lastName="";
 	/**
 	 * private field dateOfBirth - The date of birth of the user
 	 */
-	private Date dateOfBirth;
+	private Date dateOfBirth=new Date();
 	/**
 	 * private field age - The calculated age of the user.
 	 */
-	private int age;
+	private int age=0;
 	/**
 	 * private field maritalStatus - The marital status of the user
 	 */
-	private String maritialStatus;
+	private String maritialStatus="";
 	/**
 	 * private field userAddress - The address for the user
 	 */
@@ -53,41 +53,41 @@ public abstract class User {
 	/**
 	 * private field primaryPhone - the primary phone number for the user
 	 */
-	private int primaryPhone;
+	private int primaryPhone=0;
 	/**
 	 * private field secondaryPhone - the secondary phone number for the user
 	 */
-	private int secondaryPhone;
+	private int secondaryPhone=0;
 	/**
 	 * private field primaryEmail - The primary email address for the user. The
 	 * default will be the username.
 	 */
-	private String primaryEmail;
+	private String primaryEmail="";
 	/**
 	 * private field secondaryEmail - The secondary email address for the user.
 	 */
-	private String secondaryEmail;
+	private String secondaryEmail="";
 	/**
 	 * private field ecFirstName - The first name of the emergency contact
 	 */
-	private String ecFirstName;
+	private String ecFirstName="";
 	/**
 	 * private field ecLastname - The last name of the emergenecy contact.
 	 */
-	private String ecLastName;
+	private String ecLastName="";
 	/**
 	 * private field ecPhoneNumber - The phone number of the emergenry contact.
 	 */
-	private int ecPhoneNumber;
+	private int ecPhoneNumber=0;
 	/**
 	 * private field ecEmailAddress - The email address of the Emergency
 	 * contact.
 	 */
-	private String ecEmailAddress;
+	private String ecEmailAddress="";
 	/**
 	 * private field jobTitle - stores the job title of the Provider
 	 */
-	private String jobTitle;
+	private String jobTitle="";
 	/**
 	 * public constructor - will create a new instance of the class User and
 	 * store the username, primary email and the password.
