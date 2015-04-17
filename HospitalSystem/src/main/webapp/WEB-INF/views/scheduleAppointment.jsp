@@ -8,12 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form method="POST" commandName="scheduleAppointment">
-		<table>
-			<tr>
-				<td><form:radiobuttons path="appointments" items ="${appointments}"/> </td>
-			</tr>	
-		</table>
-	</form:form>
+	<form:form method="post" action="processAppointment" commandName="app">
+ <form:errors path="*" element="div" cssClass="commonerrorblock"/>
+ 	<table>
+ 		<tr>
+ 		<td>Available Appointments</td>
+ 			<td>
+ 				<form:radiobuttons items="${appointmentList}" path="Appointment"></form:radiobuttons>
+ 			</td>
+ 			<td>
+ 				<<form:errors path="Appointment" cssClass="error"/>
+ 			</td>
+ 			</tr>
+ 			<tr>
+ 				<td></td><td><input type="submit"></td>
+ 			</tr>
+ 	</table>
+ </form:form>
 </body>
 </html>
