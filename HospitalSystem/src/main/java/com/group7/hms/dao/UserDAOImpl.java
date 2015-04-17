@@ -164,6 +164,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			while(rs.next()){
 				Providers doc = new Providers();
+				doc.setPrimaryEmail(rs.getString("emailId"));
 				doc.setName(rs.getString("name"));
 				doc.setAffiliation(rs.getString("affiliation"));
 				doc.setDegree(rs.getString("degree"));
@@ -180,6 +181,28 @@ public class UserDAOImpl implements UserDAO {
 			System.out.println(a);
 		}
 		return docList;
+	}
+	@Override
+	public Providers getDoctorDetails(String email){
+		String sql = "SELECT * FROM hospitalmanagement.Users WHERE emailId = ?";
+
+		Connection conn = null;
+		Providers doc = new Providers();
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()){
+				
+				doc.setName(rs.getString("name"));
+				doc.setAvailableDays(rs.getString("availableDays"));
+				doc.setPrimaryEmail(email);
+		}}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return doc;
 	}
 	@Override
 	public void resetPassword(String emailAddress, String password) {

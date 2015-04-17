@@ -47,7 +47,7 @@
 		
 			</form:form>					
 				<h2>Available Doctors</h2>
-								
+				<form:form id ="scheduleAppointment" method="GET">			
 				<table class="tableMax">
 									<tr>
 										<th></th>
@@ -66,8 +66,8 @@
 									<c:forEach items="${doctorList}" var="user" >
 				   						
 				   						<tr>				   					
-				   							<td><button id="selectedUser" type = "submit" name="selectDoc" value = "${user}">Select</button></td>				   							
-				   							<td id= "docName" style="text-align: center;"><c:out value="${user.getName()}"/></td>
+				   							<td><button id="selectedUser" type = "submit" name="email" value = "${user.getPrimaryEmail()}">Select</button></td>				   							
+				   							<td style="text-align: center;"><c:out value="${user.getName()}"/></td>
 				   							<td style="text-align: center;"><c:out value="${user.getAffiliation()}"/></td>				   							
 				   							<td style="text-align: center;"><c:out value="${user.getDegree()}"/></td>	
 				   							<td style="text-align: center;"><c:out value="${user.getSpecialization()}"/></td>
@@ -78,7 +78,7 @@
 							</c:choose>
 						
 					</table>
-					
+					</form:form>
 					<br>
 					<br>
 		

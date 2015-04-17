@@ -168,11 +168,15 @@ public class UserProfileController {
 		return "masterpage";
 	}
 	
-	/*@RequestMapping(value = "/makeAppointment", method = RequestMethod.POST, params = "selectedUser")
-	public void getDoctorsDetails(Locale locale, Model model,
-			@RequestParam(value = "selectedUser", defaultValue = "") Providers doctor){
-		System.out.println(doctor.getName());
-	}*/
+	@RequestMapping(value = "/scheduleAppointment", method = RequestMethod.GET)
+	public String getDoctorsDetails(Locale locale, Model model,
+			@RequestParam(value = "email", defaultValue = "") String email){
+		Providers doctor = daoObject.getDoctorDetails(email);
+		model.addAttribute("viewName", "scheduleAppointment");
+		model.addAttribute("doctor", doctor);
+		//return "redirect:/makeAppointment";
+		return "masterpage";
+	}
 	
 	
 

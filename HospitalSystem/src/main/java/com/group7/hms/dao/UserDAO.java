@@ -29,6 +29,8 @@ public interface UserDAO {
 	public void setUser(User user)throws SQLException;
 
 	public List<Providers> getDoctorInfo(String dept);
+	
+	public Providers getDoctorDetails(String email);
 
 
 }
