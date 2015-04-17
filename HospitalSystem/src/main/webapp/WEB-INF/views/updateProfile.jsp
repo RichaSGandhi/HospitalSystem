@@ -69,8 +69,61 @@
 									<th><input type="text"
 											id="city" value = "${user.mailingAddress.city}" required></th>			
 								<th><label>State:</label></th>
-									<th><input type="text"
-											id="state" value = "${user.mailingAddress.state}" required></th>
+									<th><select  id="state" required style="width:150px">
+											<option value = "AL">Alabama</option>
+											<option value = "AK">Alaska</option>
+											<option value = "AZ">Arizona</option>
+											<option value = "AR">Arkansas</option>
+											<option value = "CA">California</option>
+											<option value = "CO">Colorado</option>
+											<option value = "CT">Connecticut</option>
+											<option value = "DE">Delaware</option>
+											<option value = "FL">Flordia</option>
+											<option value = "GA">Georgia</option>
+											<option value = "HI">Hawaii</option>
+											<option value = "ID">Idaho</option>
+											<option value = "IN">Indiana</option>
+											<option value = "IA">Iowa</option>
+											<option value = "KS">Kansas</option>
+											<option value = "KY">Kentucky</option>
+											<option value = "LA">Louisiana</option>
+											<option value = "ME">Maine</option>
+											<option value = "MD">Maryland</option>
+											<option value = "MA">Massachusetts</option>
+											<option value = "MI">Michigan</option>
+											<option value = "MN">Minnesota</option>
+											<option value = "MS">Mississippi</option>
+											<option value = "MO">Missouri</option>
+											<option value = "MT">Montana</option>
+											<option value = "NE">Nebraska</option>
+											<option value = "NV">Neveda</option>
+											<option value = "NH">New Hampshire</option>
+											<option value = "NJ">New Jersey</option>
+											<option value = "NM">New Mexico</option>
+											<option value = "NY">New York</option>
+											<option value = "NC">North Carolina</option>
+											<option value = "ND">North Dakota</option>
+											<option value = "OH">Ohio</option>
+											<option value = "OK">Oklahoma</option>
+											<option value = "OR">Oregon</option>
+											<option value = "PA">Pennsylvania</option>
+											<option value = "RI">Rhode Island</option>
+											<option value = "SC">South Carolina</option>
+											<option value = "SD">South Dakota</option>
+											<option value = "TN">Tennessee</option>
+											<option value = "TX">Texas</option>
+											<option value = "UT">Utah</option>
+											<option value = "VT">Vermont</option>
+											<option value = "VA">Virgina</option>
+											<option value = "WA">Washinton</option>
+											<option value = "WV">West Virgina</option>
+											<option value = "WI">Wisconson</option>
+											<option value = "WY">Wyoming</option>
+											
+										</select>
+									
+									
+									</th>
 								
 								</tr>
 								<tr>
@@ -98,10 +151,9 @@
 									</tr>
 									<tr>
 										<th><label>Start Date:</label></th>
-										<th><input type="text" id="startDate" value = "${user.mailingAddress.street}"></th>
-											
-										<th><label>End Date:</label></th>
-										<th><input type="text" id="endDate" value = "${user.mailingAddress.city}" ></th>
+										<th><input style= "width:145px" type= "date" id="startDate" value = "${user.mailingAddress.street}"></th>
+											<th><label>End Date:</label></th>
+										<th><input style="width:145px" type="date" id="endDate" value = "${user.mailingAddress.city}" ></th>
 							
 									</tr>
 								</table>

@@ -12,10 +12,20 @@
  <form:errors path="*" element="div" cssClass="commonerrorblock"/>
  	<table>
  		<tr>
- 		<td>Available Appointments</td>
+ 		<td><b>Available Appointments</b></td>
+ 		</tr>
+		<tr>
+			<td><b> Choose a Day</b></td>
+		 	<td>
+ 				<form:radiobuttons items="${dayList}" path="day"></form:radiobuttons>
+ 			</td>
+ 		</tr>
+ 		<tr>
+ 			<td><b>Choose a Time</b></td>
  			<td>
  				<form:radiobuttons items="${appointmentList}" path="Appointment"></form:radiobuttons>
  			</td>
+
  			<td>
  				<form:errors path="Appointment" cssClass="error"/>
  			</td>
