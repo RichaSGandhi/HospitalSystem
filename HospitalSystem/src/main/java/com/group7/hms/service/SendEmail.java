@@ -72,5 +72,49 @@ public class SendEmail {
 		e.printStackTrace();
 		return false;
 	}
+	
+
 	} 
+
+	public static boolean generateAndSendEmailAppointmentConfimation(String to, String name, String confirmationMessage){
+		try{
+			//Step1		
+				 logger.info("\n 1st ===> setup Mail Server Properties..");
+					mailServerProperties = System.getProperties();
+					mailServerProperties.put("mail.smtp.port", "587");
+					mailServerProperties.put("mail.smtp.auth", "true");
+					mailServerProperties.put("mail.smtp.starttls.enable", "true");
+					mailServerProperties.put("mail.smtp.host", "smtp.gmail.com");
+					System.out.println("Mail Server Properties have been setup successfully..");
+			 
+			//Step2		
+					logger.info("\n\n 2nd ===> get Mail Session..");
+					getMailSession = Session.getInstance(mailServerProperties, new GmailAuthenticator("richa1gandhi@gmail.com", "satnamwahaguru12345"));
+					generateMailMessage = new MimeMessage(getMailSession);
+					//generateMailMessage.setFrom(new InternetAddress("richa1gandhi@gmail.com"));
+					generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+					//generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("richa-gandhi@uiowa.edu"));
+					generateMailMessage.setSubject("Appointment Confromation Email");
+					String emailBody =confirmationMessage;
+					generateMailMessage.setContent(emailBody, "text/html");
+					System.out.println("Mail Session has been created successfully..");
+			 
+			//Step3		
+					System.out.println("\n\n 3rd ===> Get Session and Send mail");
+					Transport transport = getMailSession.getTransport("smtp");
+					
+					// Enter your correct gmail UserID and Password (XXXApp Shah@gmail.com)
+					//transport.connect("smtp.gmail.com");
+					//transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+					//transport.close();
+					Transport.send(generateMailMessage);
+					return true;
+				}catch (Exception e){
+					logger.info("IN CATCH");
+					e.printStackTrace();
+					return false;
+				}
+	}
+		
+
 }

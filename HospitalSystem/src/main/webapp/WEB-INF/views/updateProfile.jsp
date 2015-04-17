@@ -69,8 +69,61 @@
 									<th><input type="text"
 											id="city" value = "${user.mailingAddress.city}" required></th>			
 								<th><label>State:</label></th>
-									<th><input type="text"
-											id="state" value = "${user.mailingAddress.state}" required></th>
+									<th><select  id="state" required style="width:150px">
+											<option value = "AL">Alabama</option>
+											<option value = "AK">Alaska</option>
+											<option value = "AZ">Arizona</option>
+											<option value = "AR">Arkansas</option>
+											<option value = "CA">California</option>
+											<option value = "CO">Colorado</option>
+											<option value = "CT">Connecticut</option>
+											<option value = "DE">Delaware</option>
+											<option value = "FL">Flordia</option>
+											<option value = "GA">Georgia</option>
+											<option value = "HI">Hawaii</option>
+											<option value = "ID">Idaho</option>
+											<option value = "IN">Indiana</option>
+											<option value = "IA">Iowa</option>
+											<option value = "KS">Kansas</option>
+											<option value = "KY">Kentucky</option>
+											<option value = "LA">Louisiana</option>
+											<option value = "ME">Maine</option>
+											<option value = "MD">Maryland</option>
+											<option value = "MA">Massachusetts</option>
+											<option value = "MI">Michigan</option>
+											<option value = "MN">Minnesota</option>
+											<option value = "MS">Mississippi</option>
+											<option value = "MO">Missouri</option>
+											<option value = "MT">Montana</option>
+											<option value = "NE">Nebraska</option>
+											<option value = "NV">Neveda</option>
+											<option value = "NH">New Hampshire</option>
+											<option value = "NJ">New Jersey</option>
+											<option value = "NM">New Mexico</option>
+											<option value = "NY">New York</option>
+											<option value = "NC">North Carolina</option>
+											<option value = "ND">North Dakota</option>
+											<option value = "OH">Ohio</option>
+											<option value = "OK">Oklahoma</option>
+											<option value = "OR">Oregon</option>
+											<option value = "PA">Pennsylvania</option>
+											<option value = "RI">Rhode Island</option>
+											<option value = "SC">South Carolina</option>
+											<option value = "SD">South Dakota</option>
+											<option value = "TN">Tennessee</option>
+											<option value = "TX">Texas</option>
+											<option value = "UT">Utah</option>
+											<option value = "VT">Vermont</option>
+											<option value = "VA">Virgina</option>
+											<option value = "WA">Washinton</option>
+											<option value = "WV">West Virgina</option>
+											<option value = "WI">Wisconson</option>
+											<option value = "WY">Wyoming</option>
+											
+										</select>
+									
+									
+									</th>
 								
 								</tr>
 								<tr>
@@ -90,18 +143,17 @@
 									</tr>
 									<tr>
 										<th><label>Insurance Provider</label></th>
-										<th><input type ="text" id = "insuranceProvider" value = "${user.mailingAddress.zip}">
+										<th><input type ="text" id = "insuranceProvider" value = "${patient.insurance.provider}">
 										
 										<th><label>Insurance ID:</label></th>
-										<th><input type="text"id="insuranceID" value = "${user.mailingAddress.state}"></th>
+										<th><input type="text"id="insuranceID" value = "${patient.insurance.insuranceID}"></th>
 										
 									</tr>
 									<tr>
 										<th><label>Start Date:</label></th>
-										<th><input type="text" id="startDate" value = "${user.mailingAddress.street}"></th>
-											
-										<th><label>End Date:</label></th>
-										<th><input type="text" id="endDate" value = "${user.mailingAddress.city}" ></th>
+										<th><input style= "width:145px" type= "date" id="startDate" value = "${user.mailingAddress.street}"></th>
+											<th><label>End Date:</label></th>
+										<th><input style="width:145px" type="date" id="endDate" value = "${user.mailingAddress.city}" ></th>
 							
 									</tr>
 								</table>
@@ -112,27 +164,27 @@
 									</tr>
 										<tr>
 											<th><label>Affiliation</label></th>
-											<th><input type="text" id="affiliation" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id="affiliation" value = "${provider.affiliation}"></th>
 										
 											<th><label>Available Days</label></th>
-											<th><input type="text" id = "availableDays" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id = "availableDays" value = "${provider.availableDays}"></th>
 										
 											<th><label>Certification</label></th>
-											<th><input type="text" id = "certifcation" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id = "certifcation" value = "${provider.certification}"></th>
 										</tr>
 										<tr>
 											<th><label>Degree</label></th>
-											<th><input type ="text" id="degree" value = "${user.mailingAddress.state }"></th>
+											<th><input type ="text" id="degree" value = "${provider.degree }"></th>
 										
 											<th><label>Department</label></th>
-											<th><input type="text" id = "department" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "department" value = "${provider.department }"></th>
 										
 											<th><label>Experience</label></th>
-											<th><input type="text" id = "experience" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "experience" value = "${provider.experience }}"></th>
 										</tr>
 										<tr>
 											<th><label>Specialization]</label></th>
-											<th><input type="text" id = "specialization" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "specialization" value = "${provider.experience }"></th>
 										</tr>
 									</table>
 								
@@ -144,17 +196,17 @@
 										</tr>
 										<tr>
 											<th><label>Certifications</label></th>
-											<th><input type="text" id = "certifications" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "certifications" value = "${adminstrator.certifications }"></th>
 												
 											<th><label>Degree</label></th>
-											<th><input type="text" id = "degree" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "degree" value = "${administratior.degree }"></th>
 											
 											<th><label>Job Title</label></th>
-											<th><input type="text" id = "jobTitle" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "jobTitle" value = "${administrator.jobTitle }"></th>
 										</tr>
 										<tr>		
 											<th><label>Specializations</label></th>
-											<th><input type="text" id = "specializations" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "specializations" value = "${administrator.specializations }"></th>
 												
 										</tr>
 									</table>	
