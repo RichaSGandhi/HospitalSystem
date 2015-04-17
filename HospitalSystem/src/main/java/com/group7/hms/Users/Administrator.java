@@ -12,26 +12,29 @@ public class Administrator extends User {
 	/**
 	 * private field jobTitle - The job title that the Administrator holds
 	 */
-	private String jobTitle;
+	private String jobTitle="";
 	/**
 	 * private field degree - The degree that the Administrator holds
 	 */
-	private String degree;
+	private String degree="";
 	/**
 	 * private field certifications - The certifications that the Administrator
 	 * holds
 	 */
-	private String certifications;
+	private String certifications="";
 	/**
 	 * private field specializations - The specializations that the
 	 * Administrator holds.
 	 */
-	private String specializations;
+	private String specializations="";
 	/**
 	 * private field department - The department the Administrator belongs to.
 	 */
-	private String department;
+	private String department="";
 
+	public Administrator(){
+		super();
+	}
 	// TODO Implement shift/Availability and Holidays
 	/**
 	 * public constructor - minimal constructor
