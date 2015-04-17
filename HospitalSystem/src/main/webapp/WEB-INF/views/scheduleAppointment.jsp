@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Schedule Appointment</title>
 </head>
 <body>
 	<form:form method="post" action="processAppointment" commandName="app">
@@ -17,7 +17,7 @@
  				<form:radiobuttons items="${appointmentList}" path="Appointment"></form:radiobuttons>
  			</td>
  			<td>
- 				<<form:errors path="Appointment" cssClass="error"/>
+ 				<form:errors path="Appointment" cssClass="error"/>
  			</td>
  			</tr>
  			<tr>
