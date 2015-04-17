@@ -143,10 +143,10 @@
 									</tr>
 									<tr>
 										<th><label>Insurance Provider</label></th>
-										<th><input type ="text" id = "insuranceProvider" value = "${user.mailingAddress.zip}">
+										<th><input type ="text" id = "insuranceProvider" value = "${patient.insurance.provider}">
 										
 										<th><label>Insurance ID:</label></th>
-										<th><input type="text"id="insuranceID" value = "${user.mailingAddress.state}"></th>
+										<th><input type="text"id="insuranceID" value = "${patient.insurance.insuranceID}"></th>
 										
 									</tr>
 									<tr>
@@ -164,27 +164,27 @@
 									</tr>
 										<tr>
 											<th><label>Affiliation</label></th>
-											<th><input type="text" id="affiliation" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id="affiliation" value = "${provider.affiliation}"></th>
 										
 											<th><label>Available Days</label></th>
-											<th><input type="text" id = "availableDays" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id = "availableDays" value = "${provider.availableDays}"></th>
 										
 											<th><label>Certification</label></th>
-											<th><input type="text" id = "certifcation" value = "${user.mailingAddress.state}"></th>
+											<th><input type="text" id = "certifcation" value = "${provider.certification}"></th>
 										</tr>
 										<tr>
 											<th><label>Degree</label></th>
-											<th><input type ="text" id="degree" value = "${user.mailingAddress.state }"></th>
+											<th><input type ="text" id="degree" value = "${provider.degree }"></th>
 										
 											<th><label>Department</label></th>
-											<th><input type="text" id = "department" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "department" value = "${provider.department }"></th>
 										
 											<th><label>Experience</label></th>
-											<th><input type="text" id = "experience" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "experience" value = "${provider.experience }}"></th>
 										</tr>
 										<tr>
 											<th><label>Specialization]</label></th>
-											<th><input type="text" id = "specialization" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "specialization" value = "${provider.experience }"></th>
 										</tr>
 									</table>
 								
@@ -196,17 +196,17 @@
 										</tr>
 										<tr>
 											<th><label>Certifications</label></th>
-											<th><input type="text" id = "certifications" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "certifications" value = "${adminstrator.certifications }"></th>
 												
 											<th><label>Degree</label></th>
-											<th><input type="text" id = "degree" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "degree" value = "${administratior.degree }"></th>
 											
 											<th><label>Job Title</label></th>
-											<th><input type="text" id = "jobTitle" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "jobTitle" value = "${administrator.jobTitle }"></th>
 										</tr>
 										<tr>		
 											<th><label>Specializations</label></th>
-											<th><input type="text" id = "specializations" value = "${user.mailingAddress.state }"></th>
+											<th><input type="text" id = "specializations" value = "${administrator.specializations }"></th>
 												
 										</tr>
 									</table>	
