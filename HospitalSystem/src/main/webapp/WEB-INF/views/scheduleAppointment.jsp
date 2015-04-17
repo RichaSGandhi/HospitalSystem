@@ -10,9 +10,11 @@
 <body>
 	<form:form method="post" action="processAppointment" commandName="app">
  <form:errors path="*" element="div" cssClass="commonerrorblock"/>
+ 	<h2>Available Appointments for ${doctorName}</h2>
  	<table>
  		<tr>
- 		<td><b>Available Appointments</b></td>
+ 			<td><input type="hidden" name="doctorName" value ="${doctorName}"></td>
+ 			<td><input type="hidden" name="doctorEmail" value ="${doctorEmail}"></td>
  		</tr>
 		<tr>
 			<td><b> Choose a Day</b></td>
