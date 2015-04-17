@@ -47,7 +47,7 @@
 		
 			</form:form>					
 				<h2>Available Doctors</h2>
-				<form:form id ="scheduleAppointment" method="GET">			
+				<form:form id ="scheduleAppointment" method="GET" action = /hms/scheduleAppointment>			
 				<table class="tableMax">
 									<tr>
 										<th></th>
