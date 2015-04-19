@@ -30,13 +30,13 @@
 								<tr>
 									<th><label>UserName:</label></th>
 									<th><input type="text"
-											id="userName" value = "${user.userName}" disabled></th>
+											id="username" value = "${username}" disabled></th>
 									<th><label>Role:</label></th>	
 									<th><input type="text"
-											id="role" value = "${user.role}" disabled></th>
+											id="role" value = "${role}" disabled></th>
 									<th><label>Name:</label></th>	
 									<th><input type="text"
-											id="name" value = "${user.name}" disabled></th>
+											id="name" value = "${name}" disabled></th>
 								</tr>
 								<tr>
 									<th><label>Date of Birth:</label></th>

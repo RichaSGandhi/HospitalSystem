@@ -78,22 +78,12 @@ public class UserProfileController {
 		else if (("active").equalsIgnoreCase(info[2])) {
 			model.addAttribute("name", info[0]);
 			model.addAttribute("role", info[1]);
+			model.addAttribute("email",email);
 			model.addAttribute("viewName", "Profile");
 		}
 		return "masterpage";
 		
-	}
-	@RequestMapping(value = "/updateProfile", method = RequestMethod.GET)
-	public String updateProfile(Locale locale, Model model,
-			@RequestParam(value = "email", defaultValue = "") String email,
-			@RequestParam(value = "password", defaultValue = "") String password) {
-		model.addAttribute("viewName", "updateProfile");
-		//Info[3] : [0:Name,1:Role,2:Status]
-		String[] info = daoObject.getUserName(email);
-		model.addAttribute("role", info[1]);
-		return "masterpage";
-	}
-	
+	}	
 	//Sign-up Submit Method
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String createUser(
@@ -142,8 +132,8 @@ public class UserProfileController {
 		System.out.println("Im here 1");
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		System.out.println("Im here 2");
-		String[] info = daoObject.getUserName(email);
-		model.addAttribute("role", info[1]);
+		//String[] info = daoObject.getUserName(email);
+		//model.addAttribute("role", info[1]);
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
 		return "masterpage";

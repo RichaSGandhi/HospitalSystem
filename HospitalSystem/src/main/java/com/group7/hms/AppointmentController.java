@@ -46,6 +46,16 @@ public class AppointmentController {
 			else if(i.equalsIgnoreCase("t")){
 				generatedDayList.add("Tuesday");
 			}
+			else if(i.equalsIgnoreCase("w")){
+				generatedDayList.add("Wednesday");
+			}
+			else if(i.equalsIgnoreCase("th")){
+				generatedDayList.add("Thursday");
+			}
+			else if(i.equalsIgnoreCase("f")){
+				generatedDayList.add("Friday");
+			}
+			
 		}
 		
 		// hard code
@@ -60,7 +70,7 @@ public class AppointmentController {
 			System.out.println(i);
 		}
 		
-		return dayList;
+		return generatedDayList;
 	}
 	
 	//@ModelAttribute("appointmentList")
