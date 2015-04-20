@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form:form method="post" action="processAppointment" commandName="app">
- <form:errors path="*" element="div" cssClass="commonerrorblock"/>
+ 	<form:errors path="*" element="div" cssClass="commonerrorblock"/>
  	<h2>Available Appointments for ${doctorName}</h2>
  	<table>
  		<tr>
