@@ -172,7 +172,7 @@ public class UserProfileController {
 	@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
 	public String porcessProfilePost(@RequestParam String action,
 			@RequestParam(value = "email", defaultValue = "") String email,
-			Model model) {
+			Model model, Locale locale) {
 		if(action.equalsIgnoreCase("updateProfile")){
 			logger.info("User:" + email +" requests to update their profile page");
 			UserDAOImpl daoObject = new UserDAOImpl();
@@ -182,6 +182,13 @@ public class UserProfileController {
 			model.addAttribute("role", info[1]);
 			model.addAttribute("viewName", "updateProfile");
 			
+		}
+		else if(action.equalsIgnoreCase("makeAppointment")){
+			model.addAttribute("viewName","home");
+			//makeAppointment();
+		}
+		else if(action.equalsIgnoreCase("home")){
+			model.addAttribute("viewName","home");
 		}
 		return "masterpage";
 

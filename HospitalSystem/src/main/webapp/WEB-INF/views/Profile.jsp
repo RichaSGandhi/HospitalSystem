@@ -37,6 +37,8 @@
    			 <td><input type="hidden" name="name" value ="${name}"></td>
  			 <td><input type="hidden" name="email" value ="${email}"></td>
  			 <td><input type="submit" name="action" value ="updateProfile" >
+ 			 <td><input type="submit" name="action" value ="makeAppointment">
+ 			 <td><input type="submit" name="action" value ="Home">
  			 </td>
  			 </tr>
    </table>
