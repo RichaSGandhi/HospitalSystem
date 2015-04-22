@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
 <!DOCTYPE html>
@@ -28,6 +28,7 @@
 	</div>
 
 	<div class="content">
+
 <h2><c:out value="Welcome: ${user.getName()}" /></h2>
 <h3><c:out value="Role: ${user.getJobTitle()}" /></h3>
 			
@@ -67,14 +68,14 @@
 <div id = "UpdateLink"><a href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">Update My Profile</a></div> 
 <div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment"/>"> Make an Appointment</a></div>
 
+
+
      <P>Hi!! This is your home page</P>    
  
 	
 </div>
 
 </div>
-
-
 
 </body>
 </html>

@@ -45,14 +45,14 @@
 								<table >
 								<tr>
 									<th><label>UserName:</label></th>
-									<th><input type="text"
-											id="userName" value="${user.getPrimaryEmail()}" disabled></th>
+									<th><input type="text" id="userName" value="${user.getPrimaryEmail()}" disabled></th>
+
 									<th><label>Role:</label></th>	
-									<th><input type="text"
-											id="role" value = "${user.getJobTitle()}" disabled></th>
+									<th><input type="text" id="role" value = "${user.getJobTitle()}" disabled></th>
+
 									<th><label>Name:</label></th>	
-									<th><input type="text"
-											id="name" value = "${user.getName()}" disabled></th>
+									<th><input type="text" id="name" value = "${user.getName()}" disabled></th>
+
 								</tr>
 								<tr>
 									<th><label>Date of Birth:</label></th>
