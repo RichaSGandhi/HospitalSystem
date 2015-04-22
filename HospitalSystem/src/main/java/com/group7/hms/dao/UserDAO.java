@@ -10,7 +10,7 @@ public interface UserDAO {
 
 
 
-	public String[] getUserName(String email);
+	public User getUserName(String email);
 
 	//public void setUser(String email, String password, String fName,
 			//String lName, String phoneNumber, String street, String state,

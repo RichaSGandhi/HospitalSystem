@@ -3,10 +3,26 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script>
+	$( document ).ready(function() {
+		var role = '${user.getJobTitle()}';
+		if(role==("Doctor")||role==("Nurse")){
+			$("#providerInformation").show();
+			
+		}else if(role==("Patient")){
+			$("#insuranceInformation").show();
+		}else if(role==("Admin")){
+			$("#administratorInfromation").show();
+		}
+	
+	});
+	</script>
 <title>Update User Profile</title>
 
 </head>
@@ -21,7 +37,7 @@
 
 		<div></div>
 	</div>
-
+			<h2>Hi  ${user.getName()} !! Please Update your Profile</h2>
 							<form id="myForm" method="post"
 							class="bs-example form-horizontal">
 							<fieldset>
@@ -30,13 +46,13 @@
 								<tr>
 									<th><label>UserName:</label></th>
 									<th><input type="text"
-											id="userName" value = "${user.userName}" disabled></th>
+											id="userName" value="${user.getPrimaryEmail()}" disabled></th>
 									<th><label>Role:</label></th>	
 									<th><input type="text"
-											id="role" value = "${user.role}" disabled></th>
+											id="role" value = "${user.getJobTitle()}" disabled></th>
 									<th><label>Name:</label></th>	
 									<th><input type="text"
-											id="name" value = "${user.name}" disabled></th>
+											id="name" value = "${user.getName()}" disabled></th>
 								</tr>
 								<tr>
 									<th><label>Date of Birth:</label></th>
@@ -57,17 +73,17 @@
 									<th><label>Mobile Number:</label></th>
 									<th><input type="tel"
 											id="secondNumber" value = "${user.secondaryPhone}"></th>
-											<th><label>Mobile Number:</label></th>
+											<th><label>Secondary Email:</label></th>
 									<th><input type="email"
 											id="secondEmail" value = "${user.secondaryEmail}"></th>
 								</tr>
 																<tr>
 									<th><label>Street Address:</label></th>
 									<th><input type="text"
-											id="streetAdd" value = "${user.mailingAddress.street}" required></th>
+											id="streetAdd" value = "${user.userAddress}" required></th>
 									<th><label>City:</label></th>
 									<th><input type="text"
-											id="city" value = "${user.mailingAddress.city}" required></th>			
+											id="city" value = "${user.userAddress}" required></th>			
 								<th><label>State:</label></th>
 									<th><select  id="state" required style="width:150px">
 											<option value = "AL">Alabama</option>
@@ -133,11 +149,12 @@
 								<th/>
 								<th><label>ZIPCODE:</label></th>
 									<th><input type="number"
-											id="zip" value = "${user.mailingAddress.zip}" required></th>
+											id="zip" value = "${user.userAddress}" required></th>
 								</tr>
 								
 								</table>
-								<table class="insuranceInformation">
+								
+								<table id = "insuranceInformation" class="insuranceInformation" hidden=true>
 									<tr>
 										<th><label><b>***INSURANCE DETAILS***</b></label></th>
 									</tr>
@@ -151,14 +168,14 @@
 									</tr>
 									<tr>
 										<th><label>Start Date:</label></th>
-										<th><input style= "width:145px" type= "date" id="startDate" value = "${user.mailingAddress.street}"></th>
+										<th><input style= "width:145px" type= "date" id="startDate" value = "${user.userAddress}"></th>
 											<th><label>End Date:</label></th>
-										<th><input style="width:145px" type="date" id="endDate" value = "${user.mailingAddress.city}" ></th>
+										<th><input style="width:145px" type="date" id="endDate" value = "${user.userAddress}" ></th>
 							
 									</tr>
 								</table>
 								
-								<table class = "providerInformation">
+								<table id = "providerInformation" class = "providerInformation" hidden=true>
 									<tr>
 										<th><label><b>***PROVIDER DETAILS***</b></label></th>
 									</tr>
@@ -183,14 +200,14 @@
 											<th><input type="text" id = "experience" value = "${provider.experience }}"></th>
 										</tr>
 										<tr>
-											<th><label>Specialization]</label></th>
+											<th><label>Specialization</label></th>
 											<th><input type="text" id = "specialization" value = "${provider.experience }"></th>
 										</tr>
 									</table>
 								
 								
 								
-									<table class = "administratorInfromation">
+									<table id = "administratorInfromation" class = "administratorInfromation" hidden=true>
 										<tr>
 											<th><label><b>***ADMINISTRATOR DETAILS***</b></label></th>
 										</tr>
@@ -200,15 +217,11 @@
 												
 											<th><label>Degree</label></th>
 											<th><input type="text" id = "degree" value = "${administratior.degree }"></th>
-											
-											<th><label>Job Title</label></th>
-											<th><input type="text" id = "jobTitle" value = "${administrator.jobTitle }"></th>
-										</tr>
-										<tr>		
 											<th><label>Specializations</label></th>
 											<th><input type="text" id = "specializations" value = "${administrator.specializations }"></th>
-												
+										
 										</tr>
+										
 									</table>	
 								<input type="submit">
 							</fieldset>
