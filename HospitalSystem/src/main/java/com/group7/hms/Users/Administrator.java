@@ -88,6 +88,14 @@ public class Administrator extends User {
 		return jobTitle;
 	}
 
+	@Override
+	public String toString() {
+		return "Administrator ["+ super.toString()+"getJobTitle()=" + getJobTitle()
+				+ ", getDegree()=" + getDegree() + ", getCertifications()="
+				+ getCertifications() + ", getSpecailizations()="
+				+ getSpecailizations() + ", getDepartment()=" + getDepartment()
+				+ "]";
+	}
 	/**
 	 * public method setJobTitle - Sets the job title of the Administrator.
 	 * 

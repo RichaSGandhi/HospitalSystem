@@ -1,3 +1,4 @@
+
 package com.group7.hms.appointment;
 
 import java.sql.Date;
@@ -116,3 +117,4 @@ public class Appointment {
 		this.appointment=appointment;
 	}
 }
+

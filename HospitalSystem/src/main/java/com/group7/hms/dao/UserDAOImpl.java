@@ -242,6 +242,37 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 }
+
+	@Override
+	public User getUser(String email) {
+		String sql = "SELECT * FROM hospitalmanagement.Users WHERE emailId = ?";
+		Connection conn = null;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()){
+				if(rs.getString("Role").equalsIgnoreCase("Doctor")){
+					Providers doctor = new Providers(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					return doctor;
+				}
+				else if (rs.getString("Role").equalsIgnoreCase("Patient")){
+					Patient patient = new Patient(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					return patient;
+				}
+				else if (rs.getString("Role").equalsIgnoreCase("Admin")){
+					Administrator admin = new Administrator(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					return admin;
+				}
+				
+		}}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public void createAppointmemt(Appointment app){
 
 		String sql = "INSERT INTO hospitalmanagement.Appointments "

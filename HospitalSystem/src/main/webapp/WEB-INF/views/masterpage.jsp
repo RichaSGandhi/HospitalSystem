@@ -24,8 +24,10 @@
 					<a style="color: white" href="<c:url value="/login" />">Login</a>
 				</c:if>
 				<c:if test="${user!=null}">
-					<a style="color: white" href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">${user.getName()}
-						</a> |
+
+					<a style="color: white" href="<c:url value="/updateProfile?email=${user.getPrimaryName()}" />">${user.getName()}
+						${user.getLastName()}</a> |
+
 					<a style="color: white" href="<c:url value="/logout" />">Logout</a>
 				</c:if>
 			</div>

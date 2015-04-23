@@ -195,6 +195,7 @@ public class UserProfileController {
 		// return "redirect:/makeAppointment";
 		return "masterpage";
 	}
+
 	@RequestMapping(value = "/viewPatientProfile", method = RequestMethod.POST)
 	public String viewPatient(Model model,@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
@@ -208,29 +209,7 @@ public class UserProfileController {
 		model.addAttribute("appId", appId);
 		return "masterpage";
 	}
-	/*@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
-	public String porcessProfilePost(@RequestParam String action,
-			@RequestParam(value = "email", defaultValue = "") String email,
-			Model model, Locale locale) {
-		if(action.equalsIgnoreCase("updateProfile")){
-			logger.info("User:" + email +" requests to update their profile page");
-			UserDAOImpl daoObject = new UserDAOImpl();
-			String[] info = daoObject.getUserName(email);
-			model.addAttribute("username",email);
-			model.addAttribute("name", info[0]);
-			model.addAttribute("role", info[1]);
-			model.addAttribute("viewName", "updateProfile");
-			
-		}
-		else if(action.equalsIgnoreCase("makeAppointment")){
-			model.addAttribute("viewName","home");
-			//makeAppointment();
-		}
-		else if(action.equalsIgnoreCase("home")){
-			model.addAttribute("viewName","home");
-		}
-		return "masterpage";
 
-	}
-*/
+
+
 }
