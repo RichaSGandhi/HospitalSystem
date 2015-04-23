@@ -13,10 +13,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group7.hms.Users.Providers;
 import com.group7.hms.appointment.Appointment;
+import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.SendEmail;
 
@@ -34,6 +36,7 @@ public class AppointmentController {
 	}
 	*/
 	//@ModelAttribute("dayList")
+	AppointmentDAO daoObject = new AppointmentDAO();
 	public List<String> getDayList(String avaliableDays){
 		
 		//TODO Generate the logic to generate the dayList based on the available days from database
@@ -129,5 +132,23 @@ public class AppointmentController {
 			model.addAttribute("viewName","appointmentSuccess");
 			return "masterpage";
 		}
+	}
+	@RequestMapping(value = "/updateAppointment", method = RequestMethod.POST)
+	public String updateAppointment(
+			Locale locale,
+			Model model,
+			@RequestParam(value = "doctorNotes", defaultValue = "") String doctorNotes,
+			@RequestParam(value = "cost", defaultValue = "") int cost,
+			@RequestParam(value = "save", defaultValue = "") String save,
+			@RequestParam(value = "release", defaultValue = "") String release,
+			@RequestParam(value = "appId", defaultValue = "") int appId,
+			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail) {
+		if(save.isEmpty()){
+			daoObject.releasePatient(patientEmail);
+		}else if(release.isEmpty()){
+			daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
+		}
+		
+		return "redirect:/Profile";
 	}
 }

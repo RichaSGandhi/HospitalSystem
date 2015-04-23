@@ -89,6 +89,13 @@ public abstract class User {
 	 */
 	private String jobTitle="";
 	private String status = "";
+	private String sex = "";
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	public int getEcPhoneNumber() {
 		return ecPhoneNumber;
 	}

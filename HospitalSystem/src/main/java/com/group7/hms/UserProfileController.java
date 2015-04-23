@@ -82,9 +82,14 @@ public class UserProfileController {
 
 		}
 		else if (("active").equalsIgnoreCase(userInfo.getStatus())) {
+			
 			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
+			List<Appointment> billedList = null;
+			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient"))
+				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());	
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
+			model.addAttribute("billedList", billedList);
 		//model.addAttribute("role", info[1]);
 			System.out.println(email);
 			//model.addAttribute("email",email);
@@ -161,6 +166,7 @@ public class UserProfileController {
 		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
+		
 		return "masterpage";
 	}
 
@@ -189,7 +195,19 @@ public class UserProfileController {
 		// return "redirect:/makeAppointment";
 		return "masterpage";
 	}
-
+	@RequestMapping(value = "/viewPatientProfile", method = RequestMethod.POST)
+	public String viewPatient(Model model,@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
+			@RequestParam(value = "appId", defaultValue = "") String appId){
+		model.addAttribute("viewName", "viewPatientProfile");
+		User patientInfo = daoObject.getUserName(patientEmail);
+		System.out.println("Patient Inf" +patientInfo);
+		User userInfo = daoObject.getUserName(email);
+		model.addAttribute("patient", patientInfo);
+		model.addAttribute("user", userInfo);
+		model.addAttribute("appId", appId);
+		return "masterpage";
+	}
 	/*@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
 	public String porcessProfilePost(@RequestParam String action,
 			@RequestParam(value = "email", defaultValue = "") String email,

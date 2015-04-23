@@ -325,9 +325,7 @@ text-align: center;
 	display: table;
 }
 
-.row {
-	display: table-row;
-}
+
 
 .labelCell {
 	display: table-cell;
