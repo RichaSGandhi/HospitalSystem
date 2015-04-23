@@ -24,6 +24,8 @@ import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
 import com.group7.hms.Users.Providers;
 import com.group7.hms.Users.User;
+import com.group7.hms.appointment.Appointment;
+import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.SendEmail;
@@ -38,7 +40,7 @@ public class UserProfileController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserProfileController.class);
 	UserDAO daoObject = new UserDAOImpl();
-
+	AppointmentDAO appDaoObject = new AppointmentDAO();
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String newUser(Locale locale, Model model) {
 		logger.info("Accessing the new User Signup page.");
@@ -63,25 +65,46 @@ public class UserProfileController {
 			@RequestParam(value = "password", defaultValue = "") String password) {
 		logger.info("Logging in");
 		UserDAOImpl dao = new UserDAOImpl();
-		String[] info = dao.getUserName(email);
-		if (info[0] == null) {
-			model.addAttribute("ErrorMsg",
-					"Account doesn't exist, Please Signup");
+
+		
+		User userInfo = dao.getUserName(email);
+		System.out.println(userInfo.getStatus());
+		if (userInfo.getName()==null){
+			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
+
 			model.addAttribute("viewName", "signup");
 
-		} else if (null == info[2] || ("InActive").equalsIgnoreCase(info[2])) {
+			
+		}
+		else if (null==userInfo.getStatus()|| ("InActive").equalsIgnoreCase(userInfo.getStatus())) {
+
 			return "redirect:/updateProfile";
-		} else if (("active").equalsIgnoreCase(info[2])) {
-			model.addAttribute("name", info[0]);
-			model.addAttribute("role", info[1]);
-			model.addAttribute("email", email);
+
+		}
+		else if (("active").equalsIgnoreCase(userInfo.getStatus())) {
+			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
+			model.addAttribute("user", userInfo);
+			model.addAttribute("appList",appointmentList);
+		//model.addAttribute("role", info[1]);
+			System.out.println(email);
+			//model.addAttribute("email",email);
 			model.addAttribute("viewName", "Profile");
 		}
 		return "masterpage";
-
 	}
 
-	// Sign-up Submit Method
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.GET)
+	public String updateProfile(Locale locale, Model model,
+			@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "password", defaultValue = "") String password) {
+		model.addAttribute("viewName", "updateProfile");
+		System.out.println("in update profile"+email);
+		User userInfo = daoObject.getUserName(email);
+		model.addAttribute("user", userInfo);
+		//model.addAttribute("name",info[0]);
+		return "masterpage";
+	}
+
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String createUser(
 			Locale locale,
@@ -136,8 +159,6 @@ public class UserProfileController {
 		System.out.println("Im here 1");
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		System.out.println("Im here 2");
-		// String[] info = daoObject.getUserName(email);
-		// model.addAttribute("role", info[1]);
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
 		return "masterpage";
@@ -169,7 +190,7 @@ public class UserProfileController {
 		return "masterpage";
 	}
 
-	@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
+	/*@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
 	public String porcessProfilePost(@RequestParam String action,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			Model model, Locale locale) {
@@ -216,5 +237,5 @@ public class UserProfileController {
 		return "masterpage";
 
 	}
-
+*/
 }

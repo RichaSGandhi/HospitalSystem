@@ -88,6 +88,25 @@ public abstract class User {
 	 * private field jobTitle - stores the job title of the Provider
 	 */
 	private String jobTitle="";
+	private String status = "";
+	public int getEcPhoneNumber() {
+		return ecPhoneNumber;
+	}
+	public void setEcPhoneNumber(int ecPhoneNumber) {
+		this.ecPhoneNumber = ecPhoneNumber;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 	/**
 	 * public constructor - will create a new instance of the class User and
 	 * store the username, primary email and the password.

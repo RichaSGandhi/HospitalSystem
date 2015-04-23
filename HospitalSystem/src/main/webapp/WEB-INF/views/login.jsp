@@ -11,7 +11,7 @@
 		</table>
 			<div class="row">
 				<span class="fieldCell"><input class="PrimaryButton"
-					type="submit" id="submitButton" value="profile" /></span> <span
+					type="submit" id="submitButton" value="Login" /></span> <span
 					class="fieldCell"> 
 					<a href="<c:url value="/signup" />">Create Account</a></span>
 			</div>

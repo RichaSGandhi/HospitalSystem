@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.group7.hms.Users.*;
+import com.group7.hms.appointment.Appointment;
 
 
 @Service
@@ -100,7 +101,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String[] getUserName(String email) {
+	public User getUserName(String email) {
 
 		String sql = "SELECT * FROM hospitalmanagement.Users WHERE emailId = ?";
 
@@ -114,23 +115,41 @@ public class UserDAOImpl implements UserDAO {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
-			String[] sendInfo = new String[3];
-			//User user = null;
+			//String[] sendInfo = new String[3];
+			
 			ResultSet rs = ps.executeQuery();
-			String name= null;
 			String role = null;
-			String status = null;
 			if (rs.next()) {
-				name = rs.getString("Name");
 				role = rs.getString("Role");
-				status = rs.getString("Status");
+			
+			if(role.equalsIgnoreCase("Doctor")||role.equalsIgnoreCase("Nurse")){
+				Providers user = new Providers();
+				user.setName(rs.getString("Name"));
+				user.setPrimaryEmail(rs.getString("emailId"));
+				user.setJobTitle(rs.getString("role"));
+				user.setStatus(rs.getString("status"));
+				return user;
+			}else if (role.equalsIgnoreCase("Admin")){
+				Administrator user = new Administrator();
+				user.setName(rs.getString("Name"));
+				user.setPrimaryEmail(rs.getString("emailId"));
+				user.setJobTitle(rs.getString("role"));
+				user.setStatus(rs.getString("status"));
+				return user;
+			}else if (role.equalsIgnoreCase("Patient")){
+				Patient user=  new Patient();
+				user.setName(rs.getString("Name"));
+				user.setPrimaryEmail(rs.getString("emailId"));
+				user.setJobTitle(rs.getString("role"));
+				user.setStatus(rs.getString("status"));
+				
+				return user;
 			}
+			}
+		
 			rs.close();
 			ps.close();
-			sendInfo[0]=name;
-			sendInfo[1]=role;
-			sendInfo[2]=status;
-			return sendInfo;
+			return null;
 			 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -142,6 +161,7 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 		}
+	
 
 		// return "Test Name";
 	}
@@ -205,6 +225,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return doc;
 	}
+	
 	@Override
 	public void resetPassword(String emailAddress, String password) {
 		String sql = "UPDATE USERS SET password = ? WHERE email = ?";
@@ -251,5 +272,23 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public void createAppointmemt(Appointment app){
+
+		String sql = "INSERT INTO hospitalmanagement.Appointments "
+				+ "(startTime, endTime, appDate, attendingDoc,attendingNurse,patient) VALUES (?, ?, ?, ?,?,?)";
+		String sqlNurse = "Select * from hospitalmanagement.users" 
+				+"where role =?";
+		Connection conn = null;
+
+		try {
+			//conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
