@@ -190,7 +190,7 @@ public class UserProfileController {
 		return "masterpage";
 	}
 
-	/*@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
 	public String porcessProfilePost(@RequestParam String action,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			Model model, Locale locale) {
@@ -237,5 +237,5 @@ public class UserProfileController {
 		return "masterpage";
 
 	}
-*/
+
 }
