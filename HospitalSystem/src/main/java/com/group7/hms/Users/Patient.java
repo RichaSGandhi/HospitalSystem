@@ -16,7 +16,14 @@ public class Patient extends User {
 	 * patients insurance
 	 */
 	private Insurance patientInsurance;
+	private String medicalHistory;
 
+	public String getMedicalHistory() {
+		return medicalHistory;
+	}
+	public void setMedicalHistory(String medicalHistory) {
+		this.medicalHistory = medicalHistory;
+	}
 	public Patient(){
 		super();
 		patientInsurance = new Insurance();

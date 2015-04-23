@@ -11,6 +11,15 @@ public class Appointment {
 	private String appointment;
 	private String day;
 	private Time startTime;
+	private int appId;
+	public int getAppId() {
+		return appId;
+	}
+
+	public void setAppId(int appId) {
+		this.appId = appId;
+	}
+
 	public Time getStartTime() {
 		return startTime;
 	}

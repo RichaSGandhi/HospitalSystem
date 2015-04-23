@@ -25,7 +25,7 @@
 				</c:if>
 				<c:if test="${user!=null}">
 
-					<a style="color: white" href="<c:url value="/update" />">${user.getName()}
+					<a style="color: white" href="<c:url value="/updateProfile?email=${user.getPrimaryName()}" />">${user.getName()}
 						${user.getLastName()}</a> |
 
 					<a style="color: white" href="<c:url value="/logout" />">Logout</a>

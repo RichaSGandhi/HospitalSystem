@@ -82,9 +82,14 @@ public class UserProfileController {
 
 		}
 		else if (("active").equalsIgnoreCase(userInfo.getStatus())) {
+			
 			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
+			List<Appointment> billedList = null;
+			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient"))
+				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());	
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
+			model.addAttribute("billedList", billedList);
 		//model.addAttribute("role", info[1]);
 			System.out.println(email);
 			//model.addAttribute("email",email);
@@ -179,6 +184,7 @@ public class UserProfileController {
 		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
+		
 		return "masterpage";
 	}
 
@@ -208,52 +214,20 @@ public class UserProfileController {
 		return "masterpage";
 	}
 
-	@RequestMapping(value = "processSelectionProfile", method = RequestMethod.POST)
-	public String porcessProfilePost(@RequestParam String action,
-			@RequestParam(value = "email", defaultValue = "") String email,
-			Model model, Locale locale) {
-		if(action.equalsIgnoreCase("updateProfile")){
-			logger.info("User:" + email +" requests to update their profile page");
-			UserDAOImpl daoObject = new UserDAOImpl();
-			/*String[] info = daoObject.getUserName(email);
-			model.addAttribute("username",email);
-			model.addAttribute("name", info[0]);
-			model.addAttribute("role", info[1]);
-			*/
-			//String[] info = daoObject.getUserName(email);
-			User user = daoObject.getUser(email);
-			if (user.getJobTitle().equalsIgnoreCase("Patient")){
-				model.addAttribute("patient",user);
-				model.addAttribute("viewName", "updatePatientProfile");
-				System.out.println(user);
-			}
-			else if( user.getJobTitle().equalsIgnoreCase("Doctor")||user.getJobTitle().equalsIgnoreCase("Nurse")){
-				model.addAttribute("provider", user);
-				model.addAttribute("viewName","updateProviderProfile");
-				System.out.println(user);
-			}
-			else if (user.getJobTitle().equalsIgnoreCase("Admin")){
-				model.addAttribute("admin",user);
-				model.addAttribute("viewName","updateAdminProfile");
-				System.out.println(user);
-				
-			}
-			else {
-				model.addAttribute("user", user);
-				model.addAttribute("viewName", "updateProfile");
-				System.out.println(user);
-			}
-			
-			
-		}
-		else if(action.equalsIgnoreCase("makeAppointment")){
-			model.addAttribute("viewName","home");
-		}
-		else if(action.equalsIgnoreCase("home")){
-			model.addAttribute("viewName","home");
-		}
+	@RequestMapping(value = "/viewPatientProfile", method = RequestMethod.POST)
+	public String viewPatient(Model model,@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
+			@RequestParam(value = "appId", defaultValue = "") String appId){
+		model.addAttribute("viewName", "viewPatientProfile");
+		User patientInfo = daoObject.getUserName(patientEmail);
+		System.out.println("Patient Inf" +patientInfo);
+		User userInfo = daoObject.getUserName(email);
+		model.addAttribute("patient", patientInfo);
+		model.addAttribute("user", userInfo);
+		model.addAttribute("appId", appId);
 		return "masterpage";
-
 	}
+
+
 
 }
