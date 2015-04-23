@@ -97,11 +97,29 @@ public class UserProfileController {
 	public String updateProfile(Locale locale, Model model,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password) {
-		model.addAttribute("viewName", "updateProfile");
-		System.out.println("in update profile"+email);
-		User userInfo = daoObject.getUserName(email);
-		model.addAttribute("user", userInfo);
-		//model.addAttribute("name",info[0]);
+		
+		User user = daoObject.getUser(email);
+		if (user.getJobTitle().equalsIgnoreCase("Patient")){
+			model.addAttribute("patient",user);
+			model.addAttribute("viewName", "updatePatientProfile");
+			System.out.println(user);
+		}
+		else if( user.getJobTitle().equalsIgnoreCase("Doctor")||user.getJobTitle().equalsIgnoreCase("Nurse")){
+			model.addAttribute("provider", user);
+			model.addAttribute("viewName","updateProviderProfile");
+			System.out.println(user);
+		}
+		else if (user.getJobTitle().equalsIgnoreCase("Admin")){
+			model.addAttribute("admin",user);
+			model.addAttribute("viewName","updateAdminProfile");
+			System.out.println(user);
+			
+		}
+		else {
+			model.addAttribute("user", user);
+			model.addAttribute("viewName", "updateProfile");
+			System.out.println(user);
+		}
 		return "masterpage";
 	}
 

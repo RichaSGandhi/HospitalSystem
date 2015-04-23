@@ -283,7 +283,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 		}catch (SQLException e) {
