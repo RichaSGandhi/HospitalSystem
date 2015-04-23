@@ -176,16 +176,39 @@ public class UserProfileController {
 		if(action.equalsIgnoreCase("updateProfile")){
 			logger.info("User:" + email +" requests to update their profile page");
 			UserDAOImpl daoObject = new UserDAOImpl();
-			String[] info = daoObject.getUserName(email);
+			/*String[] info = daoObject.getUserName(email);
 			model.addAttribute("username",email);
 			model.addAttribute("name", info[0]);
 			model.addAttribute("role", info[1]);
-			model.addAttribute("viewName", "updateProfile");
+			*/
+			//String[] info = daoObject.getUserName(email);
+			User user = daoObject.getUser(email);
+			if (user.getJobTitle().equalsIgnoreCase("Patient")){
+				model.addAttribute("patient",user);
+				model.addAttribute("viewName", "updatePatientProfile");
+				System.out.println(user);
+			}
+			else if( user.getJobTitle().equalsIgnoreCase("Doctor")||user.getJobTitle().equalsIgnoreCase("Nurse")){
+				model.addAttribute("provider", user);
+				model.addAttribute("viewName","updateProviderProfile");
+				System.out.println(user);
+			}
+			else if (user.getJobTitle().equalsIgnoreCase("Admin")){
+				model.addAttribute("admin",user);
+				model.addAttribute("viewName","updateAdminProfile");
+				System.out.println(user);
+				
+			}
+			else {
+				model.addAttribute("user", user);
+				model.addAttribute("viewName", "updateProfile");
+				System.out.println(user);
+			}
+			
 			
 		}
 		else if(action.equalsIgnoreCase("makeAppointment")){
 			model.addAttribute("viewName","home");
-			//makeAppointment();
 		}
 		else if(action.equalsIgnoreCase("home")){
 			model.addAttribute("viewName","home");

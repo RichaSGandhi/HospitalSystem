@@ -270,8 +270,8 @@ public abstract class User {
 	 * @param userAddress
 	 *            the userAddress to set
 	 */
-	public void setUserAddress(MailingAddress userAddress) {
-		this.userAddress = userAddress;
+	public void setUserAddress(String street, String city, String state, int zip) {
+		this.userAddress = new MailingAddress(street, city, state, zip);
 	}
 
 	/**
@@ -478,26 +478,26 @@ public abstract class User {
 
 		return calcAge;
 	}
-	private class MailingAddress {
+	public class MailingAddress {
 
 		/**
 		 * private field street - will hold the street portion of the user address
 		 */
-		private String street;
+		private String street="";
 
 		/**
 		 * private field city - will hold the city portion of the user address
 		 */
-		private String city;
+		private String city="";
 		/**
 		 * private field state - will hold the state portion of the user address
 		 */
-		private String state;
+		private String state="";
 		/**
 		 * private field zipCode - will hold the zip code portion of the user
 		 * address
 		 */
-		private int zipCode;
+		private int zipCode=0;
 
 		/**
 		 * public constructor - creates a blank address
@@ -505,6 +505,7 @@ public abstract class User {
 		public MailingAddress() {
 			setStreet("");
 			setCity("");
+			setState("");
 			setZipCode(-1);
 		}
 
@@ -634,4 +635,26 @@ public abstract class User {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [getUsername()=" + getUsername() + ", getPassword()="
+				+ getPassword() + ", getName()=" + getName()
+				+ ", getMiddleName()=" + getMiddleName() + ", getLastName()="
+				+ getLastName() + ", getDateOfBirth()=" + getDateOfBirth()
+				+ ", getMaritialStatus()=" + getMaritialStatus()
+				+ ", getUserAddress()=" + getUserAddress()
+				+ ", getPrimaryPhone()=" + getPrimaryPhone()
+				+ ", getSecondaryPhone()=" + getSecondaryPhone()
+				+ ", getPrimaryEmail()=" + getPrimaryEmail()
+				+ ", getSecondaryEmail()=" + getSecondaryEmail()
+				+ ", getEcFirstName()=" + getEcFirstName()
+				+ ", getEcLastName()=" + getEcLastName()
+				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
+				+ ", getEcEmailAddress()=" + getEcEmailAddress()
+				+ ", getJobTitle()=" + getJobTitle() + "]";
+	}
+
 }

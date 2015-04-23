@@ -31,6 +31,8 @@ public interface UserDAO {
 	public List<Providers> getDoctorInfo(String dept);
 	
 	public Providers getDoctorDetails(String email);
+	
+	public User getUser(String email);
 
 
 }

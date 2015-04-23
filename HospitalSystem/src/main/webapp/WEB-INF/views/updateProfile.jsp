@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +22,7 @@
 		<div></div>
 	</div>
 
-							<form id="myForm" method="post"
+							<form:form id="myForm" method="post" action="processUpdateProfile" commandName= "user"
 							class="bs-example form-horizontal">
 							<fieldset>
 								<legend>Update Profile Form</legend>
@@ -30,13 +30,13 @@
 								<tr>
 									<th><label>UserName:</label></th>
 									<th><input type="text"
-											id="username" value = "${username}" disabled></th>
+											id="username" value = "${user.getUsername()}" disabled></th>
 									<th><label>Role:</label></th>	
 									<th><input type="text"
-											id="role" value = "${role}" disabled></th>
+											id="role" value = "${user.getJobTitle()}" disabled></th>
 									<th><label>Name:</label></th>	
 									<th><input type="text"
-											id="name" value = "${name}" disabled></th>
+											id="name" value = "${user.getName()}" disabled></th>
 								</tr>
 								<tr>
 									<th><label>Date of Birth:</label></th>
@@ -53,23 +53,24 @@
 								<tr>
 									<th><label>Phone Number:</label></th>
 									<th><input type="tel"
-											id="phoneNumber" value = "${user.primaryPhone}" required></th>
+											id="phoneNumber" value = "${user.getPrimaryPhone()}" required></th>
 									<th><label>Mobile Number:</label></th>
 									<th><input type="tel"
-											id="secondNumber" value = "${user.secondaryPhone}"></th>
+											id="secondNumber" value = "${user.getSecondaryPhone()}"></th>
 											<th><label>Mobile Number:</label></th>
 									<th><input type="email"
-											id="secondEmail" value = "${user.secondaryEmail}"></th>
+											id="secondEmail" value = "${user.getSecondaryEmail()}"></th>
 								</tr>
 																<tr>
 									<th><label>Street Address:</label></th>
 									<th><input type="text"
-											id="streetAdd" value = "${user.mailingAddress.street}" required></th>
-									<th><label>City:</label></th>
+											id="streetAdd" value = "${user.getUserAddress().getStreet()}" required></th>
+									<th><label>City:</label></th> 
 									<th><input type="text"
-											id="city" value = "${user.mailingAddress.city}" required></th>			
+											id="city" value = "${user.getUserAddress().getCity()}" required></th>			
 								<th><label>State:</label></th>
-									<th><select  id="state" required style="width:150px">
+									<th><select  form="myForm" name= "state" required style="width:150px">
+											<option value =""></option>
 											<option value = "AL">Alabama</option>
 											<option value = "AK">Alaska</option>
 											<option value = "AZ">Arizona</option>
@@ -133,7 +134,7 @@
 								<th/>
 								<th><label>ZIPCODE:</label></th>
 									<th><input type="number"
-											id="zip" value = "${user.mailingAddress.zip}" required></th>
+											id="zip" value = "${user.getUserAddress().getZipCode()}" required></th>
 								</tr>
 								
 								</table>
@@ -143,17 +144,17 @@
 									</tr>
 									<tr>
 										<th><label>Insurance Provider</label></th>
-										<th><input type ="text" id = "insuranceProvider" value = "${patient.insurance.provider}">
+										<th><input type ="text" id = "insuranceProvider" value = "${patient.getInsuranceProvider()}">
 										
 										<th><label>Insurance ID:</label></th>
-										<th><input type="text"id="insuranceID" value = "${patient.insurance.insuranceID}"></th>
+										<th><input type="text"id="insuranceID" value = "${patient.getInsuranceID()}"></th>
 										
 									</tr>
 									<tr>
 										<th><label>Start Date:</label></th>
-										<th><input style= "width:145px" type= "date" id="startDate" value = "${user.mailingAddress.street}"></th>
+										<th><input style= "width:145px" type= "date" id="startDate" value = "${patient.getInsuranceStartDate()}"></th>
 											<th><label>End Date:</label></th>
-										<th><input style="width:145px" type="date" id="endDate" value = "${user.mailingAddress.city}" ></th>
+										<th><input style="width:145px" type="date" id="endDate" value = "${patient.getInsuranceEndDate()}" ></th>
 							
 									</tr>
 								</table>
@@ -164,27 +165,27 @@
 									</tr>
 										<tr>
 											<th><label>Affiliation</label></th>
-											<th><input type="text" id="affiliation" value = "${provider.affiliation}"></th>
+											<th><input type="text" id="affiliation" value = "${provider.getAffiliation()}"></th>
 										
 											<th><label>Available Days</label></th>
-											<th><input type="text" id = "availableDays" value = "${provider.availableDays}"></th>
+											<th><input type="text" id = "availableDays" value = "${provider.getAvailableDays()}"></th>
 										
 											<th><label>Certification</label></th>
-											<th><input type="text" id = "certifcation" value = "${provider.certification}"></th>
+											<th><input type="text" id = "certifcation" value = "${provider.getCertification()}"></th>
 										</tr>
 										<tr>
 											<th><label>Degree</label></th>
-											<th><input type ="text" id="degree" value = "${provider.degree }"></th>
+											<th><input type ="text" id="degree" value = "${provider.getDegree() }"></th>
 										
 											<th><label>Department</label></th>
-											<th><input type="text" id = "department" value = "${provider.department }"></th>
+											<th><input type="text" id = "department" value = "${provider.getDepartment() }"></th>
 										
 											<th><label>Experience</label></th>
-											<th><input type="text" id = "experience" value = "${provider.experience }}"></th>
+											<th><input type="text" id = "experience" value = "${provider.getExperience() }}"></th>
 										</tr>
 										<tr>
 											<th><label>Specialization]</label></th>
-											<th><input type="text" id = "specialization" value = "${provider.experience }"></th>
+											<th><input type="text" id = "specialization" value = "${provider.getExperience() }"></th>
 										</tr>
 									</table>
 								
@@ -212,7 +213,7 @@
 									</table>	
 								<input type="submit">
 							</fieldset>
-						</form>
+						</form:form>
 
 
 

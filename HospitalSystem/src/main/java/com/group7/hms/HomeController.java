@@ -42,5 +42,12 @@ public class HomeController {
 		
 		return "masterpage";
 	}
+	@RequestMapping(value ="/logout", method= RequestMethod.GET)
+	public String logout(Model model){
+		
+		model.addAttribute("viewName", "home");
+		model.addAttribute("welcomeMessage","Thanks for using the Hospital Management System By Group 7");
+		return "masterpage";
+	}
 	
 }

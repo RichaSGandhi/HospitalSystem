@@ -266,4 +266,33 @@ public class Patient extends User {
 		}
 
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Patient [getInsuranceProvider()=" + getInsuranceProvider()
+				+ ", getInsuranceStartDate()=" + getInsuranceStartDate()
+				+ ", getInsuranceEndDate()=" + getInsuranceEndDate()
+				+ ", getInsuranceID()=" + getInsuranceID() + ", getUsername()="
+				+ getUsername() + ", getPassword()=" + getPassword()
+				+ ", getName()=" + getName() + ", getMiddleName()="
+				+ getMiddleName() + ", getLastName()=" + getLastName()
+				+ ", getDateOfBirth()=" + getDateOfBirth()
+				+ ", getMaritialStatus()=" + getMaritialStatus()
+				+ ", getUserAddress()=" + getUserAddress()
+				+ ", getPrimaryPhone()=" + getPrimaryPhone()
+				+ ", getSecondaryPhone()=" + getSecondaryPhone()
+				+ ", getPrimaryEmail()=" + getPrimaryEmail()
+				+ ", getSecondaryEmail()=" + getSecondaryEmail()
+				+ ", getEcFirstName()=" + getEcFirstName()
+				+ ", getEcLastName()=" + getEcLastName()
+				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
+				+ ", getEcEmailAddress()=" + getEcEmailAddress()
+				+ ", getJobTitle()=" + getJobTitle() + "]";
+	}
+
+
+
 }

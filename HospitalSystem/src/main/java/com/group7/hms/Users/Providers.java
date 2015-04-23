@@ -231,4 +231,18 @@ public class Providers extends User {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Providers ["+ super.toString()+"getAvailableHours()=" + getAvailableHours()
+				+ ", getAvailableDays()=" + getAvailableDays()
+				+ ", getDegree()=" + getDegree() + ", getSpecialization()="
+				+ getSpecialization() + ", getCertification()="
+				+ getCertification() + ", getExperience()=" + getExperience()
+				+ ", getDepartment()=" + getDepartment()
+				+ ", getAffiliation()=" + getAffiliation() + "]";
+	}
+
 }
