@@ -40,13 +40,13 @@ public class AppointmentDAO{
 		String sql =  null;
 		List<Appointment> appList = new ArrayList<Appointment>();
 		if (role.equalsIgnoreCase("Patient"))
-			sql = "Select * from HospitalManagement.appointments where Patient = ? "
+			sql = "Select * from HospitalManagement.appointments where Patient = ? and statusApp = ? "
 					+ "ORDER BY appDate DESC ";	
 		else if (role.equalsIgnoreCase("Doctor"))
-			sql = "Select * from HospitalManagement.appointments where attendingDoc = ? "
+			sql = "Select * from HospitalManagement.appointments where attendingDoc = ? and statusApp = ? "
 					+ "ORDER BY appDate DESC ";	
 		else if (role.equalsIgnoreCase("Nurse"))
-			sql = "Select * from HospitalManagement.appointments where attendingNurse = ?"
+			sql = "Select * from HospitalManagement.appointments where attendingNurse = ? and statusApp = ? "
 					+ "ORDER BY appDate DESC ";
 		else 
 			sql = "Select * from HospitalManagement.appointments order by appDate ASC";
@@ -54,10 +54,11 @@ public class AppointmentDAO{
 	Connection conn = null;
 
 	try {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		if(!(role.equalsIgnoreCase("Admin"))){
 			ps.setString(1, emailaddress);
+			ps.setString(2, "Created");
 		}
 		ResultSet rs = ps.executeQuery();
 		
@@ -73,6 +74,7 @@ public class AppointmentDAO{
 			app.setNurseName(rs.getString("NurseName"));
 			app.setPatient(rs.getString("patient"));
 			app.setPatientName(rs.getString("patientName"));
+			app.setAppId(rs.getInt("idAppointments"));
 			appList.add(app);
 			
 		}
@@ -90,7 +92,83 @@ public class AppointmentDAO{
 	}
 	return appList;
 	}
+	public List<Appointment> getBilledAppointments(String emailAddress)
+	{
+		String sql =  null;
+		List<Appointment> billedList = new ArrayList<Appointment>();
+			sql = "Select * from HospitalManagement.appointments where Patient = ? and statusApp = ? "
+					+ "ORDER BY appDate DESC ";	
+		Connection conn = null;
 
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, emailAddress);
+				ps.setString(2, "ReleasedBill");		
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Appointment app = new Appointment();
+				app.setDay(rs.getString("appDay"));
+				app.setStartTime(rs.getTime("startTime"));
+				app.setEndTime(rs.getTime("endTime"));
+				app.setAppDate(rs.getDate("appDate"));
+				app.setDoctor(rs.getString("attendingDoc"));
+				app.setDoctorName(rs.getString("DoctorName"));
+				app.setNurse(rs.getString("attendingNurse"));
+				app.setNurseName(rs.getString("NurseName"));
+				app.setPatient(rs.getString("patient"));
+				app.setPatientName(rs.getString("patientName"));
+				app.setAppId(rs.getInt("idAppointments"));
+				billedList.add(app);
+				
+			}
 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return billedList;
+	}
+	public void releasePatient(String patientEmail){
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ?";
+		Connection conn = null;
+
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "ReleasedByDoc");
+			ps.setString(2, patientEmail);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+	}
 	
+
+	public void saveAppointmentRecord(String doctorNotes,int cost, int appId){
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? , cost = ?"
+				+ " , doctorsNotes = ? where idAppointments = ?";
+		Connection conn = null;
+
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "InCare");
+			ps.setInt(2, cost);
+			ps.setString(3, doctorNotes);
+			ps.setInt(4, appId);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+		
+	}
 }
