@@ -74,7 +74,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPrimaryEmail());
@@ -112,7 +112,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			//String[] sendInfo = new String[3];
@@ -178,7 +178,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, dept);
 			ResultSet rs = ps.executeQuery();
@@ -210,7 +210,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		Providers doc = new Providers();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
@@ -289,6 +289,38 @@ public class UserDAOImpl implements UserDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+	public void updateUser(User user) throws SQLException{
+		String sql = "INSERT INTO hospitalmanagement.Users "
+				+ "(username, emailid, password, role,name,status) VALUES (?, ?, ?, ?,?,?)";
+		Connection conn = null;
+
+		try {
+			//conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPrimaryEmail());
+			ps.setString(3, user.getPassword());
+			ps.setString(4, user.getJobTitle());
+			ps.setString(5, user.getName());
+			ps.setString(6, "InActive");
+
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (SQLException e) {
+			throw e;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+	
 }

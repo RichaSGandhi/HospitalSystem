@@ -236,13 +236,31 @@ public class Providers extends User {
 	 */
 	@Override
 	public String toString() {
-		return "Providers ["+ super.toString()+"getAvailableHours()=" + getAvailableHours()
+		return "Providers [getAvailableHours()=" + getAvailableHours()
 				+ ", getAvailableDays()=" + getAvailableDays()
 				+ ", getDegree()=" + getDegree() + ", getSpecialization()="
 				+ getSpecialization() + ", getCertification()="
 				+ getCertification() + ", getExperience()=" + getExperience()
 				+ ", getDepartment()=" + getDepartment()
-				+ ", getAffiliation()=" + getAffiliation() + "]";
+				+ ", getAffiliation()=" + getAffiliation()
+				+ ", getMobilePhoneNumber()=" + getMobilePhoneNumber()
+				+ ", getSex()=" + getSex() + ", getEcPhoneNumber()="
+				+ getEcPhoneNumber() + ", getStatus()=" + getStatus()
+				+ ", getAge()=" + getAge() + ", getUsername()=" + getUsername()
+				+ ", getPassword()=" + getPassword() + ", getName()="
+				+ getName() + ", getMiddleName()=" + getMiddleName()
+				+ ", getLastName()=" + getLastName() + ", getDateOfBirth()="
+				+ getDateOfBirth() + ", getMaritialStatus()="
+				+ getMaritialStatus() + ", getUserAddress()="
+				+ getUserAddress() + ", getPrimaryPhone()=" + getPrimaryPhone()
+				+ ", getSecondaryPhone()=" + getSecondaryPhone()
+				+ ", getPrimaryEmail()=" + getPrimaryEmail()
+				+ ", getSecondaryEmail()=" + getSecondaryEmail()
+				+ ", getEcFirstName()=" + getEcFirstName()
+				+ ", getEcLastName()=" + getEcLastName()
+				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
+				+ ", getEcEmailAddress()=" + getEcEmailAddress()
+				+ ", getJobTitle()=" + getJobTitle() + "]";
 	}
 
 }

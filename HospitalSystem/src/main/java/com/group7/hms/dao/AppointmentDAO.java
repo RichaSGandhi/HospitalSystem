@@ -54,7 +54,7 @@ public class AppointmentDAO{
 	Connection conn = null;
 
 	try {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		if(!(role.equalsIgnoreCase("Admin"))){
 			ps.setString(1, emailaddress);
@@ -101,7 +101,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, emailAddress);
 				ps.setString(2, "ReleasedBill");		

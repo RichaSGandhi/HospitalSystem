@@ -107,6 +107,7 @@ public class UserProfileController {
 		if (user.getJobTitle().equalsIgnoreCase("Patient")){
 			model.addAttribute("patient",user);
 			model.addAttribute("viewName", "updatePatientProfile");
+			//model.addAttribute("viewName","home");
 			System.out.println(user);
 		}
 		else if( user.getJobTitle().equalsIgnoreCase("Doctor")||user.getJobTitle().equalsIgnoreCase("Nurse")){
