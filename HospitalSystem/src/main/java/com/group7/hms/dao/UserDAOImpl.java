@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -292,21 +293,46 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 	public void updateUser(User user) throws SQLException{
-		String sql = "INSERT INTO hospitalmanagement.Users "
-				+ "(username, emailid, password, role,name,status) VALUES (?, ?, ?, ?,?,?)";
+		String sql = "update hospitalmanagement.users "+
+					"set DateOfBirth= ? , "+
+					"MailingAddress= ? , "+
+					"Age = ? , "+
+					"MaritalStatus= ? , "+
+					"PhoneNumber= ? , "+
+					"sex= ? , "+
+					"secondaryPhone= ? , "+
+					"secondaryEmail= ? , "+
+					"mobilePhoneNumber= ? , "+
+					"middleName= ? , "+
+					"lastName= ? , "+
+					"ecEmailAddress= ? , "+
+					"ecFirstName= ? , "+
+					"ecLastName= ? "+
+					"where EmailID = ? ";
+		
 		Connection conn = null;
 
 		try {
 			//conn = dataSource.getConnection();
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getUsername());
-			ps.setString(2, user.getPrimaryEmail());
-			ps.setString(3, user.getPassword());
-			ps.setString(4, user.getJobTitle());
-			ps.setString(5, user.getName());
-			ps.setString(6, "InActive");
-
+			ps.setString(1, user.getDateOfBirth().toString());
+			//ps.setDate(1, (java.sql.Date) user.getDateOfBirth());
+			ps.setString(2, user.getUserAddress().toString());
+			ps.setInt(3, user.getAge());
+			ps.setString(4, user.getMaritialStatus());
+			ps.setInt(5, user.getPrimaryPhone());
+			ps.setString(6,user.getSex());
+			ps.setInt(7, user.getSecondaryPhone());
+			ps.setString(8, user.getSecondaryEmail());
+			ps.setInt(9, user.getMobilePhoneNumber());
+			ps.setString(10,user.getMiddleName());
+			ps.setString(11, user.getLastName());
+			ps.setString(12, user.getEcEmailAddress());
+			ps.setString(13, user.getEcFirstName());
+			ps.setString(14, user.getEcLastName());
+			ps.setString(15,user.getUsername());
+			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
 
