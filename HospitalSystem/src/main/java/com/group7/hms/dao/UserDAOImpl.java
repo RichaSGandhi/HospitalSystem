@@ -256,9 +256,22 @@ public class UserDAOImpl implements UserDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				if(rs.getString("Role").equalsIgnoreCase("Doctor")){
-					Providers doctor = new Providers(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
-					return doctor;
+				if(rs.getString("Role").equalsIgnoreCase("Doctor")||rs.getString("Role").equalsIgnoreCase("Nurse")){
+					Providers provider = new Providers(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					provider.setMiddleName(rs.getString("middleName"));
+					provider.setLastName(rs.getString("lastName"));
+					provider.setSex(rs.getString("sex"));
+					provider.setMaritialStatus(rs.getString("maritalStatus"));
+					provider.setMobilePhoneNumber(rs.getInt("mobilePhoneNumber"));
+					provider.setPrimaryPhone(rs.getInt("PhoneNumber"));
+					provider.setSecondaryPhone(rs.getInt("secondaryPhone"));
+					provider.setSecondaryEmail(rs.getString("secondaryEmail"));
+					//provider.setMailingAddress(rs.getString("mailingAddress");
+					provider.setEcFirstName(rs.getString("ecFirstName"));
+					provider.setEcLastName(rs.getString("ecLastName"));
+					provider.setEcEmailAddress(rs.getString("ecEmailAddress"));
+					provider.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
+					return provider;
 				}
 				else if (rs.getString("Role").equalsIgnoreCase("Patient")){
 					Patient patient = new Patient(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
@@ -296,7 +309,7 @@ public class UserDAOImpl implements UserDAO {
 		String sql = "update hospitalmanagement.users "+
 					"set DateOfBirth= ? , "+
 					"MailingAddress= ? , "+
-					"Age = ? , "+
+					"ecPhoneNumber = ? , "+
 					"MaritalStatus= ? , "+
 					"PhoneNumber= ? , "+
 					"sex= ? , "+
@@ -317,9 +330,8 @@ public class UserDAOImpl implements UserDAO {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getDateOfBirth().toString());
-			//ps.setDate(1, (java.sql.Date) user.getDateOfBirth());
 			ps.setString(2, user.getUserAddress().toString());
-			ps.setInt(3, user.getAge());
+			ps.setInt(3, user.getEcPhoneNuber());
 			ps.setString(4, user.getMaritialStatus());
 			ps.setInt(5, user.getPrimaryPhone());
 			ps.setString(6,user.getSex());
