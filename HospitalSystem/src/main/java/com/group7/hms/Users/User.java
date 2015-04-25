@@ -591,7 +591,7 @@ public abstract class User {
 		 */
 		@Override
 		public String toString() {
-			return getStreet() + "\n" + getCity() + ", " + getState() + " "
+			return getStreet() + "," + getCity() + ", " + getState() + ","
 					+ getZipCode();
 		}
 
@@ -696,6 +696,13 @@ public abstract class User {
 				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
 				+ ", getEcEmailAddress()=" + getEcEmailAddress()
 				+ ", getJobTitle()=" + getJobTitle() + "]";
+	}
+	public void setUserAddress( String addressString){
+		String[] split = addressString.split(",");
+		userAddress.setStreet(split[0]);
+		userAddress.setCity(split[1]);
+		userAddress.setState(split[2]);
+		userAddress.setZipCode(Integer.parseInt(split[3]));
 	}
 
 }
