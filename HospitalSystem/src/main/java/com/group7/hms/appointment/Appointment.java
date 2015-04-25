@@ -12,6 +12,24 @@ public class Appointment {
 	private String day;
 	private Time startTime;
 	private int appId;
+	private int cost;
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	public String getDocNotes() {
+		return docNotes;
+	}
+
+	public void setDocNotes(String docNotes) {
+		this.docNotes = docNotes;
+	}
+
+	private String docNotes;
 	public int getAppId() {
 		return appId;
 	}

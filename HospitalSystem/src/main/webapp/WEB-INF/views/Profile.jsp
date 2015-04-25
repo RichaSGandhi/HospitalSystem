@@ -16,33 +16,29 @@
 
 $( document ).ready(function() {
 	var role = '${user.getJobTitle()}';
-	var bill = '${billedList}';
-	var appointments = '${appList}';
+	var bill = '${billedList}';	
 	if(role==("Patient")){
 		$("#MakeAppointment").show();
 		if (!(bill==null))
-		$("#viewBill").show();
-	//	$("#DoctorName").show();
-	//	$("#NurseNameHeader").show();
-	//	$("#NurseName").show();
-		
+			$("#viewBill").show();
+		$("table td:nth-child(7),th:nth-child(7)").show();
+		$("table td:nth-child(8),th:nth-child(8)").show();
 	}
-		if(role==("Admin")){
-			alert(role);
-		for(var i = 0; i<appointments.length()-1;i++){
-			alert(i);
-			$("#patientProfile").show();
-		}
-		
-		/*$("#PatientNameHeader").show();
-		$("#PatientName").show();
-		$("#NurseNameHeader").show();
-		$("#NurseName").show();*/
-	
+	if(role==("Admin")){
+			$("table td:nth-child(2),th:nth-child(2)").show();
+			$("table td:nth-child(7),th:nth-child(7)").show();
+			$("table td:nth-child(8),th:nth-child(8)").show();
+			if (bill==null)
+			$("table td:nth-child(9),th:nth-child(9)").show();
 	}
 	if(role==("Nurse")){
-		/*$("#DoctorNameHeader").show();
-		$("#DoctorName").show();*/
+		$("table td:nth-child(2),th:nth-child(2)").show();
+		$("table td:nth-child(7),th:nth-child(7)").show();
+	}
+	if (role==("Doctor")){
+		$("table td:nth-child(1),th:nth-child(1)").show();
+		$("table td:nth-child(2),th:nth-child(2)").show();
+		$("table td:nth-child(8),th:nth-child(8)").show();
 	}
 });
 </script>
@@ -62,7 +58,7 @@ $( document ).ready(function() {
 			<a href="<c:url value="/" />">Home</a>
 			<div id = "UpdateLink"><a href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">Update My Profile</a></div> 
 			<div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment"/>"> Make an Appointment</a></div>
-			<div id = "viewBill" hidden=true><a href="<c:url value="/viewBill"/>">View Bill</a></div>
+			<div id = "viewBill" hidden=true><a href="<c:url value="/viewBill?bill=${billedList}&email=${user.getPrimaryEmail()}" />">View Bill</a></div>
 		</div>
 		<div class="col-lg-8">
 			<h2>List of upcoming appointments</h2>
@@ -70,12 +66,13 @@ $( document ).ready(function() {
 			<input hidden=true name="email" value="${user.getPrimaryEmail()}">
 			<table class="tableMax">
 				<tr>
-												<th></th>
-												<th><div id="PatientNameHeader">Patient</div></th>
+												<th hidden = true></th>
+												<th hidden = true><div id="PatientNameHeader">Patient</div></th>
 												<th>Start Time</th>
 												<th>End Time</th><th>Date</th>
-												<th>Day</th><th><div id="DoctorNameHeader">Attending Doctor</div></th>
-												<th><div id="NurseNameHeader">Attending Nurse</div></th>
+												<th>Day</th><th hidden = true><div id="DoctorNameHeader">Attending Doctor</div></th>
+												<th hidden = true><div id="NurseNameHeader">Attending Nurse</div></th>
+												<th></th>
 				</tr>
 				<c:choose>
 		      		<c:when test="${empty appList}">
@@ -86,15 +83,15 @@ $( document ).ready(function() {
 							<c:forEach items="${appList}" var="app" >
 						   						
 						   			<tr>				   					
-						   							<td><button id="patientProfile" type = "submit" name="patientEmail" hidden=true value = "${app.getPatient()}">View</button></td>	
-						   							<td style="text-align: center;"><div id="PatientName"><c:out value="${app.getPatientName()}"/></div></td>			   							
+						   							<td hidden = true><button id="patientProfile"type = "submit" name="patientEmail" value = "${app.getPatient()}">View</button></td>	
+						   							<td hidden = true style="text-align: center;"><div id="PatientName"><c:out value="${app.getPatientName()}"/></div></td>			   							
 						   							<td style="text-align: center;"><c:out value="${app.getStartTime()}"/></td>
 						   							<td style="text-align: center;"><c:out value="${app.getEndTime()}"/></td>				   							
 						   							<td style="text-align: center;"><c:out value="${app.getAppDate()}"/></td>	
 						   							<td style="text-align: center;"><c:out value="${app.getDay()}"/></td>
-						   							<td style="text-align: center;"><div id="DoctorName" ><c:out value="${app.getDoctorName()}"/></div></td>
-						   							<td style="text-align: center;"><div id="NurseName"><c:out value="${app.getNurseName()}"/></div></td>
-						   							<td><button id="ReleaseBill" type = "submit" name="ReleaseBill" hidden=true value = "${app.getPatient()}">Release Bill</button></td>	
+						   							<td hidden = true style="text-align: center;"><div id="DoctorName" ><c:out value="${app.getDoctorName()}"/></div></td>
+						   							<td hidden = true style="text-align: center;"><div id="NurseName"><c:out value="${app.getNurseName()}"/></div></td>
+						   							<td hidden = true><button id="ReleaseBill" type = "submit" name="releaseBill" value = "${app.getPatient()}">Release Bill</button></td>	
 						   							<td style="text-align: center;"><input id="appId" name="appId" value="${app.getAppId()}" hidden="true"></td>
 						   							
 						   			</tr>

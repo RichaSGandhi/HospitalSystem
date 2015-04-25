@@ -133,22 +133,23 @@ public class AppointmentController {
 			return "masterpage";
 		}
 	}
-	@RequestMapping(value = "/updateAppointment", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateAppointment", method = RequestMethod.GET)
 	public String updateAppointment(
 			Locale locale,
 			Model model,
 			@RequestParam(value = "doctorNotes", defaultValue = "") String doctorNotes,
-			@RequestParam(value = "cost", defaultValue = "") int cost,
+			@RequestParam(value = "cost", required = false) int cost,
 			@RequestParam(value = "save", defaultValue = "") String save,
 			@RequestParam(value = "release", defaultValue = "") String release,
-			@RequestParam(value = "appId", defaultValue = "") int appId,
+			@RequestParam(value = "appId", required = false) int appId,
 			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail) {
-		if(save.isEmpty()){
-			daoObject.releasePatient(patientEmail);
-		}else if(release.isEmpty()){
-			daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
-		}
-		
-		return "redirect:/Profile";
+		//if(save.isEmpty()){
+			//daoObject.releasePatient(patientEmail);
+		//}else if(release.isEmpty()){
+			//daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
+		//}
+		System.out.println("I AM IN UPDATE PROFILE");
+		model.addAttribute("viewName","home");
+		return "masterpage";
 	}
 }

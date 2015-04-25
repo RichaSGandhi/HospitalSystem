@@ -120,6 +120,8 @@ public class AppointmentDAO{
 				app.setPatient(rs.getString("patient"));
 				app.setPatientName(rs.getString("patientName"));
 				app.setAppId(rs.getInt("idAppointments"));
+				app.setDocNotes(rs.getString("DoctorsNotes"));
+				app.setCost(rs.getInt("Cost"));
 				billedList.add(app);
 				
 			}
@@ -142,11 +144,25 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedByDoc");
 			ps.setString(2, patientEmail);
-			ps.executeQuery();
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+	}
+	public void releaseBill(String patientEmail){
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ?";
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "ReleasedBill");
+			ps.setString(2, patientEmail);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 	}
@@ -165,7 +181,7 @@ public class AppointmentDAO{
 			ps.setInt(2, cost);
 			ps.setString(3, doctorNotes);
 			ps.setInt(4, appId);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 	}

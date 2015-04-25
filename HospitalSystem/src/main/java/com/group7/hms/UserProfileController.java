@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
@@ -28,6 +29,7 @@ import com.group7.hms.appointment.Appointment;
 import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
+import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
 /**
@@ -63,12 +65,11 @@ public class UserProfileController {
 	public String LoginSubmit(Locale locale, Model model,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password) {
-		logger.info("Logging in");
-		UserDAOImpl dao = new UserDAOImpl();
-
+		logger.info("Logging in" +email);
 		
+		UserDAOImpl dao = new UserDAOImpl();
 		User userInfo = dao.getUserName(email);
-		System.out.println(userInfo.getStatus());
+		System.out.println(userInfo);
 		if (userInfo.getName()==null){
 			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
 
@@ -85,8 +86,11 @@ public class UserProfileController {
 			
 			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
 			List<Appointment> billedList = null;
-			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient"))
-				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());	
+			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
+				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
+				GeneratePDF.generateBill();
+				System.out.println("generated Bill");
+			}
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
 			model.addAttribute("billedList", billedList);
@@ -217,17 +221,39 @@ public class UserProfileController {
 	@RequestMapping(value = "/viewPatientProfile", method = RequestMethod.POST)
 	public String viewPatient(Model model,@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
+			@RequestParam(value = "releaseBill", defaultValue = "") String releaseBill,
 			@RequestParam(value = "appId", defaultValue = "") String appId){
-		model.addAttribute("viewName", "viewPatientProfile");
-		User patientInfo = daoObject.getUserName(patientEmail);
-		System.out.println("Patient Inf" +patientInfo);
+		System.out.println("Printing" + appId +"realaseBill" +releaseBill + "EMail" +patientEmail);
+		if(patientEmail.isEmpty()){
+			appDaoObject.releaseBill(releaseBill);
+			RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+			ra.addFlashAttribute("email", email);
+			return "redirect:/profile";
+		}
+	
+		else {
+			
+			model.addAttribute("viewName", "viewPatientProfile");
+			User patientInfo = daoObject.getUserName(patientEmail);
+			System.out.println("Patient Inf" +patientInfo);
+			User userInfo = daoObject.getUserName(email);
+			model.addAttribute("patient", patientInfo);
+			model.addAttribute("user", userInfo);
+			model.addAttribute("appId", appId);
+			return "masterpage";
+		}
+	}
+	
+	
+	@RequestMapping(value = "/viewBill", method = RequestMethod.GET)
+	public String viewBill(Model model,@RequestParam(value = "bill") List<Appointment> bill,
+			@RequestParam(value = "email", defaultValue = "") String email){
+		//System.out.println(bill);
 		User userInfo = daoObject.getUserName(email);
-		model.addAttribute("patient", patientInfo);
+		//GeneratePDF.generateBill(userInfo, bill);
 		model.addAttribute("user", userInfo);
-		model.addAttribute("appId", appId);
+		model.addAttribute("viewName", "Profile");
 		return "masterpage";
 	}
-
-
 
 }
