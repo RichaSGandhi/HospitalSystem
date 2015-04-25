@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.group7.hms.Users.*;
+import com.group7.hms.Users.User.MailingAddress;
 import com.group7.hms.appointment.Appointment;
 
 
@@ -74,7 +76,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPrimaryEmail());
@@ -112,7 +114,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			//String[] sendInfo = new String[3];
@@ -178,7 +180,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, dept);
 			ResultSet rs = ps.executeQuery();
@@ -210,7 +212,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		Providers doc = new Providers();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
@@ -255,20 +257,99 @@ public class UserDAOImpl implements UserDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				if(rs.getString("Role").equalsIgnoreCase("Doctor")){
-					Providers doctor = new Providers(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
-					return doctor;
+				if(rs.getString("Role").equalsIgnoreCase("Doctor")||rs.getString("Role").equalsIgnoreCase("Nurse")){
+					Providers user = new Providers(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					// general user data
+					user.setMiddleName(rs.getString("middleName"));
+					user.setLastName(rs.getString("lastName"));
+					user.setSex(rs.getString("sex"));
+					user.setMaritialStatus(rs.getString("maritalStatus"));
+					user.setMobilePhoneNumber(rs.getInt("mobilePhoneNumber"));
+					user.setPrimaryPhone(rs.getInt("PhoneNumber"));
+					user.setSecondaryPhone(rs.getInt("secondaryPhone"));
+					user.setSecondaryEmail(rs.getString("secondaryEmail"));
+					user.setUserAddress(rs.getString("mailingAddress"));
+					user.setEcFirstName(rs.getString("ecFirstName"));
+					user.setEcLastName(rs.getString("ecLastName"));
+					user.setEcEmailAddress(rs.getString("ecEmailAddress"));
+					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
+					user.setStatus(rs.getString("status"));
+					user.setAge(rs.getInt("Age"));
+					
+					// provider specific information
+					user.setAffiliation(rs.getString("affiliation"));
+					user.setAvailableDays(rs.getString("availableDays"));
+					user.setAvailableHours(rs.getString("availableHours"));
+					user.setCertification(rs.getString("certification"));
+					user.setDegree(rs.getString("Degree"));
+					user.setDepartment(rs.getString("department"));
+					user.setExperience(rs.getString("experience"));
+					user.setSpecialization(rs.getString("specialization"));
+					
+					return user;
 				}
 				else if (rs.getString("Role").equalsIgnoreCase("Patient")){
-					Patient patient = new Patient(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
-					return patient;
+					Patient user = new Patient(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					
+					// general user data
+					user.setMiddleName(rs.getString("middleName"));
+					user.setLastName(rs.getString("lastName"));
+					user.setSex(rs.getString("sex"));
+					user.setMaritialStatus(rs.getString("maritalStatus"));
+					user.setMobilePhoneNumber(rs.getInt("mobilePhoneNumber"));
+					user.setPrimaryPhone(rs.getInt("PhoneNumber"));
+					user.setSecondaryPhone(rs.getInt("secondaryPhone"));
+					user.setSecondaryEmail(rs.getString("secondaryEmail"));
+					user.setUserAddress(rs.getString("mailingAddress"));
+					user.setEcFirstName(rs.getString("ecFirstName"));
+					user.setEcLastName(rs.getString("ecLastName"));
+					user.setEcEmailAddress(rs.getString("ecEmailAddress"));
+					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
+					user.setStatus(rs.getString("status"));
+					user.setAge(rs.getInt("Age"));
+					
+					//patient Specific infromation
+					//user.setInsuranceEndDate(rs.getString("insuranceEndDate"));
+					user.setInsuranceID(rs.getString("insuranceID"));
+					user.setInsuranceProvider(rs.getString("provider"));
+					//user.setInsuranceStartDate(rs.getString("insuranceEndDate"));
+					
+					return user;
 				}
 				else if (rs.getString("Role").equalsIgnoreCase("Admin")){
-					Administrator admin = new Administrator(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
-					return admin;
+					Administrator user = new Administrator(email,rs.getString("Password"),rs.getString("Role"),rs.getString("Name"));
+					
+					// general user data
+					user.setMiddleName(rs.getString("middleName"));
+					user.setLastName(rs.getString("lastName"));
+					user.setSex(rs.getString("sex"));
+					user.setMaritialStatus(rs.getString("maritalStatus"));
+					user.setMobilePhoneNumber(rs.getInt("mobilePhoneNumber"));
+					user.setPrimaryPhone(rs.getInt("PhoneNumber"));
+					user.setSecondaryPhone(rs.getInt("secondaryPhone"));
+					user.setSecondaryEmail(rs.getString("secondaryEmail"));
+					user.setUserAddress(rs.getString("mailingAddress"));
+					user.setEcFirstName(rs.getString("ecFirstName"));
+					user.setEcLastName(rs.getString("ecLastName"));
+					user.setEcEmailAddress(rs.getString("ecEmailAddress"));
+					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
+					user.setStatus(rs.getString("status"));
+					user.setAge(rs.getInt("Age"));
+					
+					// Administrative specific data
+					user.setCertifications(rs.getString("certification"));
+					user.setDegree(rs.getString("Degree"));
+					user.setDepartment(rs.getString("department"));
+					user.setSpecializations(rs.getString("specialization"));
+					
+					return user;
 				}
 				
-		}}catch(SQLException e){
+				
+				
+				
+		}
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return null;
@@ -289,6 +370,168 @@ public class UserDAOImpl implements UserDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+	}public void updatePatient(Patient patient) throws SQLException{
+		updateUser(patient);
+		String sql = "update hospitalmanagement.user "+
+					 "set insuranceEndDate = ? ,"+
+					 "insuranceID = ? , "+
+					 "provider = ? , "+
+					 "insuranceEndDate = ? "+
+					 "where EMailID = ? ";
+		Connection conn = null;
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, patient.getInsuranceEndDate().toString());
+			ps.setString(2, patient.getInsuranceID());
+			ps.setString(3, patient.getInsuranceProvider());
+			ps.setString(4, patient.getInsuranceStartDate().toString());
+			ps.setString(5, patient.getUsername());
+			System.out.println(ps.toString());
+			ps.executeUpdate();
+			ps.close();
+		}catch (SQLException e) {
+			throw e;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+			
 		
 	}
+	public void updateAdmin(Administrator admin) throws SQLException{
+		updateUser(admin);
+		String sql = "update hospitalmangement.users "+
+					 "set certification = ? , "+
+					 "Degree = ? ," +
+					 "department = ? ,"+
+					 "specailization = ? "+
+					 "where EmailID = ? ";
+		Connection conn = null;
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, admin.getCertifications());
+			ps.setString(2, admin.getDegree());
+			ps.setString(3, admin.getDepartment());
+			ps.setString(4, admin.getSpecializations());
+			ps.setString(5, admin.getUsername());
+			System.out.println(ps.toString());
+			ps.executeUpdate();
+			ps.close();
+		}catch (SQLException e) {
+			throw e;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+					 
+
+	public void updateProvider(Providers provider) throws SQLException{
+		updateUser(provider);
+		String sql = "update hospitalmanagement.users "+
+					 "set affiliation = ? , "+
+					 "Degree = ? , "+
+					 "availableDays = ? , " +
+					 "availableHours = ? , "+ 
+					 "certification = ? , "+
+					 "department = ? , "+
+					 "experience = ? ,"+
+					 "specialization = ? "+
+					 "where EmailID = ? ";
+		Connection conn = null;
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, provider.getAffiliation());
+			ps.setString(2, provider.getDegree());
+			ps.setString(3, provider.getAvailableDays());
+			ps.setString(4, provider.getAvailableHours() );
+			ps.setString(5, provider.getCertification());
+			ps.setString(6, provider.getDepartment());
+			ps.setString(7, provider.getExperience());
+			ps.setString(8, provider.getSpecialization());
+			ps.setString(9, provider.getUsername());
+			System.out.println(ps.toString());
+			ps.executeUpdate();
+			ps.close();
+		}catch (SQLException e) {
+			throw e;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+	public void updateUser(User user) throws SQLException{
+		String sql = "update hospitalmanagement.users "+
+					"set DateOfBirth= ? , "+
+					"MailingAddress= ? , "+
+					"ecPhoneNumber = ? , "+
+					"MaritalStatus= ? , "+
+					"PhoneNumber= ? , "+
+					"sex= ? , "+
+					"secondaryPhone= ? , "+
+					"secondaryEmail= ? , "+
+					"mobilePhoneNumber= ? , "+
+					"middleName= ? , "+
+					"lastName= ? , "+
+					"ecEmailAddress= ? , "+
+					"ecFirstName= ? , "+
+					"ecLastName= ? "+
+					"where EmailID = ? ";
+		
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getDateOfBirth().toString());
+			ps.setString(2, user.getUserAddress().toString());
+			ps.setInt(3, user.getEcPhoneNuber());
+			ps.setString(4, user.getMaritialStatus());
+			ps.setInt(5, user.getPrimaryPhone());
+			ps.setString(6,user.getSex());
+			ps.setInt(7, user.getSecondaryPhone());
+			ps.setString(8, user.getSecondaryEmail());
+			ps.setInt(9, user.getMobilePhoneNumber());
+			ps.setString(10,user.getMiddleName());
+			ps.setString(11, user.getLastName());
+			ps.setString(12, user.getEcEmailAddress());
+			ps.setString(13, user.getEcFirstName());
+			ps.setString(14, user.getEcLastName());
+			ps.setString(15,user.getUsername());
+			System.out.println(ps.toString());
+			ps.executeUpdate();
+			ps.close();
+
+		} catch (SQLException e) {
+			throw e;
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+	
 }

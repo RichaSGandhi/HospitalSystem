@@ -12,29 +12,46 @@ public class Administrator extends User {
 	/**
 	 * private field jobTitle - The job title that the Administrator holds
 	 */
-	private String jobTitle="";
+	// private String jobTitle="";
 	/**
 	 * private field degree - The degree that the Administrator holds
 	 */
-	private String degree="";
+	private String degree = "";
 	/**
 	 * private field certifications - The certifications that the Administrator
 	 * holds
 	 */
-	private String certifications="";
+	private String certifications = "";
 	/**
 	 * private field specializations - The specializations that the
 	 * Administrator holds.
 	 */
-	private String specializations="";
+	private String specializations = "";
+
+	/**
+	 * @return the specializations
+	 */
+	public String getSpecializations() {
+		return specializations;
+	}
+
+	/**
+	 * @param specializations
+	 *            the specializations to set
+	 */
+	public void setSpecializations(String specializations) {
+		this.specializations = specializations;
+	}
+
 	/**
 	 * private field department - The department the Administrator belongs to.
 	 */
-	private String department="";
+	private String department = "";
 
-	public Administrator(){
+	public Administrator() {
 		super();
 	}
+
 	// TODO Implement shift/Availability and Holidays
 	/**
 	 * public constructor - minimal constructor
@@ -44,8 +61,9 @@ public class Administrator extends User {
 	 * @param applicantPassword
 	 *            - applicants proposed email address
 	 */
-	public Administrator(String applicantEmail, String applicantPassword,String role,String name) {
-		super(applicantEmail, applicantPassword,role,name);
+	public Administrator(String applicantEmail, String applicantPassword,
+			String role, String name) {
+		super(applicantEmail, applicantPassword, role, name);
 
 	}
 
@@ -67,16 +85,14 @@ public class Administrator extends User {
 	 * @param department
 	 *            - the department of the administrator.
 	 */
-	/*public Administrator(String applicantEmail, String applicantPassword,
-			String jobTitle, String degree, String certifications,
-			String specailizations, String department) {
-		super(applicantEmail, applicantPassword,jobTitle);
-		//setJobTitle(jobTitle);
-		setDegree(degree);
-		setCertifications(certifications);
-		setSpecailizations(specailizations);
-		setDepartment(department);
-	}*/
+	/*
+	 * public Administrator(String applicantEmail, String applicantPassword,
+	 * String jobTitle, String degree, String certifications, String
+	 * specailizations, String department) { super(applicantEmail,
+	 * applicantPassword,jobTitle); //setJobTitle(jobTitle); setDegree(degree);
+	 * setCertifications(certifications); setSpecailizations(specailizations);
+	 * setDepartment(department); }
+	 */
 
 	/**
 	 * public method getJobTitle - will return the job title of the
@@ -84,27 +100,46 @@ public class Administrator extends User {
 	 * 
 	 * @return the jobTitle
 	 */
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
+	/*
+	 * public String getJobTitle() { return jobTitle; }/*
+	 * 
+	 * /* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Administrator ["+ super.toString()+"getJobTitle()=" + getJobTitle()
+		return "Administrator [getJobTitle()=" + getJobTitle()
 				+ ", getDegree()=" + getDegree() + ", getCertifications()="
-				+ getCertifications() + ", getSpecailizations()="
-				+ getSpecailizations() + ", getDepartment()=" + getDepartment()
-				+ "]";
+				+ getCertifications() + ", getDepartment()=" + getDepartment()
+				+ ", getMobilePhoneNumber()=" + getMobilePhoneNumber()
+				+ ", getSex()=" + getSex() + ", getEcPhoneNumber()="
+				+ getEcPhoneNumber() + ", getStatus()=" + getStatus()
+				+ ", getAge()=" + getAge() + ", getUsername()=" + getUsername()
+				+ ", getPassword()=" + getPassword() + ", getName()="
+				+ getName() + ", getMiddleName()=" + getMiddleName()
+				+ ", getLastName()=" + getLastName() + ", getDateOfBirth()="
+				+ getDateOfBirth() + ", getMaritialStatus()="
+				+ getMaritialStatus() + ", getUserAddress()="
+				+ getUserAddress() + ", getPrimaryPhone()=" + getPrimaryPhone()
+				+ ", getSecondaryPhone()=" + getSecondaryPhone()
+				+ ", getPrimaryEmail()=" + getPrimaryEmail()
+				+ ", getSecondaryEmail()=" + getSecondaryEmail()
+				+ ", getEcFirstName()=" + getEcFirstName()
+				+ ", getEcLastName()=" + getEcLastName()
+				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
+				+ ", getEcEmailAddress()=" + getEcEmailAddress() + "]";
 	}
+
 	/**
 	 * public method setJobTitle - Sets the job title of the Administrator.
 	 * 
 	 * @param jobTitle
 	 *            the jobTitle to set
 	 */
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
+	/*
+	 * public void setJobTitle(String jobTitle) { this.jobTitle = jobTitle; }
+	 */
 
 	/**
 	 * public method getDegree - will return the degree the Administrator holds.
@@ -144,27 +179,6 @@ public class Administrator extends User {
 	 */
 	public void setCertifications(String certifications) {
 		this.certifications = certifications;
-	}
-
-	/**
-	 * public method getSpecailizations - will return the specializations of the
-	 * administrator
-	 * 
-	 * @return the specializations
-	 */
-	public String getSpecailizations() {
-		return specializations;
-	}
-
-	/**
-	 * public method setSpecailizations - Sets the specializations of the
-	 * administrator.
-	 * 
-	 * @param specailizations
-	 *            the specializations to set
-	 */
-	public void setSpecailizations(String specailizations) {
-		this.specializations = specailizations;
 	}
 
 	/**

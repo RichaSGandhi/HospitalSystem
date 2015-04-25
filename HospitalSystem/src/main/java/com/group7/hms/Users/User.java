@@ -89,6 +89,19 @@ public abstract class User {
 	private String jobTitle="";
 	private String status = "";
 	private String sex = "";
+	private int mobilePhoneNumber=0;
+	/**
+	 * @return the mobilePhoneNumber
+	 */
+	public int getMobilePhoneNumber() {
+		return mobilePhoneNumber;
+	}
+	/**
+	 * @param mobilePhoneNumber the mobilePhoneNumber to set
+	 */
+	public void setMobilePhoneNumber(int mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
+	}
 	public String getSex() {
 		return sex;
 	}
@@ -149,7 +162,7 @@ public abstract class User {
 	 * @param username
 	 *            the username to set
 	 */
-	private void setUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -578,7 +591,7 @@ public abstract class User {
 		 */
 		@Override
 		public String toString() {
-			return getStreet() + "\n" + getCity() + ", " + getState() + " "
+			return getStreet() + "," + getCity() + ", " + getState() + ","
 					+ getZipCode();
 		}
 
@@ -665,13 +678,16 @@ public abstract class User {
 	 */
 	@Override
 	public String toString() {
-		return "User [getUsername()=" + getUsername() + ", getPassword()="
-				+ getPassword() + ", getName()=" + getName()
-				+ ", getMiddleName()=" + getMiddleName() + ", getLastName()="
-				+ getLastName() + ", getDateOfBirth()=" + getDateOfBirth()
-				+ ", getMaritialStatus()=" + getMaritialStatus()
-				+ ", getUserAddress()=" + getUserAddress()
-				+ ", getPrimaryPhone()=" + getPrimaryPhone()
+		return "User [getMobilePhoneNumber()=" + getMobilePhoneNumber()
+				+ ", getSex()=" + getSex() + ", getEcPhoneNumber()="
+				+ getEcPhoneNumber() + ", getStatus()=" + getStatus()
+				+ ", getAge()=" + getAge() + ", getUsername()=" + getUsername()
+				+ ", getPassword()=" + getPassword() + ", getName()="
+				+ getName() + ", getMiddleName()=" + getMiddleName()
+				+ ", getLastName()=" + getLastName() + ", getDateOfBirth()="
+				+ getDateOfBirth() + ", getMaritialStatus()="
+				+ getMaritialStatus() + ", getUserAddress()="
+				+ getUserAddress() + ", getPrimaryPhone()=" + getPrimaryPhone()
 				+ ", getSecondaryPhone()=" + getSecondaryPhone()
 				+ ", getPrimaryEmail()=" + getPrimaryEmail()
 				+ ", getSecondaryEmail()=" + getSecondaryEmail()
@@ -680,6 +696,13 @@ public abstract class User {
 				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
 				+ ", getEcEmailAddress()=" + getEcEmailAddress()
 				+ ", getJobTitle()=" + getJobTitle() + "]";
+	}
+	public void setUserAddress( String addressString){
+		String[] split = addressString.split(",");
+		userAddress.setStreet(split[0]);
+		userAddress.setCity(split[1]);
+		userAddress.setState(split[2]);
+		userAddress.setZipCode(Integer.parseInt(split[3]));
 	}
 
 }

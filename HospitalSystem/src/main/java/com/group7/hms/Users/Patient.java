@@ -154,7 +154,7 @@ public class Patient extends User {
 	 * @author Jacob Christensen
 	 *
 	 */
-	private class Insurance {
+	public class Insurance {
 
 		private String provider="";
 		private Date startDate = new Date();
@@ -279,17 +279,21 @@ public class Patient extends User {
 	 */
 	@Override
 	public String toString() {
-		return "Patient [getInsuranceProvider()=" + getInsuranceProvider()
+		return "Patient [getMedicalHistory()=" + getMedicalHistory()
+				+ ", getInsuranceProvider()=" + getInsuranceProvider()
 				+ ", getInsuranceStartDate()=" + getInsuranceStartDate()
 				+ ", getInsuranceEndDate()=" + getInsuranceEndDate()
-				+ ", getInsuranceID()=" + getInsuranceID() + ", getUsername()="
-				+ getUsername() + ", getPassword()=" + getPassword()
-				+ ", getName()=" + getName() + ", getMiddleName()="
-				+ getMiddleName() + ", getLastName()=" + getLastName()
-				+ ", getDateOfBirth()=" + getDateOfBirth()
-				+ ", getMaritialStatus()=" + getMaritialStatus()
-				+ ", getUserAddress()=" + getUserAddress()
-				+ ", getPrimaryPhone()=" + getPrimaryPhone()
+				+ ", getInsuranceID()=" + getInsuranceID()
+				+ ", getMobilePhoneNumber()=" + getMobilePhoneNumber()
+				+ ", getSex()=" + getSex() + ", getEcPhoneNumber()="
+				+ getEcPhoneNumber() + ", getStatus()=" + getStatus()
+				+ ", getAge()=" + getAge() + ", getUsername()=" + getUsername()
+				+ ", getPassword()=" + getPassword() + ", getName()="
+				+ getName() + ", getMiddleName()=" + getMiddleName()
+				+ ", getLastName()=" + getLastName() + ", getDateOfBirth()="
+				+ getDateOfBirth() + ", getMaritialStatus()="
+				+ getMaritialStatus() + ", getUserAddress()="
+				+ getUserAddress() + ", getPrimaryPhone()=" + getPrimaryPhone()
 				+ ", getSecondaryPhone()=" + getSecondaryPhone()
 				+ ", getPrimaryEmail()=" + getPrimaryEmail()
 				+ ", getSecondaryEmail()=" + getSecondaryEmail()
@@ -298,6 +302,18 @@ public class Patient extends User {
 				+ ", getEcPhoneNuber()=" + getEcPhoneNuber()
 				+ ", getEcEmailAddress()=" + getEcEmailAddress()
 				+ ", getJobTitle()=" + getJobTitle() + "]";
+	}
+	/**
+	 * @return the patientInsurance
+	 */
+	public Insurance getPatientInsurance() {
+		return patientInsurance;
+	}
+	/**
+	 * @param patientInsurance the patientInsurance to set
+	 */
+	public void setPatientInsurance(Insurance patientInsurance) {
+		this.patientInsurance = patientInsurance;
 	}
 
 
