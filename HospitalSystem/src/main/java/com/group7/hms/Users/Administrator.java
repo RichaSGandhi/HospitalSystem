@@ -9,10 +9,21 @@ package com.group7.hms.Users;
  */
 public class Administrator extends User {
 
+	private int experience =0;
 	/**
-	 * private field jobTitle - The job title that the Administrator holds
+	 * @return the experience
 	 */
-	// private String jobTitle="";
+	public int getExperience() {
+		return experience;
+	}
+
+	/**
+	 * @param experience the experience to set
+	 */
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
 	/**
 	 * private field degree - The degree that the Administrator holds
 	 */

@@ -55,8 +55,8 @@
 					<th><form:input path="maritialStatus"></form:input></th>
 					<th><label>Role:</label></th>
 					<th><form:input path="jobTitle" readonly="true"></form:input></th>
-					<th><label>Date of Birth:</label></th>
-					<th><input style="width: 145px" type="date" id="dob"></th>
+					<th><form:label path = "dateOfBirth">Date of Birth:</form:label></th>
+					<th><form:input path = "dateOfBirth" style="width: 145px" type="date" id="dob"></form:input></th>
 
 
 
