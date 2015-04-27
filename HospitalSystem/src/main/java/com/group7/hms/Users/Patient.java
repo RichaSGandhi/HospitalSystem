@@ -1,6 +1,6 @@
 package com.group7.hms.Users;
 
-import java.util.Date;;
+import java.sql.Date;;
 
 /**
  * public class Patient extends User - will hold the Patient specific
@@ -17,7 +17,14 @@ public class Patient extends User {
 	 */
 	private Insurance patientInsurance;
 	private String medicalHistory;
+	private String presciptions;
 
+	public String getPresciptions() {
+		return presciptions;
+	}
+	public void setPresciptions(String presciptions) {
+		this.presciptions = presciptions;
+	}
 	public String getMedicalHistory() {
 		return medicalHistory;
 	}
@@ -157,8 +164,8 @@ public class Patient extends User {
 	public class Insurance {
 
 		private String provider="";
-		private Date startDate = new Date();
-		private Date endDate = new Date();
+		private Date startDate = new Date(System.currentTimeMillis());
+		private Date endDate = new Date(System.currentTimeMillis());
 		private String insuranceID="";
 
 		/**
