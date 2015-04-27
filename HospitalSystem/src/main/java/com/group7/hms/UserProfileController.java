@@ -70,7 +70,7 @@ public class UserProfileController {
 		UserDAOImpl dao = new UserDAOImpl();
 		User userInfo = dao.getUserName(email);
 		System.out.println(userInfo);
-		if (userInfo.getName()==null){
+		if (null==userInfo){
 			model.addAttribute("ErrorMsg", "Account doesn't exist, Please Signup");
 
 			model.addAttribute("viewName", "signup");
@@ -83,21 +83,22 @@ public class UserProfileController {
 
 		}
 		else if (("active").equalsIgnoreCase(userInfo.getStatus())) {
-			
+			double bill =0;
 			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
 			List<Appointment> billedList = null;
 			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
-				GeneratePDF.generateBill();
+				bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
 				System.out.println("generated Bill");
 			}
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
 			model.addAttribute("billedList", billedList);
 		//model.addAttribute("role", info[1]);
-			System.out.println(email);
+			//System.out.println(email);
 			//model.addAttribute("email",email);
 			model.addAttribute("viewName", "Profile");
+			model.addAttribute("billAmount",bill);
 		}
 		return "masterpage";
 	}
@@ -247,14 +248,24 @@ public class UserProfileController {
 	
 	
 	@RequestMapping(value = "/viewBill", method = RequestMethod.GET)
-	public String viewBill(Model model,@RequestParam(value = "bill") List<Appointment> bill,
+	public String viewBill(Model model,@RequestParam(value = "billAmount") double billAmount,
 			@RequestParam(value = "email", defaultValue = "") String email){
 		//System.out.println(bill);
 		User userInfo = daoObject.getUserName(email);
 		//GeneratePDF.generateBill(userInfo, bill);
 		model.addAttribute("user", userInfo);
-		model.addAttribute("viewName", "Profile");
+		model.addAttribute("billAmount",billAmount);
+		model.addAttribute("viewName", "viewBill");
 		return "masterpage";
 	}
 
+	@RequestMapping(value = "/paymentSuccess", method = RequestMethod.GET)
+	public String payBill(Model model,
+			@RequestParam(value = "email", defaultValue = "") String email){
+		User userInfo = daoObject.getUserName(email);
+		model.addAttribute("user", userInfo);
+		appDaoObject.payBill(email);
+		model.addAttribute("viewName", "paymentSuccess");
+		return "masterpage";
+	}
 }

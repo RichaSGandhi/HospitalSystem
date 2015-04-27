@@ -54,7 +54,7 @@ public class AppointmentDAO{
 	Connection conn = null;
 
 	try {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		if(!(role.equalsIgnoreCase("Admin"))){
 			ps.setString(1, emailaddress);
@@ -101,7 +101,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, emailAddress);
 				ps.setString(2, "ReleasedBill");		
@@ -162,6 +162,21 @@ public class AppointmentDAO{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedBill");
 			ps.setString(2, patientEmail);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+	}
+	public void payBill(String patientEmail){
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ? and statusApp = ?";
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "Paid");
+			ps.setString(2, patientEmail);
+			ps.setString(3, "ReleasedBill");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

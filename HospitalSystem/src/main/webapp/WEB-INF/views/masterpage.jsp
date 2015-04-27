@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		
-		<div id="footer">&copy; 2015 - All Rights Reserved
+		<div id="footer">&copy; Group-7 @2015 - All Rights Reserved
 		<div style="float: right; margin: 20px;">
 			<a href="<c:url value="/" />">Home</a>
 		</div>
