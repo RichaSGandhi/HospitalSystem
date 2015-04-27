@@ -31,7 +31,6 @@
 			<tr><td>E-mail: </td><td><input type="email" id="email" name="email" placeholder = "Email Id" required></td></tr>
 			<tr><td>Password: </td><td><input  type="password" id="password" name="password" placeholder = "Password" required></td></tr>
 			<tr><td>Role: </td><td><select id="role" name="role" placeholder = "Role" required style="width:146px">
-									 <option value="Admin">Admin</option>
  									 <option value="Doctor">Doctor</option>
 								     <option value="Nurse">Nurse</option>
  									 <option value="Patient">Patient</option>
