@@ -412,7 +412,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	public void updateAdmin(Administrator admin) throws SQLException{
 		updateUser(admin);
-		String sql = "update hospitalmangement.users "+
+		String sql = "update hospitalmanagement.users "+
 					 "set certification = ? , "+
 					 "Degree = ? ," +
 					 "department = ? ,"+
@@ -555,7 +555,7 @@ public class UserDAOImpl implements UserDAO {
 			Connection conn = null;
 
 			try {
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 				PreparedStatement ps = conn.prepareStatement(sql);
 				
 				ps.setDate(1, beginMonth);

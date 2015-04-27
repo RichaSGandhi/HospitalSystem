@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.group7.hms.Users.Administrator;
 import com.group7.hms.Users.Patient;
@@ -89,7 +90,7 @@ public class UpdateProfileControler {
 	}
 
 	@RequestMapping("/processUpdateAdminProfile")
-	public String procecessUpdateAdminProfile(
+	public String procecessUpdateAdminProfile(Model model,
 			@Valid @ModelAttribute("admin") Administrator admin,
 			BindingResult result) {
 		UserDAOImpl dao = new UserDAOImpl();
@@ -99,8 +100,8 @@ public class UpdateProfileControler {
 			e.printStackTrace();
 		}
 		System.out.println(admin);
-
-		return null;
-
+		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		ra.addFlashAttribute("email", admin.getPrimaryEmail());
+		return "redirect:/profile";
 	}
 }

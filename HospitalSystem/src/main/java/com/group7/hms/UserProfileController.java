@@ -78,8 +78,9 @@ public class UserProfileController {
 			
 		}
 		else if (null==userInfo.getStatus()|| ("InActive").equalsIgnoreCase(userInfo.getStatus())) {
+			String emailUser = userInfo.getPrimaryEmail();
 
-			return "redirect:/updateProfile";
+			return "redirect:/updateProfile?email="+emailUser;
 
 		}
 		else if (("active").equalsIgnoreCase(userInfo.getStatus())) {
