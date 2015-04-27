@@ -39,8 +39,6 @@ public class AppointmentController {
 
 	public List<String> getDayList(String avaliableDays) {
 
-		// TODO Generate the logic to generate the dayList based on the
-		// available days from database
 		List<String> generatedDayList = new ArrayList<String>();
 		String[] days = avaliableDays.split(",");
 		for (String i : days) {
@@ -54,6 +52,10 @@ public class AppointmentController {
 				generatedDayList.add("Thursday");
 			} else if (i.equalsIgnoreCase("f")) {
 				generatedDayList.add("Friday");
+			}else if (i.equalsIgnoreCase("s")){
+				generatedDayList.add("Saturday");
+			}else if(i.equalsIgnoreCase("sun")){
+				generatedDayList.add("Sunday");
 			}
 
 		}
@@ -76,8 +78,7 @@ public class AppointmentController {
 	// @ModelAttribute("appointmentList")
 	public List<String> getAppointmentList(String avaliableAppointments) {
 
-		// TODO Generate Logic to create the appointmentsList based on the
-		// available appointments from database
+		String[] split = avaliableAppointments.split(",");
 		List<String> appointmentsList = new ArrayList<String>();
 		for (int i = 9; i < 17; i++) {
 			String aMpM = (i < 12) ? "AM" : "PM";
