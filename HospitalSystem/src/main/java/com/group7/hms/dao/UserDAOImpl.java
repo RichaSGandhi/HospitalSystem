@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -275,6 +276,8 @@ public class UserDAOImpl implements UserDAO {
 					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
 					user.setStatus(rs.getString("status"));
 					user.setAge(rs.getInt("Age"));
+					user.setDateOfBirth(rs.getDate("DateOfBirth"));
+					
 					
 					// provider specific information
 					user.setAffiliation(rs.getString("affiliation"));
@@ -283,7 +286,7 @@ public class UserDAOImpl implements UserDAO {
 					user.setCertification(rs.getString("certification"));
 					user.setDegree(rs.getString("Degree"));
 					user.setDepartment(rs.getString("department"));
-					user.setExperience(rs.getString("experience"));
+					user.setExperience(rs.getInt("experience"));
 					user.setSpecialization(rs.getString("specialization"));
 					
 					return user;
@@ -307,6 +310,7 @@ public class UserDAOImpl implements UserDAO {
 					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
 					user.setStatus(rs.getString("status"));
 					user.setAge(rs.getInt("Age"));
+					user.setDateOfBirth(rs.getDate("DateOfBirth"));
 					
 					//patient Specific infromation
 					//user.setInsuranceEndDate(rs.getString("insuranceEndDate"));
@@ -335,6 +339,7 @@ public class UserDAOImpl implements UserDAO {
 					user.setEcPhoneNuber(rs.getInt("ecPhoneNumber"));
 					user.setStatus(rs.getString("status"));
 					user.setAge(rs.getInt("Age"));
+					user.setDateOfBirth(rs.getDate("DateOfBirth"));
 					
 					// Administrative specific data
 					user.setCertifications(rs.getString("certification"));
@@ -461,7 +466,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(4, provider.getAvailableHours() );
 			ps.setString(5, provider.getCertification());
 			ps.setString(6, provider.getDepartment());
-			ps.setString(7, provider.getExperience());
+			ps.setInt(7, provider.getExperience());
 			ps.setString(8, provider.getSpecialization());
 			ps.setString(9, provider.getUsername());
 			System.out.println(ps.toString());
@@ -502,7 +507,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getDateOfBirth().toString());
+			ps.setDate(1, user.getDateOfBirth());
 			ps.setString(2, user.getUserAddress().toString());
 			ps.setInt(3, user.getEcPhoneNuber());
 			ps.setString(4, user.getMaritialStatus());
@@ -532,6 +537,50 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 		}
+	}
+	public int getNumberAppointments(User user) {
+		
+			// TODO get the Appointments from the database default is 5
+			Calendar cal = Calendar.getInstance();
+			java.sql.Date today = new java.sql.Date(cal.getTimeInMillis());
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			java.sql.Date beginMonth = new java.sql.Date(cal.getTimeInMillis());
+			String providerStr;
+			if (user.getJobTitle().equalsIgnoreCase("doctor")) providerStr="Doc";
+			else providerStr ="Nurse";
+			
+			String sql = "Select Count(appDate) from hospitalmanagement.appointments "
+					+ "where (appDate between ? and ?) and Atending? = ? ";
+			
+			Connection conn = null;
+
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
+				PreparedStatement ps = conn.prepareStatement(sql);
+				
+				ps.setDate(1, beginMonth);
+				ps.setDate(2, today);
+				ps.setString(3, providerStr);
+				ps.setString(4, user.getUsername());
+				
+				System.out.println(ps.toString());
+				ps.executeUpdate();
+				ps.close();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			} finally {
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+					}
+				}
+			}
+			return 5;
+		
 	}
 	
 }

@@ -28,7 +28,7 @@ public class Providers extends User {
 	/**
 	 * private field experience - stores the experience level of the provider
 	 */
-	private String experience="";
+	private int experience=0;
 
 	/**
 	 * private field department - stores the department information of the
@@ -173,7 +173,7 @@ public class Providers extends User {
 	 * 
 	 * @return the experience
 	 */
-	public String getExperience() {
+	public int getExperience() {
 		return experience;
 	}
 
@@ -183,7 +183,7 @@ public class Providers extends User {
 	 * @param experience
 	 *            the experience to set
 	 */
-	public void setExperience(String experience) {
+	public void setExperience(int experience) {
 		this.experience = experience;
 	}
 

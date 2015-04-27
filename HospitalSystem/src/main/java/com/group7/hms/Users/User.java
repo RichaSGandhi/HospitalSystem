@@ -36,7 +36,7 @@ public abstract class User {
 	/**
 	 * private field dateOfBirth - The date of birth of the user
 	 */
-	private Date dateOfBirth=new Date();
+	private java.sql.Date dateOfBirth=new java.sql.Date(System.currentTimeMillis());
 	/**
 	 * private field age - The calculated age of the user.
 	 */
@@ -123,8 +123,13 @@ public abstract class User {
 	public int getAge() {
 		return age;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateOfBirth(java.sql.Date dateOfBirth) {
+		try{
+			this.dateOfBirth = dateOfBirth;
+		}catch(Exception e){
+			this.dateOfBirth = new java.sql.Date(System.currentTimeMillis());
+			System.out.println("Bad Date From Data Base");
+		}
 	}
 	/**
 	 * public constructor - will create a new instance of the class User and
@@ -253,7 +258,7 @@ public abstract class User {
 	 * 
 	 * @return the dateOfBirth
 	 */
-	public Date getDateOfBirth() {
+	public java.sql.Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -591,7 +596,7 @@ public abstract class User {
 		 */
 		@Override
 		public String toString() {
-			return getStreet() + "," + getCity() + ", " + getState() + ","
+			return getStreet() + "," + getCity() + "," + getState() + ","
 					+ getZipCode();
 		}
 
@@ -631,6 +636,7 @@ public abstract class User {
 		 *            the state to set
 		 */
 		public void setState(String state) {
+			state.replaceAll("\\s+", "");
 			this.state = state;
 		}
 
@@ -698,11 +704,18 @@ public abstract class User {
 				+ ", getJobTitle()=" + getJobTitle() + "]";
 	}
 	public void setUserAddress( String addressString){
+		try{
 		String[] split = addressString.split(",");
 		userAddress.setStreet(split[0]);
 		userAddress.setCity(split[1]);
 		userAddress.setState(split[2]);
 		userAddress.setZipCode(Integer.parseInt(split[3]));
+		}catch (Exception e){
+			userAddress.setStreet("Street");
+			userAddress.setCity("city");
+			userAddress.setState("");
+			userAddress.setZipCode(0);
+		}
 	}
 
 }

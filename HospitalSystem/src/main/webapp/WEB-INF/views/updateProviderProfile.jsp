@@ -37,11 +37,11 @@
 					<th><form:label path="username">UserName:</form:label></th>
 					<th><form:input path="username" readonly="true"></form:input></th>
 					<th><form:label path="Name">Name:</form:label></th>
-					<th><form:input path="Name"></form:input></th>
+					<th><form:input type="text" path="Name"></form:input></th>
 					<th><form:label path="middleName">Middle Name</form:label></th>
-					<th><form:input path="middleName"></form:input></th>
+					<th><form:input type="text" path="middleName"></form:input></th>
 					<th><form:label path="lastName">Last Name</form:label></th>
-					<th><form:input path="lastName"></form:input></th>
+					<th><form:input type="text" path="lastName"></form:input></th>
 
 
 				</tr>
@@ -56,21 +56,18 @@
 					<th><form:input path="maritialStatus"></form:input></th>
 					<th><label>Role:</label></th>
 					<th><form:input path="jobTitle" readonly="true"></form:input></th>
-					<th><label>Date of Birth:</label></th>
-					<th><input style="width: 145px" type="date" id="dob"></th>
-
-
-
-
+					<th><form:label path="dateOfBirth">Date of Birth:</form:label></th>
+					<th><form:input type="date"  path = "dateOfBirth"></form:input></th>
+					
 				</tr>
 				<tr>
 					<!-- Thirdrow [moblePhone primaryPhone secondaryPhone SecondaryEmail -->
 					<th><form:label path="mobilePhoneNumber">Mobile Number:</form:label></th>
-					<th><form:input path="mobilePhoneNumber"></form:input></th>
+					<th><form:input type="tel" path="mobilePhoneNumber"></form:input></th>
 					<th><form:label path="primaryPhone">Phone Number:</form:label></th>
-					<th><form:input path="primaryPhone"></form:input></th>
+					<th><form:input type="tel" path="primaryPhone"></form:input></th>
 					<th><form:label path="secondaryPhone">Secondary Phone Number:</form:label></th>
-					<th><form:input path="secondaryPhone"></form:input></th>
+					<th><form:input type="tel" path="secondaryPhone"></form:input></th>
 					<th><form:label path="secondaryEmail">secondaryEmail:</form:label></th>
 					<th><form:input path="secondaryEmail"></form:input></th>
 				</tr>
@@ -80,8 +77,7 @@
 					<th><form:label path="userAddress.city">City:</form:label></th>
 					<th><form:input path="userAddress.city"></form:input></th>
 					<th><label>State:</label></th>
-					<th><form:select path="userAddress.state">
-							<option value=""></option>
+					<th><form:select path="userAddress.state" >
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -146,16 +142,16 @@
 				</tr>
 				<tr>
 					<th><form:label path="ecFirstName">First Name</form:label></th>
-					<th><form:input path="ecFirstName"></form:input></th>
+					<th><form:input type="text" path="ecFirstName"></form:input></th>
 
 					<th><form:label path="ecLastName">Last Name</form:label></th>
-					<th><form:input path="ecLastName"></form:input></th>
+					<th><form:input type="text" path="ecLastName"></form:input></th>
 
 					<th><form:label path="ecPhoneNumber">Phone Number</form:label></th>
-					<th><form:input path="ecPhoneNumber"></form:input></th>
+					<th><form:input type="tel" path="ecPhoneNumber"></form:input></th>
 
 					<th><form:label path="ecEmailAddress">Email Address</form:label></th>
-					<th><form:input path="ecEmailAddress"></form:input></th>
+					<th><form:input type="text" path="ecEmailAddress"></form:input></th>
 			</table>
 			<!-- End of Emergency Contact Table -->
 
@@ -166,29 +162,29 @@
 				</tr>
 				<tr>
 					<th><form:label path="affiliation">Affiliation</form:label></th>
-					<th><form:input path="affiliation"></form:input></th>
+					<th><form:input type="text" path="affiliation"></form:input></th>
 
 					<th><form:label path="availableDays">Available Days</form:label></th>
-					<th><form:input path="availableDays"></form:input></th>
+					<th><form:input type="text" path="availableDays"></form:input></th>
 
 					<th><form:label path="availableHours">Available Hours</form:label></th>
-					<th><form:input path="availableHours"></form:input></th>
+					<th><form:input type="text" path="availableHours"></form:input></th>
 
 					<th><form:label path="certification">Certification</form:label></th>
-					<th><form:input path="certification"></form:input></th>
+					<th><form:input type="text" path="certification"></form:input></th>
 				</tr>
 				<tr>
 					<th><form:label path="degree">Degree</form:label></th>
-					<th><form:input path="degree"></form:input></th>
+					<th><form:input type="text" path="degree"></form:input></th>
 
 					<th><form:label path="department">Department</form:label></th>
-					<th><form:input path="department"></form:input></th>
+					<th><form:input type="text" path="department"></form:input></th>
 
 					<th><form:label path="experience">Experience</form:label></th>
 					<th><form:input path="experience"></form:input></th>
 
 					<th><form:label path="specialization">Specialization</form:label></th>
-					<th><form:input path="specialization"></form:input></th>
+					<th><form:input type="text" path="specialization"></form:input></th>
 				</tr>
 			</table>
 
