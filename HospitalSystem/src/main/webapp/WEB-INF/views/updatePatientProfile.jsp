@@ -36,11 +36,11 @@
 					<th><form:label path="username">UserName:</form:label></th>
 					<th><form:input path="username" readonly="true"></form:input></th>
 					<th><form:label path="Name">Name:</form:label></th>
-					<th><form:input path="Name"></form:input></th>
+					<th><form:input type="text" path="Name"></form:input></th>
 					<th><form:label path="middleName">Middle Name</form:label></th>
-					<th><form:input path="middleName"></form:input></th>
+					<th><form:input type="text" path="middleName"></form:input></th>
 					<th><form:label path="lastName">Last Name</form:label></th>
-					<th><form:input path="lastName"></form:input></th>
+					<th><form:input type="text" path="lastName"></form:input></th>
 
 
 				</tr>
@@ -52,11 +52,11 @@
 							<form:option value="female" label="Female" />
 						</form:select></th>
 					<th><form:label path="maritialStatus">Maritial Status:</form:label></th>
-					<th><form:input path="maritialStatus"></form:input></th>
-					<th><label>Role:</label></th>
+					<th><form:input type="text"  path="maritialStatus"></form:input></th>
+					<th><form:label path="jobTitle">Role:</form:label></th>
 					<th><form:input path="jobTitle" readonly="true"></form:input></th>
 					<th><form:label path = "dateOfBirth">Date of Birth:</form:label></th>
-					<th><form:input path = "dateOfBirth" style="width: 145px" type="date" id="dob"></form:input></th>
+					<th><form:input type="date" path ="dateOfBirth" ></form:input></th>
 
 
 
@@ -65,75 +65,75 @@
 				<tr>
 					<!-- Thirdrow [moblePhone primaryPhone secondaryPhone SecondaryEmail -->
 					<th><form:label path="mobilePhoneNumber">Mobile Number:</form:label></th>
-					<th><form:input path="mobilePhoneNumber"></form:input></th>
+					<th><form:input type="number" path="mobilePhoneNumber"></form:input></th>
 					<th><form:label path="primaryPhone">Phone Number:</form:label></th>
-					<th><form:input path="primaryPhone"></form:input></th>
+					<th><form:input type="number" path="primaryPhone"></form:input></th>
 					<th><form:label path="secondaryPhone">Secondary Phone Number:</form:label></th>
-					<th><form:input path="secondaryPhone"></form:input></th>
+					<th><form:input type="number" path="secondaryPhone"></form:input></th>
 					<th><form:label path="secondaryEmail">secondaryEmail:</form:label></th>
-					<th><form:input path="secondaryEmail"></form:input></th>
+					<th><form:input type="email" path="secondaryEmail"></form:input></th>
 				</tr>
 				<tr>
 					<th><form:label path="userAddress.street">Street Address:</form:label></th>
-					<th><form:input path="userAddress.street"></form:input></th>
+					<th><form:input type="text" path="userAddress.street"></form:input></th>
 					<th><form:label path="userAddress.city">City:</form:label></th>
-					<th><form:input path="userAddress.city"></form:input></th>
-					<th><label>State:</label></th>
+					<th><form:input type="text" path="userAddress.city"></form:input></th>
+					<th><form:label path="userAddress.state">State:</form:label></th>
 					<th><form:select path="userAddress.state">
-							<option value=""></option>
-							<option value="AL">Alabama</option>
-							<option value="AK">Alaska</option>
-							<option value="AZ">Arizona</option>
-							<option value="AR">Arkansas</option>
-							<option value="CA">California</option>
-							<option value="CO">Colorado</option>
-							<option value="CT">Connecticut</option>
-							<option value="DE">Delaware</option>
-							<option value="FL">Flordia</option>
-							<option value="GA">Georgia</option>
-							<option value="HI">Hawaii</option>
-							<option value="ID">Idaho</option>
-							<option value="IN">Indiana</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-							<option value="LA">Louisiana</option>
-							<option value="ME">Maine</option>
-							<option value="MD">Maryland</option>
-							<option value="MA">Massachusetts</option>
-							<option value="MI">Michigan</option>
-							<option value="MN">Minnesota</option>
-							<option value="MS">Mississippi</option>
-							<option value="MO">Missouri</option>
-							<option value="MT">Montana</option>
-							<option value="NE">Nebraska</option>
-							<option value="NV">Neveda</option>
-							<option value="NH">New Hampshire</option>
-							<option value="NJ">New Jersey</option>
-							<option value="NM">New Mexico</option>
-							<option value="NY">New York</option>
-							<option value="NC">North Carolina</option>
-							<option value="ND">North Dakota</option>
-							<option value="OH">Ohio</option>
-							<option value="OK">Oklahoma</option>
-							<option value="OR">Oregon</option>
-							<option value="PA">Pennsylvania</option>
-							<option value="RI">Rhode Island</option>
-							<option value="SC">South Carolina</option>
-							<option value="SD">South Dakota</option>
-							<option value="TN">Tennessee</option>
-							<option value="TX">Texas</option>
-							<option value="UT">Utah</option>
-							<option value="VT">Vermont</option>
-							<option value="VA">Virgina</option>
-							<option value="WA">Washinton</option>
-							<option value="WV">West Virgina</option>
-							<option value="WI">Wisconson</option>
-							<option value="WY">Wyoming</option>
+							<form:option value="" label=""/>
+							<form:option value="AL" label="Alabama"/>
+							<form:option value="AK" label="Alaska"/>
+							<form:option value="AZ" label="Arizona"/>
+							<form:option value="AR" label="Arkansas"/>
+							<form:option value="CA" label="California"/>
+							<form:option value="CO" label="Colorado"/>
+							<form:option value="CT" label="Connecticut"/>
+							<form:option value="DE" label="Delaware"/>
+							<form:option value="FL" label="Flordia"/>
+							<form:option value="GA" label="Georgia"/>
+							<form:option value="HI" label="Hawaii"/>
+							<form:option value="ID" label="Idaho"/>
+							<form:option value="IN" label="Indiana"/>
+							<form:option value="IA" label="Iowa<"/>
+							<form:option value="KS" label="Kansas"/>
+							<form:option value="KY" label="Kentucky"/>
+							<form:option value="LA" label="Louisiana"/>
+							<form:option value="ME" label="Maine"/>
+							<form:option value="MD" label="Maryland"/>
+							<form:option value="MA" label="Massachusetts"/>
+							<form:option value="MI" label="Michigan"/>
+							<form:option value="MN" label="Minnesota"/>
+							<form:option value="MS" label="Mississippi"/>
+							<form:option value="MO" label="Missouri"/>
+							<form:option value="MT" label="Montana"/>
+							<form:option value="NE" label="Nebraska"/>
+							<form:option value="NV" label="Neveda"/>
+							<form:option value="NH" label="New Hampshire"/>
+							<form:option value="NJ" label="New Jersey"/>
+							<form:option value="NM" label="New Mexico"/>
+							<form:option value="NY" label="New York"/>
+							<form:option value="NC" label="North Carolina"/>
+							<form:option value="ND" label="North Dakota"/>
+							<form:option value="OH" label="Ohio"/>
+							<form:option value="OK" label="Oklahoma"/>
+							<form:option value="OR" label="Oregon"/>
+							<form:option value="PA" label="Pennsylvania"/>
+							<form:option value="RI" label="Rhode Island"/>
+							<form:option value="SC" label="South Carolina"/>
+							<form:option value="SD" label="South Dakota"/>
+							<form:option value="TN" label="Tennessee"/>
+							<form:option value="TX" label="Texas"/>
+							<form:option value="UT" label="Utah"/>
+							<form:option value="VT" label="Vermont"/>
+							<form:option value="VA" label="Virgina"/>
+							<form:option value="WA" label="Washinton"/>
+							<form:option value="WV" label="West Virgina"/>
+							<form:option value="WI" label="Wisconson"/>
+							<form:option value="WY" label="Wyoming"/>
 
 						</form:select></th>
 					<th><form:label path="userAddress.zipCode">ZIPCODE:</form:label></th>
-					<th><form:input path="userAddress.zipCode"></form:input></th>
+					<th><form:input type="number" path="userAddress.zipCode"></form:input></th>
 				</tr>
 			</table>
 			<!-- End of standard user Table -->
@@ -145,16 +145,16 @@
 				</tr>
 				<tr>
 					<th><form:label path="ecFirstName">First Name</form:label></th>
-					<th><form:input path="ecFirstName"></form:input></th>
+					<th><form:input type="text" path="ecFirstName"></form:input></th>
 
 					<th><form:label path="ecLastName">Last Name</form:label></th>
-					<th><form:input path="ecLastName"></form:input></th>
+					<th><form:input type="text" path="ecLastName"></form:input></th>
 
 					<th><form:label path="ecPhoneNumber">Phone Number</form:label></th>
-					<th><form:input path="ecPhoneNumber"></form:input></th>
+					<th><form:input type="number" path="ecPhoneNumber"></form:input></th>
 
 					<th><form:label path="ecEmailAddress">Email Address</form:label></th>
-					<th><form:input path="ecEmailAddress"></form:input></th>
+					<th><form:input type="email" path="ecEmailAddress"></form:input></th>
 			</table>
 			<!-- End of Emergency Contact Table -->
 
@@ -165,15 +165,13 @@
 				</tr>
 				<tr>
 					<th><form:label path="patientInsurance.provider">Insurance Provider</form:label></th>
-					<th><form:input path="patientInsurance.provider"></form:input></th>
+					<th><form:input type="text" path="patientInsurance.provider"></form:input></th>
 					<th><form:label path="patientInsurance.insuranceID">Insurance ID:</form:label></th>
-					<th><form:input path="patientInsurance.insuranceID"></form:input></th>
-					<th><label>Start Date:</label></th>
-					<th><input style="width: 145px" type="date" id="startDate"
-						value="${patient.getInsuranceStartDate()}"></th>
-					<th><label>End Date:</label></th>
-					<th><input style="width: 145px" type="date" id="endDate"
-						value="${patient.getInsuranceEndDate()}"></th>
+					<th><form:input type="text" path="patientInsurance.insuranceID"></form:input></th>
+					<th><form:label path="patientInsurance.startDate">Start Date:</form:label></th>
+					<th><form:input type="date" path="patientInsurance.startDate"></form:input></th>
+					<th><form:label path="patientInsurance.endDate">End Date:</form:label></th>
+					<th><form:input type="date" path="patientInsurance.endDate"></form:input></th>
 
 				</tr>
 			</table>
