@@ -29,7 +29,7 @@ import com.group7.hms.appointment.Appointment;
 import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
-import com.group7.hms.service.GeneratePDF;
+//import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
 /**
@@ -89,7 +89,7 @@ public class UserProfileController {
 			List<Appointment> billedList = null;
 			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
-				bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
+				//bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
 				System.out.println("generated Bill");
 			}
 			model.addAttribute("user", userInfo);
@@ -110,6 +110,7 @@ public class UserProfileController {
 			@RequestParam(value = "password", defaultValue = "") String password) {
 		
 		User user = daoObject.getUser(email);
+		model.addAttribute("user", user);
 		if (user.getJobTitle().equalsIgnoreCase("Patient")){
 			model.addAttribute("patient",user);
 			model.addAttribute("viewName", "updatePatientProfile");
@@ -185,12 +186,15 @@ public class UserProfileController {
 	public String makeAppointment(
 			Locale locale,
 			Model model,
-			@RequestParam(value = "department", defaultValue = "General") String department) {
+			@RequestParam(value = "department", defaultValue = "General") String department,
+			@RequestParam(value = "email", defaultValue = "") String email) {
 		System.out.println("Im here 1");
+		User user = daoObject.getUser(email);
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
+		model.addAttribute("user",user);
 		
 		return "masterpage";
 	}

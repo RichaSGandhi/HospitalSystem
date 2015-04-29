@@ -1,5 +1,6 @@
 package com.group7.hms;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,9 +53,9 @@ public class AppointmentController {
 				generatedDayList.add("Thursday");
 			} else if (i.equalsIgnoreCase("f")) {
 				generatedDayList.add("Friday");
-			}else if (i.equalsIgnoreCase("s")){
+			} else if (i.equalsIgnoreCase("s")) {
 				generatedDayList.add("Saturday");
-			}else if(i.equalsIgnoreCase("sun")){
+			} else if (i.equalsIgnoreCase("sun")) {
 				generatedDayList.add("Sunday");
 			}
 
@@ -76,18 +77,41 @@ public class AppointmentController {
 	}
 
 	// @ModelAttribute("appointmentList")
-	public List<String> getAppointmentList(String avaliableAppointments) {
+	public List<String> getAppointmentTimes(String avaliableHours,
+			List<Appointment> appointmentList) {
 
-		String[] split = avaliableAppointments.split(",");
+		String[] split = avaliableHours.split(",");
+		String startHourStr = split[0];
+		String endHourStr = split[1];
+		int startHour = Integer.parseInt(startHourStr.substring(0, 1));
+		int endHour = Integer.parseInt(endHourStr.substring(0, 1));
+		startHour = (startHourStr.contains("am")) ? (startHour)
+				: (startHour + 12);
+		endHour = (endHourStr.contains("am")) ? (endHour) : (endHour + 12);
 		List<String> appointmentsList = new ArrayList<String>();
-		for (int i = 9; i < 17; i++) {
-			String aMpM = (i < 12) ? "AM" : "PM";
-			appointmentsList.add(Integer.toString((i > 12) ? (i % 12)
-					: (i % 13))
-					+ ":00-"
-					+ Integer.toString((i > 13) ? (i % 12) : (i % 13))
-					+ ":59 "
-					+ aMpM);
+		for (int i = startHour; i < endHour; i++) {
+			if (!appointmentList.isEmpty()) {
+				for (Appointment app : appointmentList) {
+					java.sql.Time testTime = java.sql.Time
+							.valueOf(i + ":00:00");
+					if (!app.getStartTime().equals(testTime)) {
+						String aMpM = (i < 12) ? "AM" : "PM";
+						appointmentsList.add(Integer
+								.toString((i > 12) ? (i % 12) : (i % 13))
+								+ ":00-"
+								+ Integer.toString((i > 13) ? (i % 12)
+										: (i % 13)) + ":59 " + aMpM);
+					}
+				}
+			}
+			else{
+				String aMpM = (i < 12) ? "AM" : "PM";
+				appointmentsList.add(Integer
+						.toString((i > 12) ? (i % 12) : (i % 13))
+						+ ":00-"
+						+ Integer.toString((i > 13) ? (i % 12)
+								: (i % 13)) + ":59 " + aMpM);
+			}
 		}
 
 		for (String i : appointmentsList) {
@@ -101,11 +125,14 @@ public class AppointmentController {
 	public String scheduleAppointment(Model model, String email) {
 
 		UserDAOImpl dao = new UserDAOImpl();
-		Providers doctor = dao.getDoctorDetails(email);
+		AppointmentDAO appDao = new AppointmentDAO();
+		Providers doctor = (Providers) dao.getUser(email);
 
 		Appointment app = new Appointment();
-		List<String> appointments = getAppointmentList(doctor
-				.getAvailableHours());
+		List<String> appointments = getAppointmentTimes(
+				doctor.getAvailableHours(),
+				appDao.getAppointments(doctor.getUsername(),
+						doctor.getJobTitle()));
 		List<String> days = getDayList(doctor.getAvailableDays());
 		model.addAttribute("doctorName", doctor.getName());
 		model.addAttribute("doctoremail", email);
@@ -137,7 +164,6 @@ public class AppointmentController {
 		}
 	}
 
-
 	@RequestMapping(value = "/updateAppointment", method = RequestMethod.POST)
 	public String updateAppointment(
 			Locale locale,
@@ -148,17 +174,16 @@ public class AppointmentController {
 			@RequestParam(value = "release", defaultValue = "") String release,
 			@RequestParam(value = "appId", required = false) int appId,
 			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail) {
-		//if(save.isEmpty()){
-			//daoObject.releasePatient(patientEmail);
-		//}else if(release.isEmpty()){
-			//daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
-		//}
+		// if(save.isEmpty()){
+		// daoObject.releasePatient(patientEmail);
+		// }else if(release.isEmpty()){
+		// daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
+		// }
 		System.out.println("I AM IN UPDATE PROFILE");
-		model.addAttribute("viewName","home");
+		model.addAttribute("viewName", "home");
 		return "masterpage";
 
-
-		//return "redirect:/Profile";
+		// return "redirect:/Profile";
 
 	}
 }

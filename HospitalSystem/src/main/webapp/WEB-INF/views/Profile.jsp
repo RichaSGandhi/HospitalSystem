@@ -57,7 +57,7 @@ $( document ).ready(function() {
 		<div class="col-lg-4">		
 			<a href="<c:url value="/" />">Home</a>
 			<div id = "UpdateLink"><a href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">Update My Profile</a></div> 
-			<div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment"/>"> Make an Appointment</a></div>
+			<div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment?email=${user.getPrimaryEmail()}"/>"> Make an Appointment</a></div>
 			<div id = "viewBill"><a href="<c:url value="/viewBill?email=${user.getPrimaryEmail()}&billAmount=${billAmount}" />">View Bill</a></div>
 		</div>
 		<div class="col-lg-8">
