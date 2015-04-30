@@ -391,6 +391,7 @@ public class UserDAOImpl implements UserDAO {
 					 "insuranceProvider = ? , "+
 					 "insuranceStartDate = ? , "+
 					 "medicalHistory = ? " +
+					 "status = ? , " +
 					 "where EMailID = ? ";
 		Connection conn = null;
 		try{
@@ -401,7 +402,8 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(3, patient.getInsuranceProvider());
 			ps.setDate(4, patient.getInsuranceStartDate());
 			ps.setString(5, patient.getMedicalHistory());
-			ps.setString(6, patient.getUsername());
+			ps.setString(6, "Active");
+			ps.setString(7, patient.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
