@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group7.hms.Users.Providers;
+import com.group7.hms.Users.User;
 import com.group7.hms.appointment.Appointment;
 import com.group7.hms.dao.AppointmentDAO;
+import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.SendEmail;
 
@@ -37,7 +39,7 @@ public class AppointmentController {
 	 */
 	// @ModelAttribute("dayList")
 	AppointmentDAO daoObject = new AppointmentDAO();
-
+	UserDAO userDaoObject = new UserDAOImpl();
 	public List<String> getDayList(String avaliableDays) {
 
 		List<String> generatedDayList = new ArrayList<String>();
@@ -122,11 +124,15 @@ public class AppointmentController {
 	}
 
 	@RequestMapping("/scheduleAppointment")
-	public String scheduleAppointment(Model model, String email) {
+	public String scheduleAppointment(Model model, String email,String docEmail ) {
 
 		UserDAOImpl dao = new UserDAOImpl();
+
+		Providers doctor = dao.getDoctorDetails(email);
+
 		AppointmentDAO appDao = new AppointmentDAO();
-		Providers doctor = (Providers) dao.getUser(email);
+		//Providers doctor = (Providers) dao.getUser(email);
+
 
 		Appointment app = new Appointment();
 		List<String> appointments = getAppointmentTimes(
@@ -134,8 +140,10 @@ public class AppointmentController {
 				appDao.getAppointments(doctor.getUsername(),
 						doctor.getJobTitle()));
 		List<String> days = getDayList(doctor.getAvailableDays());
+		User userInfo = userDaoObject.getUserName(email);
+		model.addAttribute("user", userInfo);
 		model.addAttribute("doctorName", doctor.getName());
-		model.addAttribute("doctoremail", email);
+		model.addAttribute("doctoremail", docEmail);
 		model.addAttribute("appointmentList", appointments);
 		model.addAttribute("dayList", days);
 		model.addAttribute("app", app);
@@ -164,7 +172,7 @@ public class AppointmentController {
 		}
 	}
 
-	@RequestMapping(value = "/updateAppointment", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateAppointment", method = RequestMethod.GET)
 	public String updateAppointment(
 			Locale locale,
 			Model model,
@@ -173,17 +181,22 @@ public class AppointmentController {
 			@RequestParam(value = "save", defaultValue = "") String save,
 			@RequestParam(value = "release", defaultValue = "") String release,
 			@RequestParam(value = "appId", required = false) int appId,
-			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail) {
-		// if(save.isEmpty()){
-		// daoObject.releasePatient(patientEmail);
-		// }else if(release.isEmpty()){
-		// daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
-		// }
-		System.out.println("I AM IN UPDATE PROFILE");
-		model.addAttribute("viewName", "home");
-		return "masterpage";
+			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
+			@RequestParam(value = "email", defaultValue = "") String email) {
+		if(!save.isEmpty()){
+			daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
+			
+		}else if(!release.isEmpty()){
+			daoObject.releasePatient(patientEmail);
+		}
+		else{
+			System.out.println("SOME THING WENT WRONG");
+		}
 
-		// return "redirect:/Profile";
+		//model.addAttribute("viewName", "home");
+		//return "masterpage";
+
+		return "redirect:/profile?email="+email;
 
 	}
 }

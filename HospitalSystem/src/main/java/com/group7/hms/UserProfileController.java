@@ -29,6 +29,7 @@ import com.group7.hms.appointment.Appointment;
 import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
+import com.group7.hms.service.GeneratePDF;
 //import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
@@ -61,7 +62,7 @@ public class UserProfileController {
 		return "masterpage";
 	}
 
-	@RequestMapping(value = "/profile", method = RequestMethod.POST)
+	@RequestMapping(value = "/profile",  method = { RequestMethod.GET, RequestMethod.POST })
 	public String LoginSubmit(Locale locale, Model model,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password) {
@@ -87,15 +88,21 @@ public class UserProfileController {
 			double bill =0;
 			List<Appointment> appointmentList = appDaoObject.getAppointments(userInfo.getPrimaryEmail(), userInfo.getJobTitle());
 			List<Appointment> billedList = null;
+			List<String> releasedUsers = null;
 			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
-				//bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
-				System.out.println("generated Bill");
+
+				if(billedList!=null&&billedList.size()>0)
+					bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
+
+			}
+			if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){
+				releasedUsers = appDaoObject.getReleasedPatient();
 			}
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
 			model.addAttribute("billedList", billedList);
-		//model.addAttribute("role", info[1]);
+			model.addAttribute("releasedUsers", releasedUsers);
 			//System.out.println(email);
 			//model.addAttribute("email",email);
 			model.addAttribute("viewName", "Profile");
@@ -189,13 +196,18 @@ public class UserProfileController {
 			@RequestParam(value = "department", defaultValue = "General") String department,
 			@RequestParam(value = "email", defaultValue = "") String email) {
 		System.out.println("Im here 1");
+
+		//User userInfo = daoObject.getUserName(email);
 		User user = daoObject.getUser(email);
+
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
+
+		//model.addAttribute("user",userInfo);
+
 		model.addAttribute("user",user);
-		
 		return "masterpage";
 	}
 
@@ -217,8 +229,11 @@ public class UserProfileController {
 	public String searchDocs(
 			Locale locale,
 			Model model,
-			@RequestParam(value = "department", defaultValue = "") String department) {
+			@RequestParam(value = "department", defaultValue = "") String department,
+			@RequestParam(value = "email", defaultValue = "") String email) {
 		List<Providers> docList = daoObject.getDoctorInfo(department);
+		User userInfo = daoObject.getUserName(email);
+		model.addAttribute("user", userInfo);
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
 		// return "redirect:/makeAppointment";
@@ -231,16 +246,7 @@ public class UserProfileController {
 			@RequestParam(value = "releaseBill", defaultValue = "") String releaseBill,
 			@RequestParam(value = "appId", defaultValue = "") String appId){
 		System.out.println("Printing" + appId +"realaseBill" +releaseBill + "EMail" +patientEmail);
-		if(patientEmail.isEmpty()){
-			appDaoObject.releaseBill(releaseBill);
-			RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
-			ra.addFlashAttribute("email", email);
-			return "redirect:/profile";
-		}
-	
-		else {
-			
-			model.addAttribute("viewName", "viewPatientProfile");
+		model.addAttribute("viewName", "viewPatientProfile");
 			User patientInfo = daoObject.getUserName(patientEmail);
 			System.out.println("Patient Inf" +patientInfo);
 			User userInfo = daoObject.getUserName(email);
@@ -249,8 +255,15 @@ public class UserProfileController {
 			model.addAttribute("appId", appId);
 			return "masterpage";
 		}
+
+	@RequestMapping(value = "/releaseBill", method = RequestMethod.POST)
+	public String releaseBill(Model model,@RequestParam(value = "email", defaultValue = "") String email,
+			@RequestParam(value = "releaseBill", defaultValue = "") String releaseBill){
+		appDaoObject.releaseBill(releaseBill);
+		//RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		//ra.addFlashAttribute("email", email);
+		return "redirect:/profile?email="+email;
 	}
-	
 	
 	@RequestMapping(value = "/viewBill", method = RequestMethod.GET)
 	public String viewBill(Model model,@RequestParam(value = "billAmount") double billAmount,

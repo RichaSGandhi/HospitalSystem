@@ -29,7 +29,8 @@
 				
 				
 				<form:form id ="makeAppointment" method="GET">
-			<div>	
+			<div>
+			<input hidden=true name="email" value="${user.getPrimaryEmail()}">	
 			<table>
 		<tr>			
 			<th> Departments :</th> <th><select id="Department" name = "department" required style="width:146px">
@@ -47,7 +48,8 @@
 		
 			</form:form>					
 				<h2>Available Doctors</h2>
-				<form:form id ="scheduleAppointment" method="GET" action = "/hms/scheduleAppointment">			
+				<form:form id ="scheduleAppointment" method="GET" action = "/hms/scheduleAppointment">	
+				<input hidden=true name="email" value="${user.getPrimaryEmail()}">		
 				<table class="tableMax">
 									<tr>
 										<th></th>
@@ -63,15 +65,15 @@
       							</c:when>
 
 							    <c:otherwise>
-									<c:forEach items="${doctorList}" var="user" >
+									<c:forEach items="${doctorList}" var="doc" >
 				   						
 				   						<tr>				   					
-				   							<td><button id="selectedUser" type = "submit" name="email" value = "${user.getPrimaryEmail()}">Select</button></td>				   							
-				   							<td style="text-align: center;"><c:out value="${user.getName()}"/></td>
-				   							<td style="text-align: center;"><c:out value="${user.getAffiliation()}"/></td>				   							
-				   							<td style="text-align: center;"><c:out value="${user.getDegree()}"/></td>	
-				   							<td style="text-align: center;"><c:out value="${user.getSpecialization()}"/></td>
-				   							<td style="text-align: center;"><c:out value="${user.getAvailableDays()}"/></td>
+				   							<td><button id="selectedUser" type = "submit" name="docEmail" value = "${doc.getPrimaryEmail()}">Select</button></td>				   							
+				   							<td style="text-align: center;"><c:out value="${doc.getName()}"/></td>
+				   							<td style="text-align: center;"><c:out value="${doc.getAffiliation()}"/></td>				   							
+				   							<td style="text-align: center;"><c:out value="${doc.getDegree()}"/></td>	
+				   							<td style="text-align: center;"><c:out value="${doc.getSpecialization()}"/></td>
+				   							<td style="text-align: center;"><c:out value="${doc.getAvailableDays()}"/></td>
 				   						</tr>
 									</c:forEach>										    
 							    </c:otherwise>

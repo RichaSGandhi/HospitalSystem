@@ -49,7 +49,7 @@ public class AppointmentDAO{
 			sql = "Select * from HospitalManagement.appointments where attendingNurse = ? and statusApp = ? "
 					+ "ORDER BY appDate DESC ";
 		else 
-			sql = "Select * from HospitalManagement.appointments order by appDate ASC";
+			sql = "Select * from HospitalManagement.appointments where statusApp <> ? order by appDate ASC";
 	
 	Connection conn = null;
 
@@ -59,6 +59,9 @@ public class AppointmentDAO{
 		if(!(role.equalsIgnoreCase("Admin"))){
 			ps.setString(1, emailaddress);
 			ps.setString(2, "Created");
+		}
+		if(role.equalsIgnoreCase("Admin")){
+			ps.setString(1, "Paid");
 		}
 		ResultSet rs = ps.executeQuery();
 		
@@ -154,7 +157,7 @@ public class AppointmentDAO{
 	}
 	}
 	public void releaseBill(String patientEmail){
-		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ?";
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ? and statusApp = ?";
 		Connection conn = null;
 
 		try {
@@ -162,6 +165,7 @@ public class AppointmentDAO{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedBill");
 			ps.setString(2, patientEmail);
+			ps.setString(3, "ReleasedByDoc");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -183,14 +187,14 @@ public class AppointmentDAO{
 	}
 	}
 	
-
+	
 	public void saveAppointmentRecord(String doctorNotes,int cost, int appId){
 		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? , cost = ?"
 				+ " , doctorsNotes = ? where idAppointments = ?";
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "InCare");
 			ps.setInt(2, cost);
@@ -201,5 +205,24 @@ public class AppointmentDAO{
 			throw new RuntimeException(e);
 	}
 		
+	}
+	public List<String> getReleasedPatient(){
+		String sql = "select distinct patient from hospitalManagement.appointments where statusApp = ?;";
+		Connection conn = null;
+		List<String> userNames = new ArrayList<String>();
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "ReleasedByDoc");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				userNames.add(rs.getString("patient"));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+		System.out.println(userNames.toString());
+		return userNames;
 	}
 }

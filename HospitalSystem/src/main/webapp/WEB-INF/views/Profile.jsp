@@ -19,23 +19,29 @@ $( document ).ready(function() {
 	var bill = '${billedList}';	
 	if(role==("Patient")){
 		$("#MakeAppointment").show();
-		if (!(bill==null))
-			$("#viewBill").show();
+		$("#releaseBill").hide();
+		if (bill==null)
+			$("#viewBill").hide();
 		$("table td:nth-child(7),th:nth-child(7)").show();
 		$("table td:nth-child(8),th:nth-child(8)").show();
 	}
 	if(role==("Admin")){
+			$("#viewBill").hide();
 			$("table td:nth-child(2),th:nth-child(2)").show();
 			$("table td:nth-child(7),th:nth-child(7)").show();
 			$("table td:nth-child(8),th:nth-child(8)").show();
-			if (bill==null)
-			$("table td:nth-child(9),th:nth-child(9)").show();
+			
+				
 	}
 	if(role==("Nurse")){
+		$("#releaseBill").hide();
+		$("#viewBill").hide();
 		$("table td:nth-child(2),th:nth-child(2)").show();
 		$("table td:nth-child(7),th:nth-child(7)").show();
 	}
 	if (role==("Doctor")){
+		$("#releaseBill").hide();
+		$("#viewBill").hide();
 		$("table td:nth-child(1),th:nth-child(1)").show();
 		$("table td:nth-child(2),th:nth-child(2)").show();
 		$("table td:nth-child(8),th:nth-child(8)").show();
@@ -61,7 +67,7 @@ $( document ).ready(function() {
 			<div id = "viewBill"><a href="<c:url value="/viewBill?email=${user.getPrimaryEmail()}&billAmount=${billAmount}" />">View Bill</a></div>
 		</div>
 		<div class="col-lg-8">
-			<h2>List of upcoming appointments</h2>
+			<h2>List of appointments</h2>
 			<form:form id ="viewPatientProfile" method="POST" action = "/hms/viewPatientProfile">	
 			<input hidden=true name="email" value="${user.getPrimaryEmail()}">
 			<table class="tableMax">
@@ -99,7 +105,33 @@ $( document ).ready(function() {
 					 </c:otherwise>
 				</c:choose>
 			</table>
-				</form:form>
+			</form:form>
+			<form:form id ="releaseBill" method="POST" action = "/hms/releaseBill">	
+			<input hidden=true name="email" value="${user.getPrimaryEmail()}">
+			<table id = "released" class="tableMax">
+				<tr>	
+												<th><div id="PatientNameHeader">Patient</div></th>
+												<th></th>
+				</tr>
+				<c:choose>
+		      		<c:when test="${empty releasedUsers}">
+		      				<tr><td colspan="8" style="color:blue;text-align:left;"><strong>No Patient Released by Doctor at the Moment</strong></td></tr>
+		      		</c:when>
+		
+					 <c:otherwise>
+							<c:forEach items="${releasedUsers}" var="release" >
+						   						
+						   			<tr>				   					
+						   							
+						   							<td style="text-align: center;"><div id="patient"><c:out value="${release}"/></div></td>
+						   							<td><button id="ReleaseBill" type = "submit" name="releaseBill" value = "${release}">Release Bill</button></td>	
+						   							
+						   			</tr>
+							</c:forEach>										    
+					 </c:otherwise>
+				</c:choose>
+			</table>
+			</form:form>
 			
 	</div>
 </div>

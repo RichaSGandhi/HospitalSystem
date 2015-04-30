@@ -65,11 +65,11 @@
 				<tr>
 					<!-- Thirdrow [moblePhone primaryPhone secondaryPhone SecondaryEmail -->
 					<th><form:label path="mobilePhoneNumber">Mobile Number:</form:label></th>
-					<th><form:input type="number" path="mobilePhoneNumber"></form:input></th>
+					<th><form:input type="tel" path="mobilePhoneNumber"></form:input></th>
 					<th><form:label path="primaryPhone">Phone Number:</form:label></th>
-					<th><form:input type="number" path="primaryPhone"></form:input></th>
+					<th><form:input type="tel" path="primaryPhone"></form:input></th>
 					<th><form:label path="secondaryPhone">Secondary Phone Number:</form:label></th>
-					<th><form:input type="number" path="secondaryPhone"></form:input></th>
+					<th><form:input type="tel" path="secondaryPhone"></form:input></th>
 					<th><form:label path="secondaryEmail">secondaryEmail:</form:label></th>
 					<th><form:input type="email" path="secondaryEmail"></form:input></th>
 				</tr>
@@ -94,7 +94,7 @@
 							<form:option value="HI" label="Hawaii"/>
 							<form:option value="ID" label="Idaho"/>
 							<form:option value="IN" label="Indiana"/>
-							<form:option value="IA" label="Iowa<"/>
+							<form:option value="IA" label="Iowa"/>
 							<form:option value="KS" label="Kansas"/>
 							<form:option value="KY" label="Kentucky"/>
 							<form:option value="LA" label="Louisiana"/>
@@ -149,7 +149,7 @@
 					<th><form:input path = "ecLastName"></form:input></th>
 						
 					<th><form:label path = "ecPhoneNumber">Phone Number</form:label></th>
-					<th><form:input type ="number" path = "ecPhoneNumber"></form:input></th>
+					<th><form:input type ="tel" path = "ecPhoneNumber"></form:input></th>
 						
 					<th><form:label path = "ecEmailAddress">Email Address</form:label></th>
 					<th><form:input path = "ecEmailAddress"></form:input></th>		
