@@ -116,12 +116,30 @@ public class Salary {
 		return expFactor;
 	}
 
-
+    public void setDepartmentFactor(Providers user){
+    
+    	String department=user.getDepartment();
+    	if (department!=null){
+    		if(department.equalsIgnoreCase("general")){
+    			setDepartmentFactor(0);
+    		}else if (department.equalsIgnoreCase("cardiology")){
+    			setDepartmentFactor(.5);
+    		}else if (department.equalsIgnoreCase("neurology")){
+    			setDepartmentFactor(.75);
+    		}
+    		else if (department.equalsIgnoreCase("pediactrics")){
+    			setDepartmentFactor(.3);
+    		}else if (department.equalsIgnoreCase("gynaecology")){
+    			setDepartmentFactor(.65);
+    		} else setDepartmentFactor(0);
+    	}
+    }
 
 	public Salary(Providers user) {
 		UserDAOImpl dao = new UserDAOImpl();
 		setAppointments(dao.getNumberAppointments(user));
 		setExperience(user.getExperience());
+		setDepartmentFactor(user);
 
 		if (user.getJobTitle().equalsIgnoreCase("doctor")) {
 			setCalculatedSalary((getDocbase() * (1 + (getExpfactor() * getExperience())))

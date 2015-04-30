@@ -30,6 +30,7 @@ import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.GeneratePDF;
+//import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
 /**
@@ -90,9 +91,10 @@ public class UserProfileController {
 			List<String> releasedUsers = null;
 			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
+
 				if(billedList!=null&&billedList.size()>0)
 					bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
-				System.out.println("generated Bill");
+
 			}
 			if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){
 				releasedUsers = appDaoObject.getReleasedPatient();
@@ -115,6 +117,7 @@ public class UserProfileController {
 			@RequestParam(value = "password", defaultValue = "") String password) {
 		
 		User user = daoObject.getUser(email);
+		model.addAttribute("user", user);
 		if (user.getJobTitle().equalsIgnoreCase("Patient")){
 			model.addAttribute("patient",user);
 			model.addAttribute("viewName", "updatePatientProfile");
@@ -193,12 +196,18 @@ public class UserProfileController {
 			@RequestParam(value = "department", defaultValue = "General") String department,
 			@RequestParam(value = "email", defaultValue = "") String email) {
 		System.out.println("Im here 1");
-		User userInfo = daoObject.getUserName(email);
+
+		//User userInfo = daoObject.getUserName(email);
+		User user = daoObject.getUser(email);
+
 		List<Providers> docList = daoObject.getDoctorInfo(department);
 		System.out.println("Im here 2");
 		model.addAttribute("viewName", "makeAppointment");
 		model.addAttribute("doctorList", docList);
-		model.addAttribute("user",userInfo);
+
+		//model.addAttribute("user",userInfo);
+
+		model.addAttribute("user",user);
 		return "masterpage";
 	}
 

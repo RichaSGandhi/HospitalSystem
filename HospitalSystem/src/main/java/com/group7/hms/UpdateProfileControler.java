@@ -63,12 +63,10 @@ public class UpdateProfileControler {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			System.out.println(patient);
-			model.addAttribute("user", patient);
-			model.addAttribute("viewName", "Profile");
 		}
-
-		return "masterpage";
+		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		ra.addFlashAttribute("email", patient.getPrimaryEmail());
+		return "redirect:/profile";
 
 	}
 
@@ -84,8 +82,9 @@ public class UpdateProfileControler {
 			e.printStackTrace();
 		}
 		System.out.println(provider);
-
-		return null;
+		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		ra.addFlashAttribute("email", provider.getPrimaryEmail());
+		return "redirect:/profile";
 
 	}
 
