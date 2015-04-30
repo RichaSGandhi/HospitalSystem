@@ -100,8 +100,10 @@ public class UpdateProfileControler {
 			e.printStackTrace();
 		}
 		System.out.println(admin);
-		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
-		ra.addFlashAttribute("email", admin.getPrimaryEmail());
-		return "redirect:/profile";
+		System.out.println("redirect:/profile?email="+admin.getUsername());
+		//RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		//ra.addFlashAttribute("email", admin.getPrimaryEmail());
+		return "redirect:/profile?email="+admin.getUsername();
+		
 	}
 }
