@@ -112,7 +112,7 @@ public class Salary {
 	/**
 	 * @return the expfactor
 	 */
-	public static double getExpfactor() {
+	public double getExpfactor() {
 		return expFactor;
 	}
 

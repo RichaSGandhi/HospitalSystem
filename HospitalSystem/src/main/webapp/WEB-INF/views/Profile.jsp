@@ -20,6 +20,7 @@ $( document ).ready(function() {
 	if(role==("Patient")){
 		$("#MakeAppointment").show();
 		$("#releaseBill").hide();
+		$("#viewPayCheck").hide();
 		if (bill==null)
 			$("#viewBill").hide();
 		$("table td:nth-child(7),th:nth-child(7)").show();
@@ -65,6 +66,7 @@ $( document ).ready(function() {
 			<div id = "UpdateLink"><a href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">Update My Profile</a></div> 
 			<div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment?email=${user.getPrimaryEmail()}"/>"> Make an Appointment</a></div>
 			<div id = "viewBill"><a href="<c:url value="/viewBill?email=${user.getPrimaryEmail()}&billAmount=${billAmount}" />">View Bill</a></div>
+			<div id = "viewPayCheck"><a href="<c:url value="/viewPayCheck?email=${user.getPrimaryEmail()}" />">View Paycheck</a></div>
 		</div>
 		<div class="col-lg-8">
 			<h2>List of appointments</h2>

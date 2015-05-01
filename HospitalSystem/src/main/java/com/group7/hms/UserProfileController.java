@@ -30,6 +30,7 @@ import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
 import com.group7.hms.service.GeneratePDF;
+import com.group7.hms.service.GeneratePayCheck;
 //import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
@@ -96,8 +97,12 @@ public class UserProfileController {
 					bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
 
 			}
-			if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){
+			else if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){
 				releasedUsers = appDaoObject.getReleasedPatient();
+				GeneratePayCheck.generate(userInfo);
+			}
+			else{
+				GeneratePayCheck.generate(userInfo);
 			}
 			model.addAttribute("user", userInfo);
 			model.addAttribute("appList",appointmentList);
@@ -284,6 +289,14 @@ public class UserProfileController {
 		model.addAttribute("user", userInfo);
 		appDaoObject.payBill(email);
 		model.addAttribute("viewName", "paymentSuccess");
+		return "masterpage";
+	}
+	@RequestMapping(value = "/viewPayCheck", method = RequestMethod.GET)
+	public String viewPayCheck(Model model,
+			@RequestParam(value = "email", defaultValue = "") String email){
+		User userInfo = daoObject.getUserName(email);		
+		model.addAttribute("user", userInfo);		
+		model.addAttribute("viewName", "viewPayCheck");
 		return "masterpage";
 	}
 }
