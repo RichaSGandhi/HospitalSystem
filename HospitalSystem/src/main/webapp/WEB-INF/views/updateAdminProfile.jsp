@@ -149,10 +149,10 @@
 					<th><form:input path = "ecLastName"></form:input></th>
 						
 					<th><form:label path = "ecPhoneNumber">Phone Number</form:label></th>
-					<th><form:input type ="tel" path = "ecPhoneNumber"></form:input></th>
+					<th><form:input type ="number" path = "ecPhoneNumber"></form:input></th>
 						
 					<th><form:label path = "ecEmailAddress">Email Address</form:label></th>
-					<th><form:input path = "ecEmailAddress"></form:input></th>		
+					<th><form:input type="email" path = "ecEmailAddress"></form:input></th>		
 			</table>
 			<!-- End of Emergency Contact Table -->
 

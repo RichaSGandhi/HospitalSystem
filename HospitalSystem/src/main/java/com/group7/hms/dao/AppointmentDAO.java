@@ -36,7 +36,7 @@ public class AppointmentDAO{
 
 	public void createAppointment(Appointment app){
 		String sql = "INSERT INTO hospitalmanagement.appointments "
-				+ "(startTime, endTime, appDate, appDay,attendingDoc, docName, attendingNurse, NurseName, patient, patientName, statusApp, DoctorsNotes, Cost) VALUES (?, ?, ?, ?,?,?,? ,?, ?, ?, ?, ?, ?)";
+				+ "(startTime, endTime, appDate, appDay,attendingDoc, DoctorName, attendingNurse, NurseName, patient, patientName, statusApp, DoctorsNotes, Cost) VALUES (?, ?, ?, ?,?,?,? ,?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
@@ -216,8 +216,7 @@ public class AppointmentDAO{
 			throw new RuntimeException(e);
 	}
 	}
-	
-	
+		
 	public void saveAppointmentRecord(String doctorNotes,int cost, int appId){
 		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? , cost = ?"
 				+ " , doctorsNotes = ? where idAppointments = ?";
@@ -252,7 +251,7 @@ public class AppointmentDAO{
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 	}
-		System.out.println(userNames.toString());
+		//System.out.println(userNames.toString());
 		return userNames;
 	}
 }

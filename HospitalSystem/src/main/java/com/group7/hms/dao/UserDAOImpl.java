@@ -390,8 +390,8 @@ public class UserDAOImpl implements UserDAO {
 					 "insuranceID = ? , "+
 					 "insuranceProvider = ? , "+
 					 "insuranceStartDate = ? , "+
-					 "medicalHistory = ? " +
-					 "status = ? , " +
+					 "medicalHistory = ? , " +
+					 "status = ?  " +
 					 "where EMailID = ? ";
 		Connection conn = null;
 		try{
@@ -427,8 +427,8 @@ public class UserDAOImpl implements UserDAO {
 					 "set certification = ? , "+
 					 "Degree = ? ," +
 					 "department = ? ,"+
-					 "specialization = ? "+
-					 "status = ? , " +
+					 "specialization = ? , "+
+					 "status = ?  " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
@@ -467,8 +467,8 @@ public class UserDAOImpl implements UserDAO {
 					 "certification = ? , "+
 					 "department = ? , "+
 					 "experience = ? ,"+
-					 "specialization = ? "+
-					 "status = ? , " +
+					 "specialization = ? , "+
+					 "status = ?  " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
