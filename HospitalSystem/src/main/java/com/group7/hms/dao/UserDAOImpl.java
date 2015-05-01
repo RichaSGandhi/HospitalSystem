@@ -376,7 +376,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 		}catch (SQLException e) {
@@ -390,7 +390,8 @@ public class UserDAOImpl implements UserDAO {
 					 "insuranceID = ? , "+
 					 "insuranceProvider = ? , "+
 					 "insuranceStartDate = ? , "+
-					 "medicalHistory = ? " +
+					 "medicalHistory = ? , " +
+					 "status = ?  " +
 					 "where EMailID = ? ";
 		Connection conn = null;
 		try{
@@ -401,7 +402,8 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(3, patient.getInsuranceProvider());
 			ps.setDate(4, patient.getInsuranceStartDate());
 			ps.setString(5, patient.getMedicalHistory());
-			ps.setString(6, patient.getUsername());
+			ps.setString(6, "Active");
+			ps.setString(7, patient.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
@@ -425,7 +427,8 @@ public class UserDAOImpl implements UserDAO {
 					 "set certification = ? , "+
 					 "Degree = ? ," +
 					 "department = ? ,"+
-					 "specialization = ? "+
+					 "specialization = ? , "+
+					 "status = ?  " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
@@ -435,7 +438,8 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(2, admin.getDegree());
 			ps.setString(3, admin.getDepartment());
 			ps.setString(4, admin.getSpecializations());
-			ps.setString(5, admin.getUsername());
+			ps.setString(5, "Active");
+			ps.setString(6, admin.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
@@ -463,7 +467,8 @@ public class UserDAOImpl implements UserDAO {
 					 "certification = ? , "+
 					 "department = ? , "+
 					 "experience = ? ,"+
-					 "specialization = ? "+
+					 "specialization = ? , "+
+					 "status = ?  " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
@@ -477,7 +482,8 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(6, provider.getDepartment());
 			ps.setInt(7, provider.getExperience());
 			ps.setString(8, provider.getSpecialization());
-			ps.setString(9, provider.getUsername());
+			ps.setString(9, "Active");
+			ps.setString(10, provider.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();

@@ -64,9 +64,9 @@ public class UpdateProfileControler {
 				e.printStackTrace();
 			}
 		}
-		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
-		ra.addFlashAttribute("email", patient.getPrimaryEmail());
-		return "redirect:/profile";
+		//RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		//ra.addFlashAttribute("email", patient.getUsername());
+		return "redirect:/profile?email="+patient.getUsername();
 
 	}
 
@@ -82,9 +82,9 @@ public class UpdateProfileControler {
 			e.printStackTrace();
 		}
 		System.out.println(provider);
-		RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
-		ra.addFlashAttribute("email", provider.getPrimaryEmail());
-		return "redirect:/profile";
+		//RedirectAttributesModelMap ra = new RedirectAttributesModelMap();
+		//ra.addFlashAttribute("email", provider.getUsername());
+		return "redirect:/profile?email="+provider.getUsername();
 
 	}
 
@@ -92,6 +92,7 @@ public class UpdateProfileControler {
 	public String procecessUpdateAdminProfile(Model model,
 			@Valid @ModelAttribute("admin") Administrator admin,
 			BindingResult result) {
+		System.out.println(admin);
 		UserDAOImpl dao = new UserDAOImpl();
 		try {
 			dao.updateAdmin(admin);

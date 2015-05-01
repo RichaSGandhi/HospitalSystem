@@ -172,8 +172,12 @@
 					<th><form:input type="text" path="availableDays"></form:input></th>
 
 					<th><form:label path="availableHours">Available Hours</form:label></th>
-					<th><form:input type="text" path="availableHours"></form:input></th>
-
+					<th><form:select path="availableHours">
+							<form:option value="7am,4pm" label="7am-4pm"></form:option>
+							<form:option value="8am,5pm" label="8am-5pm"></form:option>
+							<form:option value="9am,6pm" label="9am-5pm"></form:option>
+						</form:select></th>
+						
 					<th><form:label path="certification">Certification</form:label></th>
 					<th><form:input type="text" path="certification"></form:input></th>
 				</tr>

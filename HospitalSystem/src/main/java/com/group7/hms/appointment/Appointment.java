@@ -7,6 +7,17 @@ import java.sql.Time;
 import org.hibernate.validator.constraints.NotEmpty;
 public class Appointment {
 
+	@Override
+	public String toString() {
+		return "Appointment [appointment=" + appointment + ", day=" + day
+				+ ", startTime=" + startTime + ", appId=" + appId + ", cost="
+				+ cost + ", docNotes=" + docNotes + ", endTime=" + endTime
+				+ ", appDate=" + appDate + ", doctor=" + doctor + ", nurse="
+				+ nurse + ", patient=" + patient + ", doctorName=" + doctorName
+				+ ", nurseName=" + nurseName + ", patientName=" + patientName
+				+ "]";
+	}
+
 	@NotEmpty
 	private String appointment;
 	private String day;
