@@ -13,8 +13,9 @@
  	<h2>Available Appointments for ${doctorName}</h2>
  	<table>
  		<tr>
- 			<td><input type="hidden" name="doctorName" value ="${doctorName}"></td>
- 			<td><input type="hidden" name="doctorEmail" value ="${doctorEmail}"></td>
+ 			<td><input type="hidden" id="doctorName" name="doctorName"  value ="${doctorName}"></td>
+ 			<td><input type="hidden" id="doctorEmail" name="doctorEmail"  value ="${doctorEmail}"></td>
+ 			<td><input type="hidden" id="patientEmail" name="patientEmail" value= "${patientEmail}"></td>
  		</tr>
 		<tr>
 			<td><b> Choose a Day</b></td>

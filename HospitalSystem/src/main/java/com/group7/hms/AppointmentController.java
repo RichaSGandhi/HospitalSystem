@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group7.hms.Users.Patient;
 import com.group7.hms.Users.Providers;
 import com.group7.hms.Users.User;
 import com.group7.hms.appointment.Appointment;
@@ -128,10 +129,10 @@ public class AppointmentController {
 
 		UserDAOImpl dao = new UserDAOImpl();
 
-		Providers doctor = dao.getDoctorDetails(email);
-
+		//Providers doctor = dao.getDoctorDetails(email);
+		
 		AppointmentDAO appDao = new AppointmentDAO();
-		//Providers doctor = (Providers) dao.getUser(email);
+		Providers doctor = (Providers) dao.getUser(docEmail);
 
 
 		Appointment app = new Appointment();
@@ -143,7 +144,8 @@ public class AppointmentController {
 		User userInfo = userDaoObject.getUserName(email);
 		model.addAttribute("user", userInfo);
 		model.addAttribute("doctorName", doctor.getName());
-		model.addAttribute("doctoremail", docEmail);
+		model.addAttribute("doctorEmail", docEmail);
+		model.addAttribute("patientEmail", email);
 		model.addAttribute("appointmentList", appointments);
 		model.addAttribute("dayList", days);
 		model.addAttribute("app", app);
@@ -154,7 +156,7 @@ public class AppointmentController {
 
 	@RequestMapping("/processAppointment")
 	public String processForm(@Valid @ModelAttribute("app") Appointment app,
-			BindingResult result, Model model) {
+			BindingResult result, Model model, String doctorEmail, String patientEmail ) {
 		if (result.hasErrors()) {
 			System.out.println("inside error block");
 			model.addAttribute("viewName", "scheduleAppointment");
@@ -168,6 +170,21 @@ public class AppointmentController {
 					+ app.getDay() + " " + app.getAppointment()
 					+ "\nConfirmation Email Has been Sent");
 			model.addAttribute("viewName", "appointmentSuccess");
+			System.out.println(doctorEmail);
+			System.out.println(patientEmail);
+			app.setDoctor(doctorEmail);
+			app.setPatient(patientEmail);
+			
+			Patient patient = (Patient) new UserDAOImpl().getUser(patientEmail);
+			Providers provider = (Providers) new UserDAOImpl().getUser(doctorEmail);
+			
+			app.setDoctorName(provider.getName());
+			app.setPatientName(patient.getName());
+			int appointmentTime = Integer.parseInt(app.getAppointment().substring(0, 1));
+			app.setStartTime(java.sql.Time.valueOf(appointmentTime+":00:00"));
+			app.setEndTime(java.sql.Time.valueOf(appointmentTime+":59:00"));
+			daoObject.createAppointment(app);
+			
 			return "masterpage";
 		}
 	}

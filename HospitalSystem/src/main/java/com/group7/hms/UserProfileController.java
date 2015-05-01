@@ -29,7 +29,6 @@ import com.group7.hms.appointment.Appointment;
 import com.group7.hms.dao.AppointmentDAO;
 import com.group7.hms.dao.UserDAO;
 import com.group7.hms.dao.UserDAOImpl;
-import com.group7.hms.service.GeneratePDF;
 //import com.group7.hms.service.GeneratePDF;
 import com.group7.hms.service.SendEmail;
 
@@ -92,8 +91,8 @@ public class UserProfileController {
 			if ((userInfo.getJobTitle()).equalsIgnoreCase("patient")){
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
 
-				if(billedList!=null&&billedList.size()>0)
-					bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
+				if(billedList!=null&&billedList.size()>0);
+				//bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
 
 			}
 			if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){

@@ -34,6 +34,35 @@ public class AppointmentDAO{
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
+	public void createAppointment(Appointment app){
+		String sql = "INSERT INTO hospitalmanagement.appointments "
+				+ "(startTime, endTime, appDate, appDay,attendingDoc, docName, attendingNurse, NurseName, patient, patientName, statusApp, DoctorsNotes, Cost) VALUES (?, ?, ?, ?,?,?,? ,?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setTime(1, app.getStartTime());
+			ps.setTime(2, app.getEndTime());
+			ps.setDate(3, app.getAppDate());
+			ps.setString(4, app.getDay());
+			ps.setString(5, app.getDoctor());
+			ps.setString(6, app.getDoctorName());
+			ps.setString(7, app.getNurse());
+			ps.setString(8, app.getNurseName());
+			ps.setString(9,app.getPatient());
+			ps.setString(10, app.getPatientName());
+			ps.setString(11, "Created");
+			ps.setString(12,"");
+			ps.setDouble(13, app.getCost());
+			ps.executeUpdate();
+			ps.close();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+	}
 
 	public List<Appointment> getAppointments(String emailaddress, String role)
 	{
@@ -56,6 +85,7 @@ public class AppointmentDAO{
 	try {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 		PreparedStatement ps = conn.prepareStatement(sql);
+		System.out.println(ps);
 		if(!(role.equalsIgnoreCase("Admin"))){
 			ps.setString(1, emailaddress);
 			ps.setString(2, "Created");
@@ -194,7 +224,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "InCare");
 			ps.setInt(2, cost);
@@ -211,7 +241,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 		List<String> userNames = new ArrayList<String>();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedByDoc");
 			ResultSet rs = ps.executeQuery();

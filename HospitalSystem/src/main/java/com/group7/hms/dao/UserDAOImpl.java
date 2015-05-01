@@ -77,7 +77,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPrimaryEmail());
@@ -115,7 +115,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			//String[] sendInfo = new String[3];
@@ -186,7 +186,7 @@ public class UserDAOImpl implements UserDAO {
 			 //User user = jdbcTemplateObject.queryForObject(sql, 
                   //   email, new StudentMapper());
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, dept);
 			ResultSet rs = ps.executeQuery();
@@ -218,7 +218,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		Providers doc = new Providers();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
@@ -257,7 +257,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
@@ -376,7 +376,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			//conn = dataSource.getConnection();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 		}catch (SQLException e) {
@@ -395,7 +395,7 @@ public class UserDAOImpl implements UserDAO {
 					 "where EMailID = ? ";
 		Connection conn = null;
 		try{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setDate(1, patient.getInsuranceEndDate());
 			ps.setString(2, patient.getInsuranceID());
@@ -428,16 +428,18 @@ public class UserDAOImpl implements UserDAO {
 					 "Degree = ? ," +
 					 "department = ? ,"+
 					 "specialization = ? "+
+					 "status = ? , " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, admin.getCertifications());
 			ps.setString(2, admin.getDegree());
 			ps.setString(3, admin.getDepartment());
 			ps.setString(4, admin.getSpecializations());
-			ps.setString(5, admin.getUsername());
+			ps.setString(5, "Active");
+			ps.setString(6, admin.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
@@ -466,10 +468,11 @@ public class UserDAOImpl implements UserDAO {
 					 "department = ? , "+
 					 "experience = ? ,"+
 					 "specialization = ? "+
+					 "status = ? , " +
 					 "where EmailID = ? ";
 		Connection conn = null;
 		try{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, provider.getAffiliation());
 			ps.setString(2, provider.getDegree());
@@ -479,7 +482,8 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(6, provider.getDepartment());
 			ps.setInt(7, provider.getExperience());
 			ps.setString(8, provider.getSpecialization());
-			ps.setString(9, provider.getUsername());
+			ps.setString(9, "Active");
+			ps.setString(10, provider.getUsername());
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
@@ -516,7 +520,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setDate(1, user.getDateOfBirth());
 			ps.setString(2, user.getUserAddress().toString());
@@ -566,7 +570,7 @@ public class UserDAOImpl implements UserDAO {
 			Connection conn = null;
 
 			try {
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 				PreparedStatement ps = conn.prepareStatement(sql);
 				
 				ps.setDate(1, beginMonth);
