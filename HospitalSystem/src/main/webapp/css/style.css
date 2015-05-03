@@ -69,12 +69,12 @@ root {
 /***  LINKS  ***/
 a:link {
 	font-size: 14px;
-	color: #367C2B;
+	color: black;
 }
 
 a:visited {
 	font-size: 14px;
-	color: #367C2B;
+	color: black;
 	text-decoration: none;
 }
 
@@ -85,30 +85,30 @@ a:hover {
 }
 
 a:active {
-	color: #367C2B;
+	color: black;
 }
 
 /*** inline links ***/
 a:link,inline {
 	font-size: 14px;
-	color: #367C2B;
+	color: black;
 	text-decoration: underline;;
 }
 
 a:visited,inline {
 	font-size: 14px;
-	color: #367C2B;
+	color: black;
 	text-decoration: none;
 }
 
 a:hover,inline {
 	font-size: 14px;
-	color: #669966;
+	color: black;
 	text-decoration: underline;
 }
 
 a:active,inline {
-	color: #367C2B;
+	color: black;
 }
 
 
@@ -338,12 +338,15 @@ text-align: center;
 }
 
 #header {
-	background-color: #367C2B;
+	background-color: yellow;
 	white-space: nowrap;
 	padding-bottom: 0px;
 	padding-top: 0px;
-	border-bottom: 2px solid #111;
-	color: White;
+	border-bottom: 4px solid #111;
+	color: black;
+	background-image: url("hawk.jpg");
+    background-repeat: no-repeat;
+    background-position: left top;
 }
 
 #header>div {
@@ -351,8 +354,8 @@ text-align: center;
 }
 
 #header h1 {
-	color: white;
-	padding: 0px 10px;
+	color: black;
+	padding: 0px 140px;
 }
 
 .tableMax{

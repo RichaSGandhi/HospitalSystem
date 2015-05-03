@@ -19,17 +19,17 @@
 			</div>
 			<div style="float: right; margin: 20px;">
 				<c:if test="${user==null}">
-					<a style="color: white" href="<c:url value="/signup" />">Create
+					<a style="color: black" href="<c:url value="/signup" />">Create
 						Profile</a> |
-					<a style="color: white" href="<c:url value="/login" />">Login</a>
+					<a style="color: black" href="<c:url value="/login" />">Login</a>
 				</c:if>
 				<c:if test="${user!=null}">
 
-					<a style="color: white" href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">${user.getName()}
+					<a style="color: black" href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">${user.getName()}
 
-						${user.getLastName()}</a> |
+						</a> |
 
-					<a style="color: white" href="<c:url value="/logout" />">Logout</a>
+					<a style="color: black" href="<c:url value="/logout" />">Logout</a>
 				</c:if>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 		
 		<div id="footer">&copy; Group-7 @2015 - All Rights Reserved
 		<div style="float: right; margin: 20px;">
-			<a href="<c:url value="/" />">Home</a>
+			
 		</div>
 		</div>
 		
