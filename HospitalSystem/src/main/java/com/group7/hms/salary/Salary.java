@@ -136,6 +136,7 @@ public class Salary {
     }
 
 	public Salary(Providers user) {
+		System.out.println(user);
 		UserDAOImpl dao = new UserDAOImpl();
 		setAppointments(dao.getNumberAppointments(user));
 		setExperience(user.getExperience());

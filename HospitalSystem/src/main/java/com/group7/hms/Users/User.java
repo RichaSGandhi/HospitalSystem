@@ -52,11 +52,11 @@ public abstract class User {
 	/**
 	 * private field primaryPhone - the primary phone number for the user
 	 */
-	private int primaryPhone=0;
+	private int primaryPhone;
 	/**
 	 * private field secondaryPhone - the secondary phone number for the user
 	 */
-	private int secondaryPhone=0;
+	private int secondaryPhone;
 	/**
 	 * private field primaryEmail - The primary email address for the user. The
 	 * default will be the username.
@@ -77,7 +77,7 @@ public abstract class User {
 	/**
 	 * private field ecPhoneNumber - The phone number of the emergenry contact.
 	 */
-	private int ecPhoneNumber=0;
+	private int ecPhoneNumber;
 	/**
 	 * private field ecEmailAddress - The email address of the Emergency
 	 * contact.
@@ -89,7 +89,7 @@ public abstract class User {
 	private String jobTitle="";
 	private String status = "";
 	private String sex = "";
-	private int mobilePhoneNumber=0;
+	private int mobilePhoneNumber;
 	/**
 	 * @return the mobilePhoneNumber
 	 */

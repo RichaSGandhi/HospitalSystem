@@ -65,11 +65,11 @@
 				<tr>
 					<!-- Thirdrow [moblePhone primaryPhone secondaryPhone SecondaryEmail -->
 					<th><form:label path="mobilePhoneNumber">Mobile Number:</form:label></th>
-					<th><form:input type="tel" path="mobilePhoneNumber"></form:input></th>
+					<th><form:input type="number" path="mobilePhoneNumber"></form:input></th>
 					<th><form:label path="primaryPhone">Phone Number:</form:label></th>
-					<th><form:input type="tel" path="primaryPhone"></form:input></th>
+					<th><form:input type="number" path="primaryPhone"></form:input></th>
 					<th><form:label path="secondaryPhone">Secondary Phone Number:</form:label></th>
-					<th><form:input type="tel" path="secondaryPhone"></form:input></th>
+					<th><form:input type="number" path="secondaryPhone"></form:input></th>
 					<th><form:label path="secondaryEmail">secondaryEmail:</form:label></th>
 					<th><form:input type="email" path="secondaryEmail"></form:input></th>
 				</tr>

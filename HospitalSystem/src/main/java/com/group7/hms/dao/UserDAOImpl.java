@@ -560,26 +560,32 @@ public class UserDAOImpl implements UserDAO {
 			java.sql.Date today = new java.sql.Date(cal.getTimeInMillis());
 			cal.set(Calendar.DAY_OF_MONTH, 1);
 			java.sql.Date beginMonth = new java.sql.Date(cal.getTimeInMillis());
-			String providerStr;
-			if (user.getJobTitle().equalsIgnoreCase("doctor")) providerStr="Doc";
-			else providerStr ="Nurse";
-			
-			String sql = "Select Count(appDate) from hospitalmanagement.appointments "
-					+ "where (appDate between ? and ?) and Atending? = ? ";
+			//String providerStr;
+			// providerStr="Doc";
+			 String sql = null;
+			if (user.getJobTitle().equalsIgnoreCase("doctor"))
+				sql = "Select COUNT(*) from hospitalmanagement.appointments "
+					+ "where (appDate between ? and ?) and attendingDoc = ? ";
+			else 
+				sql =  "Select COUNT(*) from hospitalmanagement.appointments "
+						+ "where (appDate between ? and ?) and attendingNurse = ? ";
 			
 			Connection conn = null;
-
+			ResultSet rs = null;
+			int numApp=0;
 			try {
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
 				PreparedStatement ps = conn.prepareStatement(sql);
 				
 				ps.setDate(1, beginMonth);
 				ps.setDate(2, today);
-				ps.setString(3, providerStr);
-				ps.setString(4, user.getUsername());
+				//ps.setString(3, providerStr);
+				ps.setString(3, user.getPrimaryEmail());
 				
 				System.out.println(ps.toString());
-				ps.executeUpdate();
+				rs = ps.executeQuery();
+				if(rs.next())
+					numApp = rs.getInt(1);
 				ps.close();
 				
 				
@@ -594,7 +600,7 @@ public class UserDAOImpl implements UserDAO {
 					}
 				}
 			}
-			return 5;
+			return numApp;
 		
 	}
 	
