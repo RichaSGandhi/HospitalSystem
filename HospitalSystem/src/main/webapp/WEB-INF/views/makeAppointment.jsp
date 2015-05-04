@@ -10,9 +10,9 @@
 		<title>Make Appointment</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/demo_table.css" />">
-	<script>function getDoctorsDetails(){
+	<script>function Alert(){
 		var doctor = document.getElementById('selectedUser').value;
-		alert("Warning: Are you sure you want to make appointment with "+doctor+"?");
+		alert("Warning: Are you sure you want to make appointment with Dr."+doctor+"?");
 	}
 		</script>
 	</head>
@@ -68,7 +68,7 @@
 									<c:forEach items="${doctorList}" var="doc" >
 				   						
 				   						<tr>				   					
-				   							<td><button id="selectedUser" type = "submit" name="docEmail" value = "${doc.getPrimaryEmail()}">Select</button></td>				   							
+				   							<td><button id="selectedUser" type = "submit" name="docEmail" onClick="Alert()" value = "${doc.getPrimaryEmail()}">Select</button></td>				   							
 				   							<td style="text-align: center;"><c:out value="${doc.getName()}"/></td>
 				   							<td style="text-align: center;"><c:out value="${doc.getAffiliation()}"/></td>				   							
 				   							<td style="text-align: center;"><c:out value="${doc.getDegree()}"/></td>	

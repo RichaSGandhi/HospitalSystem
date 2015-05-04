@@ -169,6 +169,7 @@ public class AppointmentController {
 			System.out.println("Appointment Sucessfully scheduled: "
 					+ app.getDay() + " " + app.getAppointment()
 					+ "\nConfirmation Email Has been Sent");
+			
 			model.addAttribute("viewName", "appointmentSuccess");
 			System.out.println(doctorEmail);
 			System.out.println(patientEmail);
@@ -177,7 +178,7 @@ public class AppointmentController {
 			
 			Patient patient = (Patient) new UserDAOImpl().getUser(patientEmail);
 			Providers provider = (Providers) new UserDAOImpl().getUser(doctorEmail);
-			
+			model.addAttribute("user", patient);
 			app.setDoctorName(provider.getName());
 			app.setPatientName(patient.getName());
 			int appointmentTime = Integer.parseInt(app.getAppointment().substring(0, 1));

@@ -17,11 +17,12 @@
 $( document ).ready(function() {
 	var role = '${user.getJobTitle()}';
 	var bill = '${billedList}';	
+	var billAmount = '${billAmount}';
 	if(role==("Patient")){
 		$("#MakeAppointment").show();
 		$("#releaseBill").hide();
 		$("#viewPayCheck").hide();
-		if (bill==null)
+		if (bill==null||billAmount<=0.0)
 			$("#viewBill").hide();
 		$("table td:nth-child(7),th:nth-child(7)").show();
 		$("table td:nth-child(8),th:nth-child(8)").show();
@@ -62,7 +63,6 @@ $( document ).ready(function() {
 
 <div class="row">
 		<div class="col-lg-4">		
-			<a href="<c:url value="/" />">Home</a>
 			<div id = "UpdateLink"><a href="<c:url value="/updateProfile?email=${user.getPrimaryEmail()}" />">Update My Profile</a></div> 
 			<div id = "MakeAppointment" hidden=true><a href="<c:url value="/makeAppointment?email=${user.getPrimaryEmail()}"/>"> Make an Appointment</a></div>
 			<div id = "viewBill"><a href="<c:url value="/viewBill?email=${user.getPrimaryEmail()}&billAmount=${billAmount}" />">View Bill</a></div>
@@ -99,7 +99,6 @@ $( document ).ready(function() {
 						   							<td style="text-align: center;"><c:out value="${app.getDay()}"/></td>
 						   							<td hidden = true style="text-align: center;"><div id="DoctorName" ><c:out value="${app.getDoctorName()}"/></div></td>
 						   							<td hidden = true style="text-align: center;"><div id="NurseName"><c:out value="${app.getNurseName()}"/></div></td>
-						   							<td hidden = true><button id="ReleaseBill" type = "submit" name="releaseBill" value = "${app.getPatient()}">Release Bill</button></td>	
 						   							<td style="text-align: center;"><input id="appId" name="appId" value="${app.getAppId()}" hidden="true"></td>
 						   							
 						   			</tr>
@@ -110,6 +109,8 @@ $( document ).ready(function() {
 			</form:form>
 			<form:form id ="releaseBill" method="POST" action = "/hms/releaseBill">	
 			<input hidden=true name="email" value="${user.getPrimaryEmail()}">
+			<br/>
+			<br/>
 			<table id = "released" class="tableMax">
 				<tr>	
 												<th><div id="PatientNameHeader">Patient</div></th>

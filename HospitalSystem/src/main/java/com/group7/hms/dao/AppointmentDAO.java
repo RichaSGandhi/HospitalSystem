@@ -128,6 +128,7 @@ public class AppointmentDAO{
 	public List<Appointment> getBilledAppointments(String emailAddress)
 	{
 		String sql =  null;
+		System.out.println(emailAddress +"in get billed app");
 		List<Appointment> billedList = new ArrayList<Appointment>();
 			sql = "Select * from HospitalManagement.appointments where Patient = ? and statusApp = ? "
 					+ "ORDER BY appDate DESC ";	

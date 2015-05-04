@@ -95,7 +95,7 @@ public class UserProfileController {
 				billedList = appDaoObject.getBilledAppointments(userInfo.getPrimaryEmail());
 
 				if(billedList!=null&&billedList.size()>0);
-				//bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
+				bill = GeneratePDF.generateBill((Patient)userInfo,billedList);
 
 			}
 			else if((userInfo.getJobTitle()).equalsIgnoreCase("Admin")){
@@ -250,7 +250,7 @@ public class UserProfileController {
 	public String viewPatient(Model model,@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "patientEmail", defaultValue = "") String patientEmail,
 			@RequestParam(value = "releaseBill", defaultValue = "") String releaseBill,
-			@RequestParam(value = "appId", defaultValue = "") String appId){
+			@RequestParam(value = "appId") int appId){
 		System.out.println("Printing" + appId +"realaseBill" +releaseBill + "EMail" +patientEmail);
 		model.addAttribute("viewName", "viewPatientProfile");
 			User patientInfo = daoObject.getUserName(patientEmail);
