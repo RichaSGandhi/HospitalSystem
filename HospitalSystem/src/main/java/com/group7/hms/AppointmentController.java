@@ -186,8 +186,12 @@ public class AppointmentController {
 			app.setEndTime(java.sql.Time.valueOf(appointmentTime+":59:00"));
 			app.setAppDate(new java.sql.Date(System.currentTimeMillis()));
 			//TODO generate random Nurse
-			app.setNurse("Nurse@gmail.com");
-			app.setNurseName("Nurse");
+			UserDAOImpl dao = new UserDAOImpl();
+			Providers nurse= dao.getNurse();
+			app.setNurse(nurse.getUsername());
+			app.setNurseName(nurse.getName());
+			//app.setNurse("Nurse@gmail.com");
+			//app.setNurseName("Nurse");
 			daoObject.createAppointment(app);
 			
 			return "masterpage";
