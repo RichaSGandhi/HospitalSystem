@@ -94,7 +94,7 @@
 							<form:option value="HI" label="Hawaii"/>
 							<form:option value="ID" label="Idaho"/>
 							<form:option value="IN" label="Indiana"/>
-							<form:option value="IA" label="Iowa<"/>
+							<form:option value="IA" label="Iowa"/>
 							<form:option value="KS" label="Kansas"/>
 							<form:option value="KY" label="Kentucky"/>
 							<form:option value="LA" label="Louisiana"/>
