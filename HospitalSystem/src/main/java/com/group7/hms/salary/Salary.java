@@ -143,11 +143,11 @@ public class Salary {
 		setDepartmentFactor(user);
 
 		if (user.getJobTitle().equalsIgnoreCase("doctor")) {
-			setCalculatedSalary((getDocbase() * ((getExpfactor() * getExperience())))
-					+ (getAppointments() * (getDepartmentFactor()) * getDocappbase()));
+			setCalculatedSalary((getDocbase() * (1 + (getExpfactor() * getExperience())))
+					+ (getAppointments() * (1 + getDepartmentFactor()) * getDocappbase()));
 		} else if (user.getJobTitle().equalsIgnoreCase("nurse")) {
-			setCalculatedSalary((getNursebase() * ((getExpfactor() * getExperience())))
-					+ (getAppointments() * (getDepartmentFactor()) * getNurseappbase()));
+			setCalculatedSalary((getNursebase() * (1 + (getExpfactor() * getExperience())))
+					+ (getAppointments() * (1 + getDepartmentFactor()) * getNurseappbase()));
 		}
 
 	}

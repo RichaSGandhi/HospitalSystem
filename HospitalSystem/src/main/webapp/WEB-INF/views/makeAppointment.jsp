@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/demo_table.css" />">
 	<script>function Alert(){
 		var doctor = document.getElementById('selectedUser').value;
-		alert("Warning: Are you sure you want to make appointment with Dr."+doctor+"?");
+		alert("Warning: Are you sure you want to make appointment with Doctor : "+doctor+"?");
 	}
 		</script>
 	</head>
