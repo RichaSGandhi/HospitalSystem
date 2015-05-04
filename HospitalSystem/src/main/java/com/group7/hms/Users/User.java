@@ -52,11 +52,11 @@ public abstract class User {
 	/**
 	 * private field primaryPhone - the primary phone number for the user
 	 */
-	private int primaryPhone;
+	private String primaryPhone;
 	/**
 	 * private field secondaryPhone - the secondary phone number for the user
 	 */
-	private int secondaryPhone;
+	private String secondaryPhone;
 	/**
 	 * private field primaryEmail - The primary email address for the user. The
 	 * default will be the username.
@@ -77,7 +77,7 @@ public abstract class User {
 	/**
 	 * private field ecPhoneNumber - The phone number of the emergenry contact.
 	 */
-	private int ecPhoneNumber;
+	private String ecPhoneNumber;
 	/**
 	 * private field ecEmailAddress - The email address of the Emergency
 	 * contact.
@@ -89,17 +89,17 @@ public abstract class User {
 	private String jobTitle="";
 	private String status = "";
 	private String sex = "";
-	private int mobilePhoneNumber;
+	private String mobilePhoneNumber;
 	/**
 	 * @return the mobilePhoneNumber
 	 */
-	public int getMobilePhoneNumber() {
+	public String getMobilePhoneNumber() {
 		return mobilePhoneNumber;
 	}
 	/**
 	 * @param mobilePhoneNumber the mobilePhoneNumber to set
 	 */
-	public void setMobilePhoneNumber(int mobilePhoneNumber) {
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
 		this.mobilePhoneNumber = mobilePhoneNumber;
 	}
 	public String getSex() {
@@ -108,10 +108,10 @@ public abstract class User {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public int getEcPhoneNumber() {
+	public String getEcPhoneNumber() {
 		return ecPhoneNumber;
 	}
-	public void setEcPhoneNumber(int ecPhoneNumber) {
+	public void setEcPhoneNumber(String ecPhoneNumber) {
 		this.ecPhoneNumber = ecPhoneNumber;
 	}
 	public String getStatus() {
@@ -323,7 +323,7 @@ public abstract class User {
 	 * 
 	 * @return the primaryPhone
 	 */
-	public int getPrimaryPhone() {
+	public String getPrimaryPhone() {
 		return primaryPhone;
 	}
 
@@ -335,7 +335,7 @@ public abstract class User {
 	 * @param primaryPhone
 	 *            the primaryPhone to set
 	 */
-	public void setPrimaryPhone(int primaryPhone) {
+	public void setPrimaryPhone(String primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
@@ -345,7 +345,7 @@ public abstract class User {
 	 * 
 	 * @return the secondaryPhone
 	 */
-	public int getSecondaryPhone() {
+	public String getSecondaryPhone() {
 		return secondaryPhone;
 	}
 
@@ -357,7 +357,7 @@ public abstract class User {
 	 * @param secondaryPhone
 	 *            the secondaryPhone to set
 	 */
-	public void setSecondaryPhone(int secondaryPhone) {
+	public void setSecondaryPhone(String secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
 	}
 
@@ -456,7 +456,7 @@ public abstract class User {
 	 * 
 	 * @return the ecPhoneNuber
 	 */
-	public int getEcPhoneNuber() {
+	public String getEcPhoneNuber() {
 		return ecPhoneNumber;
 	}
 
@@ -468,7 +468,7 @@ public abstract class User {
 	 * @param ecPhoneNuber
 	 *            the ecPhoneNuber to set
 	 */
-	public void setEcPhoneNuber(int ecPhoneNuber) {
+	public void setEcPhoneNuber(String ecPhoneNuber) {
 		this.ecPhoneNumber = ecPhoneNuber;
 	}
 
