@@ -39,7 +39,7 @@ public class AppointmentDAO{
 				+ "(startTime, endTime, appDate, appDay,attendingDoc, DoctorName, attendingNurse, NurseName, patient, patientName, statusApp, DoctorsNotes, Cost) VALUES (?, ?, ?, ?,?,?,? ,?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setTime(1, app.getStartTime());
 			ps.setTime(2, app.getEndTime());
@@ -83,7 +83,7 @@ public class AppointmentDAO{
 	Connection conn = null;
 
 	try {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		System.out.println(ps);
 		if(!(role.equalsIgnoreCase("Admin"))){
@@ -135,7 +135,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, emailAddress);
 				ps.setString(2, "ReleasedBill");		
@@ -179,7 +179,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob"); 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedByDoc");
 			ps.setString(2, patientEmail);
@@ -195,7 +195,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedBill");
 			ps.setString(2, patientEmail);
@@ -210,7 +210,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "Paid");
 			ps.setString(2, patientEmail);
@@ -227,7 +227,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "InCare");
 			ps.setInt(2, cost);
@@ -244,7 +244,7 @@ public class AppointmentDAO{
 		Connection conn = null;
 		List<String> userNames = new ArrayList<String>();
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","sept");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","jacob");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedByDoc");
 			ResultSet rs = ps.executeQuery();

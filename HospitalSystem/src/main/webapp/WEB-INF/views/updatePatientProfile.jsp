@@ -176,6 +176,18 @@
 				</tr>
 			</table>
 			<!-- End of Patient Specific Table -->
+			<!-- Start of Patient Medical History -->
+			<table>
+				<tr>
+					<th><label><b>***History***</b></label></th>
+				</tr>
+				<tr>
+					<th><form:label path="medicalHistory"> Patient Medical History</form:label></th>
+					<th><form:textarea path="medicalHistory"></form:textarea></th>
+			
+			</table>
+			
+			<!-- End of patient Medical History -->
 			<input type="submit">
 		</fieldset>
 	</form:form>

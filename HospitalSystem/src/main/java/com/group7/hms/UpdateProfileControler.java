@@ -55,7 +55,8 @@ public class UpdateProfileControler {
 
 		if (result.hasErrors()) {
 			System.out.println("Has Errors");
-			//model.addAttribute("viewName", "home");
+			System.out.println(result.getFieldErrorCount());
+			System.out.println(result.getFieldError());
 		} else {
 			UserDAOImpl dao = new UserDAOImpl();
 			try {
