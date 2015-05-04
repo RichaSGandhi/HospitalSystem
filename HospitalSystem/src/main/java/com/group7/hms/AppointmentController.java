@@ -209,6 +209,7 @@ public class AppointmentController {
 			daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
 			
 		}else if(!release.isEmpty()){
+			daoObject.saveAppointmentRecord(doctorNotes,cost, appId);
 			daoObject.releasePatient(patientEmail);
 		}
 		else{

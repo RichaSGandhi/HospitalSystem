@@ -11,11 +11,11 @@ public class Salary {
 
 	// The doctor calculation variables
 	private static final int docBase = 100000;
-	private static final int docAppBase = 10;
+	private static final int docAppBase = 50;
 
 	// the nurse calculation variables
 	private static final int nurseBase = 50000;
-	private static final int nurseAppBase = 2;
+	private static final int nurseAppBase = 20;
 
 	// the admin calculation variables
 	private static final int adminBase = 75000;
@@ -141,13 +141,13 @@ public class Salary {
 		setAppointments(dao.getNumberAppointments(user));
 		setExperience(user.getExperience());
 		setDepartmentFactor(user);
-
+		System.out.println(getAppointments());
 		if (user.getJobTitle().equalsIgnoreCase("doctor")) {
 			setCalculatedSalary((getDocbase() * (1 + (getExpfactor() * getExperience())))
-					+ (getAppointments() * (1 + getDepartmentFactor()) * getDocappbase()));
+					+ (getAppointments() * getDocappbase()));
 		} else if (user.getJobTitle().equalsIgnoreCase("nurse")) {
 			setCalculatedSalary((getNursebase() * (1 + (getExpfactor() * getExperience())))
-					+ (getAppointments() * (1 + getDepartmentFactor()) * getNurseappbase()));
+					+ (getAppointments() * getNurseappbase()));
 		}
 
 	}

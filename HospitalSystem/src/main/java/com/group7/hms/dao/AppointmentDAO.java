@@ -174,7 +174,8 @@ public class AppointmentDAO{
 		return billedList;
 	}
 	public void releasePatient(String patientEmail){
-		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ?";
+		String sql = "UPDATE hospitalManagement.appointments SET statusApp = ? where patient= ? and statusApp = ? "
+				+ " OR statusApp = ?";
 		Connection conn = null;
 
 		try {
@@ -182,6 +183,8 @@ public class AppointmentDAO{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "ReleasedByDoc");
 			ps.setString(2, patientEmail);
+			ps.setString(3, "InCare");
+			ps.setString(4, "Created");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

@@ -349,10 +349,9 @@ text-align: center;
     background-position: left top;
 }
 #footer {
-   position:absolute;
    font-size: 15px;
    font-weight: bold;
-   bottom:0;
+   bottom:0px;
    width:100%;
    height:20px;   /* Height of the footer */
 }

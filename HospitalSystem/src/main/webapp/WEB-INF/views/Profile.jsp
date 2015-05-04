@@ -10,7 +10,12 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css" />">
 	<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
 	<link href="assets/css/bootstrap-united.css" rel="stylesheet" />
+<script>
 
+function AlertReleased() {
+	alert("Bill for this patient has been Released");
+}
+</script>
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>	
 <script>
 
@@ -127,7 +132,7 @@ $( document ).ready(function() {
 						   			<tr>				   					
 						   							
 						   							<td style="text-align: center;"><div id="patient"><c:out value="${release}"/></div></td>
-						   							<td><button id="ReleaseBill" type = "submit" name="releaseBill" value = "${release}">Release Bill</button></td>	
+						   							<td><button id="ReleaseBill" onClick = "AlertReleased()" type = "submit" name="releaseBill" value = "${release}">Release Bill</button></td>	
 						   							
 						   			</tr>
 							</c:forEach>										    
