@@ -141,13 +141,13 @@ public class Salary {
 		setAppointments(dao.getNumberAppointments(user));
 		setExperience(user.getExperience());
 		setDepartmentFactor(user);
-		System.out.println(getAppointments());
+
 		if (user.getJobTitle().equalsIgnoreCase("doctor")) {
-			setCalculatedSalary((getDocbase() * (1 + (getExpfactor() * getExperience())))
-					+ (getAppointments() * getDocappbase()));
+			setCalculatedSalary((getDocbase() * ((getExpfactor() * getExperience())))
+					+ (getAppointments() * (getDepartmentFactor()) * getDocappbase()));
 		} else if (user.getJobTitle().equalsIgnoreCase("nurse")) {
-			setCalculatedSalary((getNursebase() * (1 + (getExpfactor() * getExperience())))
-					+ (getAppointments() * getNurseappbase()));
+			setCalculatedSalary((getNursebase() * ((getExpfactor() * getExperience())))
+					+ (getAppointments() * (getDepartmentFactor()) * getNurseappbase()));
 		}
 
 	}
